@@ -1,0 +1,59 @@
+Entidade{
+        Usuário,
+        *Administrador,
+        Grupo,
+        Post,
+        Comentário,
+}
+
+Usuário{
+    Atributos {
+        Nome,
+        Email,
+        Senha,
+        Fota,
+        Git,
+        Posts,
+        Amizades,
+        Grupos,
+    }
+    Relações {
+        1 Usuário - n Posts [chave estran.](Posts)
+        1 Usuário - n Usuário [chave estran.](Amizades)
+        1 Usuário - n Grupos [chave estran.](Grupos)
+    }
+}
+
+Grupo {
+    Atributos {
+        Nome,
+        Fota,
+        Descrição,
+        Usuários,
+        Git,
+        Posts,
+    }
+    Relações {
+        1 Grupo - n Usuários
+    }
+}
+
+
+Post {
+    Atributos {
+        Usuário,
+        Data,
+        Conteúdo,
+        Comentários,
+    }
+}
+
+Comentário {
+    Atributos {
+        Usuário,
+        Date,
+        Conteúdo,
+        Post,
+        *Avaliação
+    }
+}
