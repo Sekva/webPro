@@ -1,9 +1,15 @@
-Entidade{
-        Usuário,
+
+
+- Entidade{
         *Administrador,
+        Usuário,
         Grupo,
         Post,
         Comentário,
+}
+
+Administrador {
+
 }
 
 Usuário{
@@ -18,9 +24,15 @@ Usuário{
         Grupos,
     }
     Relações {
-        1 Usuário - n Posts [chave estran.](Posts)
-        1 Usuário - n Usuário [chave estran.](Amizades)
-        1 Usuário - n Grupos [chave estran.](Grupos)
+        =>Tem
+            1 Usuário - n Posts [chave estran.](Posts)
+            1 Usuário - n Usuário [chave estran.](Amizades)
+
+        =>Faz Parte
+            1 Usuário - n Grupos [chave estran.](Grupos)
+
+        =>Modera
+            1 Usuário - n Grupos
     }
 }
 
@@ -34,7 +46,11 @@ Grupo {
         Posts,
     }
     Relações {
-        1 Grupo - n Usuários
+        =>Possui
+            1 Grupo - n Usuários
+            1 Grupo - n Posts
+        => É moderado
+            1 Grupo - n Usuários
     }
 }
 
