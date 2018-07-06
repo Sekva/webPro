@@ -1,15 +1,25 @@
-
+-> ADD: {
+    Adm,
+    Banimentos,
+}
 
 - Entidade{
         *Administrador,
         Usuário,
         Grupo,
+        Interesses,
+        Perfil Externo,
+        Curadoria,
+        Feed,
         Post,
         Comentário,
 }
 
 Administrador {
+    Atributos {
+        Nome,
 
+    }
 }
 
 Usuário{
@@ -19,14 +29,24 @@ Usuário{
         Senha,
         Fota,
         Git,
+        Descrição,
         Posts,
         Amizades,
         Grupos,
     }
     Relações {
         =>Tem
-            1 Usuário - n Posts [chave estran.](Posts)
             1 Usuário - n Usuário [chave estran.](Amizades)
+            1 Usuário - n Interesses
+            1 Usuário - 1 PerfilExterno
+            1 Usuário - 1 Feed
+
+        =>Faz
+            1 Usuário - n Posts [chave estran.](Posts)
+
+        =>Solicita
+            1 Usuário - n Usuário //Solicita amizade
+            1 Usuário - n Grupos //Solicita entrada de grupos
 
         =>Faz Parte
             1 Usuário - n Grupos [chave estran.](Grupos)
@@ -46,21 +66,57 @@ Grupo {
         Posts,
     }
     Relações {
-        =>Possui
+        =>Tem
             1 Grupo - n Usuários
+            1 Grupo - n Interesses
+            1 Grupo - 1 PerfilExterno
+            1 Grupo - 1 Feed
+
+        =>Faz
             1 Grupo - n Posts
+
         => É moderado
             1 Grupo - n Usuários
+
     }
 }
 
+Interesses {
+    Atributos {
+        Linguagens,
+    }
+}
+
+PerfilExterno {
+    Atributos {
+        Tipo, //Tipo do link: git, facebook, gmail...
+    }
+}
+
+Curadoria {
+    Atributos {
+        Descrição,
+        Link,
+    }
+}
+
+Feed {
+    Relações {
+        =>Tem
+            1 Feed - n Posts
+    }
+}
 
 Post {
     Atributos {
         Usuário,
         Data,
+        Permanete,
         Conteúdo,
-        Comentários,
+    }
+    Relações {
+        =>Tem
+            1 Post - n Comentários
     }
 }
 
