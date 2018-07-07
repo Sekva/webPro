@@ -3,7 +3,6 @@ body {
 }
 
 .divs {
-  background-color: white;
   border-radius: 4px;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
   display: flex;
@@ -24,13 +23,15 @@ body {
 }
 
 .navInicio {
-  width: 220px;
+  width: 16.5%;
   height: 214px;
-  /* background-color: green; */
+  background-color: #acacac;
   color: black;
-  position: relative;
-  top: 20px;
-  left: 60px;
+  position: absolute;
+  top: 60px;
+  left: 4%;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
 }
 
 .menu  {
@@ -38,24 +39,51 @@ body {
 }
 
 .menuSpan {
+  padding-left: 5px;
   margin-bottom: 10px;
   color: #838c91;
 }
 
 .menu div {
   margin-bottom: 10px;
-  color: gray;
-}
-
-li {
-  margin-bottom: 4px;
-  margin-left: 4px;
-  font-size: 18px;
+  /* color: gray; */
 }
 
 .primeiroMenu {
   margin-bottom: 10px;
 }
-.menuEsq li {
-  color: #444444;
+
+.linkEsq {
+  font-size: 18px;
+  padding-left: 5px;
+  color: #454545;
+  position: relative;
+  width: 100%;
+}
+
+.linkEsq:hover {
+  border-radius: 4px;
+  color: black;
+  background-color: #EDEFF0;
+}
+
+.navDir {
+  position: absolute;
+  width: 16.5%;
+  height: 200px;
+  background-color: #acacac;
+  top: 60px;
+  float: right;
+  right: 4%;
+}
+
+.conteudo {
+  background-color: green;
+  position: absolute;
+  width: 56%;
+  height: 2000px;
+  left: 22%;
+  top: 60px;
+
+
 }
