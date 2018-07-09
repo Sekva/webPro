@@ -1,10 +1,11 @@
 -> ADD: {
-    Adm,
-    Banimentos,
+
+    Diagrama Banco de Dados {
+    }
 }
 
 - Entidade{
-        *Administrador,
+        Administrador,
         Usuário,
         Grupo,
         Interesses,
@@ -18,7 +19,18 @@
 Administrador {
     Atributos {
         Nome,
+        UsuáriosBanidos,
+        PostsBanidos,
+        GruposExcluídos,
+    }
+    Relações {
+        =>Exclui
+            Comentários,
+            Posts,
+            Grupos,
 
+        =>Bane
+            Usuários,
     }
 }
 
@@ -27,9 +39,11 @@ Usuário{
         Nome,
         Email,
         Senha,
-        Fota,
-        Git,
         Descrição,
+        Fota,
+        Interesses,
+        PerfilExterno,
+        Curadoria,
         Posts,
         Amizades,
         Grupos,
@@ -37,8 +51,8 @@ Usuário{
     Relações {
         =>Tem
             1 Usuário - n Usuário [chave estran.](Amizades)
-            1 Usuário - n Interesses
             1 Usuário - 1 PerfilExterno
+            1 Usuário - 1 Curadoria
             1 Usuário - 1 Feed
 
         =>Faz
@@ -51,6 +65,9 @@ Usuário{
         =>Faz Parte
             1 Usuário - n Grupos [chave estran.](Grupos)
 
+        =>TemInteresse
+            1 Usuário - n Interesses
+
         =>Modera
             1 Usuário - n Grupos
     }
@@ -61,19 +78,22 @@ Grupo {
         Nome,
         Fota,
         Descrição,
+        PerfilExterno,
+        Curadoria,
+        Interesses,
         Usuários,
-        Git,
-        Posts,
+        Feed,
     }
     Relações {
         =>Tem
             1 Grupo - n Usuários
-            1 Grupo - n Interesses
             1 Grupo - 1 PerfilExterno
             1 Grupo - 1 Feed
+            1 Grupo - 1 Curadoria
 
-        =>Faz
-            1 Grupo - n Posts
+        =>TemInteresse
+            1 Grupo - n Interesses
+
 
         => É moderado
             1 Grupo - n Usuários
@@ -83,13 +103,16 @@ Grupo {
 
 Interesses {
     Atributos {
-        Linguagens,
+        Descrição,
+        Nome,
     }
 }
 
 PerfilExterno {
     Atributos {
-        Tipo, //Tipo do link: git, facebook, gmail...
+        Nome,
+        Link,
+        Data
     }
 }
 
@@ -97,6 +120,7 @@ Curadoria {
     Atributos {
         Descrição,
         Link,
+        Data,
     }
 }
 
@@ -110,22 +134,31 @@ Feed {
 Post {
     Atributos {
         Usuário,
-        Data,
+        ÉDeGrupo,
         Permanete,
-        Conteúdo,
+        Data,
+        Texto,
+        Fota,
+        Comentários,
     }
     Relações {
         =>Tem
             1 Post - n Comentários
+            1 Post - 1 Usuário[Autor]
     }
 }
 
 Comentário {
     Atributos {
         Usuário,
-        Date,
-        Conteúdo,
         Post,
-        *Avaliação
+        Data,
+        Texto,
+        Avaliação
+    }
+
+    Relação {
+        =>Tem
+            n Comentários - 1 Post
     }
 }
