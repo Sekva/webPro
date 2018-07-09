@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('teste/{id?}', 'Teste@teste');
 
-Route::get('asd', 'Teste@coisa');
+
+Route::get('/asd', function () {
+    return "asd";
+});

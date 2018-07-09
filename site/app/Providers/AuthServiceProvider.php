@@ -1,6 +1,6 @@
 <?php
 
-namespace exemplo\Providers;
+namespace site\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'exemplo\Model' => 'exemplo\Policies\ModelPolicy',
+        'site\Model' => 'site\Policies\ModelPolicy',
     ];
 
     /**
