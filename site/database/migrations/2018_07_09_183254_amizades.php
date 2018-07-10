@@ -16,8 +16,8 @@ class Amizades extends Migration
       Schema::create('amizades', function (Blueprint $table) {
           $table->increments('id');
 
-          $table->integer('id_user1')->nullable(false);
-          $table->integer('id_user2')->nullable(false);
+          $table->integer('id_user1')->unsigned()->nullable(false);
+          $table->integer('id_user2')->unsigned()->nullable(false);
 
 
           $table->foreign('id_user1')->references('id')->on('users');

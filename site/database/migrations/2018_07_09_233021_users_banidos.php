@@ -16,7 +16,7 @@ class UsersBanidos extends Migration
       Schema::create('users_banidos', function (Blueprint $table) {
           $table->increments('id');
 
-          $table->integer('id_adm_responsavel')->nullable(false);
+          $table->integer('id_adm_responsavel')->unsigned()->nullable(false);
 
           $table->string('nome_usuario')->nullable(false);
           $table->string('email_usuario')->nullable(false);

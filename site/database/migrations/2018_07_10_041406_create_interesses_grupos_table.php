@@ -18,7 +18,7 @@ class CreateInteressesGruposTable extends Migration
             $table->string('descricao', 500)->nullable(true);
             $table->string('nome')->nullable(false);
 
-            $table->integer('id_grupo')->nullable(false);
+            $table->integer('id_grupo')->unsigned()->nullable(false);
 
 
             $table->foreign('id_grupo')->references('id')->on('grupos');

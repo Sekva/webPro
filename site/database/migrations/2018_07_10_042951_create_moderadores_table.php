@@ -16,8 +16,8 @@ class CreateModeradoresTable extends Migration
         Schema::create('moderadores', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_grupo')->nullable(false); //Grupo a ser moderado
-            $table->integer('id_user')->nullable(false); //Moderador
+            $table->integer('id_grupo')->unsigned()->nullable(false); //Grupo a ser moderado
+            $table->integer('id_user')->unsigned()->nullable(false); //Moderador
 
 
             $table->foreign('id_user')->references('id')->on('users');

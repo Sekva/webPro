@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable(false);
             $table->string('foto')->nullbale(false);
 
-            $table->integer('id_perfil_externo')->nullable(true);
+            $table->integer('id_perfil_externo')->unsigned()->nullable(true);
 
             $table->string('descricao', 500)->nullable(true);
 

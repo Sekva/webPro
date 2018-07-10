@@ -18,7 +18,7 @@ class CreateGruposTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('foto')->nullbale(false);
 
-            $table->integer('id_perfil_externo')->nullable(true);
+            $table->integer('id_perfil_externo')->unsigned()->nullable(false);
 
             $table->string('descricao', 500)->nullable(true);
 

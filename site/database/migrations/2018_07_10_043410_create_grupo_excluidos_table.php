@@ -16,7 +16,7 @@ class CreateGrupoExcluidosTable extends Migration
         Schema::create('grupo_excluidos', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_adm')->nullable(false);
+            $table->integer('id_adm')->unsigned()->nullable(false);
 
             $table->string('nome')->nullable(false);
             $table->string('motivo')->nullable(false);

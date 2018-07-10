@@ -16,9 +16,9 @@ class PostsExcluidos extends Migration
       Schema::create('posts_excluidos', function (Blueprint $table) {
           $table->increments('id');
 
-          $table->integer('id_adm_responsavel')->nullable(false);
-          $table->integer('id_post')->nullable(false);
-          $table->integer('id_autor_post')->nullable(false);
+          $table->integer('id_adm_responsavel')->unsigned()->nullable(false);
+          $table->integer('id_post')->unsigned()->nullable(false);
+          $table->integer('id_autor_post')->unsigned()->nullable(false);
 
           $table->string('motivo')->nullable(false);;
 

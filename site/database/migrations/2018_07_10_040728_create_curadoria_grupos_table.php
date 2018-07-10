@@ -19,7 +19,7 @@ class CreateCuradoriaGruposTable extends Migration
             $table->string('descricao', 200)->nullable(false);
             $table->string('link')->nullable(false);
 
-            $table->integer('id_grupo')->nullable(false);
+            $table->integer('id_grupo')->unsigned()->nullable(false);
 
 
             $table->foreign('id_grupo')->references('id')->on('grupos');

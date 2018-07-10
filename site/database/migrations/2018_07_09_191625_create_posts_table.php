@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('texto')->nullable(false); //Descrição
             $table->string('conteudo', 600); //Seja foto ou texto (código ou não)
 
-            $table->integer('id_autor')->nullable();
+            $table->integer('id_autor')->unsigned()->nullable();
 
 
             $table->foreign('id_autor')->references('id')->on('users');

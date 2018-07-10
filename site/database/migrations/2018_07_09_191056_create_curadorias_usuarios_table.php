@@ -18,11 +18,11 @@ class CreateCuradoriasUsuariosTable extends Migration
             $table->string('descricao', 300)->nullable(false); //300 caracteres!
             $table->string('link')->nullable(false);
 
-            $table->integer('id_user')->nullable(false);
+            $table->integer('id_user')->unsigned()->nullable(false);
 
 
             $table->foreign('id_user')->references('id')->on('users');
-            
+
             $table->timestamps();
         });
     }

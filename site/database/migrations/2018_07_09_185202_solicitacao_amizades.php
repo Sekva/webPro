@@ -16,8 +16,8 @@ class SolicitacaoAmizades extends Migration
       Schema::create('solicitacao_amizades', function (Blueprint $table) {
           $table->increments('id');
 
-          $table->integer('id_quem_pediu')->nullable(false);
-          $table->integer('id_quem_recebeu')->nullable(false);
+          $table->integer('id_quem_pediu')->unsigned()->nullable(false);
+          $table->integer('id_quem_recebeu')->unsigned()->nullable(false);
 
 
           $table->foreign('id_quem_pediu')->references('id')->on('users');
