@@ -5,6 +5,8 @@ namespace site;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Support\Facades\DB;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'foto', 'descricao'
     ];
 
     /**
@@ -26,4 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getPerfilExterno($id) {
+      return DB::table('perfis_externos')->where('id', $id)->first();
+    }
 }
