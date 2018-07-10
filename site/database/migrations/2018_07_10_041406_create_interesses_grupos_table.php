@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdmsTable extends Migration
+class CreateInteressesGruposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateAdmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('adms', function (Blueprint $table) {
+        Schema::create('interesses_grupos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descricao', 500)->nullable(true);
             $table->string('nome');
-            $table->string('senha');
-
+            $table->integer('id_grupo')->unsigned();
+            $table->foreign('id_grupo')->references('id')->on('grupos');
             $table->timestamps();
+
+
         });
     }
 
@@ -29,6 +32,6 @@ class CreateAdmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adms');
+        Schema::dropIfExists('interesses_grupos');
     }
 }

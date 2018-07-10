@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAdmsTable extends Migration
+class CreateGrupoExcluidosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateAdmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('adms', function (Blueprint $table) {
+        Schema::create('grupo_excluidos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
-            $table->string('senha');
 
+            $table->integer('id_adm')->nullable(false)->unsigned();
+            $table->foreing('id_adm')->references('id')->on('adms');
+
+            $table->string('nome')->nullable(false);
+            $table->string('motivo')->nullable(false);
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class CreateAdmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adms');
+        Schema::dropIfExists('grupo_excluidos');
     }
 }
