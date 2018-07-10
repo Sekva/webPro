@@ -20,7 +20,7 @@ class UsersBanidos extends Migration
 
           $table->string('nome_usuario')->nullable(false);
           $table->string('email_usuario')->nullable(false);
-          $table->string('motivo')->nullable(false);
+          $table->longText('motivo')->nullable(false);
 
 
           $table->foreign('id_adm_responsavel')->references('id')->on('adms');

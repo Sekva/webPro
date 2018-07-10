@@ -20,7 +20,7 @@ class CreateGruposTable extends Migration
 
             $table->integer('id_perfil_externo')->unsigned()->nullable(false);
 
-            $table->string('descricao', 500)->nullable(true);
+            $table->longText('descricao')->nullable(true);
 
 
             $table->foreign('id_perfil_externo')->references('id')->on('perfis_externos');

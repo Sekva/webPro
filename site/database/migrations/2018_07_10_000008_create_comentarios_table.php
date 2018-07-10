@@ -19,7 +19,7 @@ class CreateComentariosTable extends Migration
             $table->integer('id_autor')->unsigned()->nullable(false);
             $table->integer('id_post')->unsigned()->nullable(false);
 
-            $table->string('conteudo', 600);
+            $table->longText('conteudo');
             $table->integer('avaliacao');
 
 

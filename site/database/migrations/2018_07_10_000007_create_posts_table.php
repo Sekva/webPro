@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->boolean('permanente');
             $table->boolean('e_de_grupo');
             $table->string('texto')->nullable(false); //Descrição
-            $table->string('conteudo', 600); //Seja foto ou texto (código ou não)
+            $table->longText('conteudo'); //Seja foto ou texto (código ou não)
 
             $table->integer('id_autor')->unsigned()->nullable();
 

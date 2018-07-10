@@ -15,7 +15,7 @@ class CreateInteressesGruposTable extends Migration
     {
         Schema::create('interesses_grupos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao', 500)->nullable(true);
+            $table->longText('descricao')->nullable(true);
             $table->string('nome')->nullable(false);
 
             $table->integer('id_grupo')->unsigned()->nullable(false);

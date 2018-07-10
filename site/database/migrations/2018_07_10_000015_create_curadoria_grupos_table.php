@@ -16,7 +16,7 @@ class CreateCuradoriaGruposTable extends Migration
         Schema::create('curadoria_grupos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome')->nullable(false);
-            $table->string('descricao', 200)->nullable(false);
+            $table->longText('descricao')->nullable(false);
             $table->string('link')->nullable(false);
 
             $table->integer('id_grupo')->unsigned()->nullable(false);

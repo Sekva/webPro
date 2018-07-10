@@ -19,7 +19,7 @@ class CreateGrupoExcluidosTable extends Migration
             $table->integer('id_adm')->unsigned()->nullable(false);
 
             $table->string('nome')->nullable(false);
-            $table->string('motivo')->nullable(false);
+            $table->longText('motivo')->nullable(false);
 
 
             $table->foreign('id_adm')->references('id')->on('adms');

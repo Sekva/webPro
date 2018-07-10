@@ -20,7 +20,7 @@ class PostsExcluidos extends Migration
           $table->integer('id_post')->unsigned()->nullable(false);
           $table->integer('id_autor_post')->unsigned()->nullable(false);
 
-          $table->string('motivo')->nullable(false);;
+          $table->longText('motivo')->nullable(false);;
 
 
           $table->foreign('id_adm_responsavel')->references('id')->on('adms');

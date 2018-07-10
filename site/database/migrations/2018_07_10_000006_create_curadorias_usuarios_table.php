@@ -15,7 +15,7 @@ class CreateCuradoriasUsuariosTable extends Migration
         Schema::create('curadorias_usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome')->nullable(false);
-            $table->string('descricao', 300)->nullable(false); //300 caracteres!
+            $table->longText('descricao')->nullable(false); //300 caracteres!
             $table->string('link')->nullable(false);
 
             $table->integer('id_user')->unsigned()->nullable(false);
