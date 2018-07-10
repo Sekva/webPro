@@ -16,12 +16,12 @@ class SolicitacaoAmizades extends Migration
       Schema::create('solicitacao_amizades', function (Blueprint $table) {
           $table->increments('id');
 
-          $table->integer('quem_pediu')->unsigned()->nullable(false);
-          $table->integer('quem_recebeu')->unsigned()->nullable(false);
+          $table->integer('id_quem_pediu')->nullable(false);
+          $table->integer('id_quem_recebeu')->nullable(false);
 
-          $table->foreign('quem_pediu')->references('id')->on('users');
-          $table->foreign('quem_recebeu')->references('id')->on('users');
 
+          $table->foreign('id_quem_pediu')->references('id')->on('users');
+          $table->foreign('id_quem_recebeu')->references('id')->on('users');
 
           $table->timestamps();
       });

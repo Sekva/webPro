@@ -16,8 +16,8 @@ class SolicitacaoGrupo extends Migration
       Schema::create('solicitacoes_grupo', function (Blueprint $table) {
           $table->increments('id');
 
-          $table->integer('id_user_pedinte')->unsigned()->nullable(false);
-          $table->integer('id_grupo_solicitado')->unsigned()->nullable(false);
+          $table->integer('id_user_pedinte')->nullable(false);
+          $table->integer('id_grupo_solicitado')->nullable(false);
 
           $table->foreign('id_user_pedinte')->references('id')->on('users');
           $table->foreign('id_grupo_solicitado')->references('id')->on('grupos');

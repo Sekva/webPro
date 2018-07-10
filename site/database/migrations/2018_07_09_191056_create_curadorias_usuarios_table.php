@@ -13,12 +13,16 @@ class CreateCuradoriasUsuariosTable extends Migration
      */
     public function up() {
         Schema::create('curadorias_usuarios', function (Blueprint $table) {
-            $table->increments('id')->nullable(false)->unsigned();
+            $table->increments('id');
             $table->string('nome')->nullable(false);
             $table->string('descricao', 300)->nullable(false); //300 caracteres!
             $table->string('link')->nullable(false);
-            $table->integer('usuario')->nullable(false);
-            $table->foreing('usuario')->references('id')->on('users');
+
+            $table->integer('id_user')->nullable(false);
+
+
+            $table->foreing('id_user')->references('id')->on('users');
+            
             $table->timestamps();
         });
     }

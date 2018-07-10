@@ -14,12 +14,18 @@ class CreateGruposTable extends Migration
     public function up()
     {
         Schema::create('grupos', function (Blueprint $table) {
-            $table->increments('id')->nullable(false)->unsigned();
+            $table->increments('id');
             $table->string('name')->nullable(false);
             $table->string('foto')->nullbale(false);
-            $table->integer('perfil_externo')->nullable(true);
-            $table->foreing('perfil_externo')->references('id')->on('perfis_externos');
+
+            $table->integer('id_perfil_externo')->nullable(true);
+
             $table->string('descricao', 500)->nullable(true);
+
+
+            $table->foreing('id_perfil_externo')->references('id')->on('perfis_externos');
+
+            $table->timestamps();
         });
     }
 

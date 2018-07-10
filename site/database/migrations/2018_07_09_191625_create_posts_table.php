@@ -17,15 +17,15 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->boolean('permanente');
             $table->boolean('e_de_grupo');
-            $table->string('conteudo');
-            $table->string('texto');
-            $table->integer('autor')->unsigned();
+            $table->string('texto')->nullable(false); //Descrição
+            $table->string('conteudo', 600); //Seja foto ou texto (código ou não)
+
+            $table->integer('id_autor')->nullable();
+
+
+            $table->foreign('id_autor')->references('id')->on('users');
+
             $table->timestamps();
-
-
-
-            $table->foreign('autor')->references('id')->on('users');
-
         });
     }
 

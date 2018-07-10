@@ -14,14 +14,15 @@ class CreateModeradoresTable extends Migration
     public function up()
     {
         Schema::create('moderadores', function (Blueprint $table) {
-            $table->increments('id')->nullable(false)->unsigned();
+            $table->increments('id');
 
             $table->integer('id_grupo')->nullable(false); //Grupo a ser moderado
+            $table->integer('id_user')->nullable(false); //Moderador
+
+
+            $table->foreing('id_user')->references('id')->on('users');
             $table->foreing('id_grupo')->references('id')->on('grupos');
 
-            $table->integer('id_user')->nullable(false); //Moderador
-            $table->foreing('id_user')->references('id')->on('users');
-            
             $table->timestamps();
         });
     }

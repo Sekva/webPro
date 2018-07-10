@@ -16,11 +16,14 @@ class CreateGrupoExcluidosTable extends Migration
         Schema::create('grupo_excluidos', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('id_adm')->nullable(false)->unsigned();
-            $table->foreing('id_adm')->references('id')->on('adms');
+            $table->integer('id_adm')->nullable(false);
 
             $table->string('nome')->nullable(false);
             $table->string('motivo')->nullable(false);
+
+
+            $table->foreing('id_adm')->references('id')->on('adms');
+
             $table->timestamps();
         });
     }

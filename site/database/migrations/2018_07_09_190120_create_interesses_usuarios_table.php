@@ -16,13 +16,14 @@ class CreateInteressesUsuariosTable extends Migration
         Schema::create('interesses_usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('descricao', 500)->nullable(true);
-            $table->string('nome');
-            $table->integer('id')->unsigned();
+            $table->string('nome')->nullable(false);
+
+            $table->integer('id_user')->unsigned()->nullable(false);
+
+
+            $table->foreign('id_user')->references('id')->on('users');
+            
             $table->timestamps();
-
-
-            $table->foreign('id')->references('id')->on('users');
-
         });
     }
 

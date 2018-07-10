@@ -14,11 +14,15 @@ class CreateUsersGruposTable extends Migration
     public function up()
     {
         Schema::create('users_grupos', function (Blueprint $table) {
-            $table->increments('id')->nullable(false)->unsigned();
+            $table->increments('id');
+
             $table->integer('id_grupo')->nullable(false);
-            $table->foreing('id_grupo')->references('id')->on('grupos');
             $table->integer('id_user')->nullable(false);
+
+
+            $table->foreing('id_grupo')->references('id')->on('grupos');
             $table->foreing('id_user')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

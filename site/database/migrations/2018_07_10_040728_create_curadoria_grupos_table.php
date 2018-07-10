@@ -14,12 +14,16 @@ class CreateCuradoriaGruposTable extends Migration
     public function up()
     {
         Schema::create('curadoria_grupos', function (Blueprint $table) {
-            $table->increments('id')->nullable(false)->unsigned();
+            $table->increments('id');
             $table->string('nome')->nullable(false);
-            $table->string('descricao', 300)->nullable(false); //300 caracteres!
+            $table->string('descricao', 200)->nullable(false);
             $table->string('link')->nullable(false);
-            $table->integer('grupos')->nullable(false);
-            $table->foreing('grupos')->references('id')->on('grupos');
+
+            $table->integer('id_grupo')->nullable(false);
+
+
+            $table->foreing('id_grupo')->references('id')->on('grupos');
+
             $table->timestamps();
         });
     }

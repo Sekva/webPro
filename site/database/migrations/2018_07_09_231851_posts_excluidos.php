@@ -15,17 +15,19 @@ class PostsExcluidos extends Migration
     {
       Schema::create('posts_excluidos', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('adm_responsavel')->unsigned()->nullable(false);
-          $table->integer('post')->unsigned()->nullable(false);
-          $table->integer('autor_post')->unsigned()->nullable(false);
-          $table->string('motivo');
+
+          $table->integer('id_adm_responsavel')->nullable(false);
+          $table->integer('id_post')->nullable(false);
+          $table->integer('id_autor_post')->nullable(false);
+
+          $table->string('motivo')->nullable(false);;
+
+
+          $table->foreign('id_adm_responsavel')->references('id')->on('adms');
+          $table->foreign('id_post')->references('id')->on('posts');
+          $table->foreign('id_autor_post')->references('id')->on('users');
+
           $table->timestamps();
-
-
-          $table->foreign('adm_responsavel')->references('id')->on('adms');
-          $table->foreign('post')->references('id')->on('posts');
-          $table->foreign('autor_post')->references('id')->on('users');
-
       });
     }
 
