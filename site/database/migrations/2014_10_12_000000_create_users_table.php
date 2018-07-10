@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('descricao', 500)->nullable(true);
 
 
-            $table->foreing('id_perfil_externo')->references('id')->on('perfis_externos');
+            $table->foreign('id_perfil_externo')->references('id')->on('perfis_externos');
 
             $table->timestamps();
             $table->rememberToken(); //???????diabéisso????????

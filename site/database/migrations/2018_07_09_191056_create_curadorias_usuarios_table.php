@@ -21,7 +21,7 @@ class CreateCuradoriasUsuariosTable extends Migration
             $table->integer('id_user')->nullable(false);
 
 
-            $table->foreing('id_user')->references('id')->on('users');
+            $table->foreign('id_user')->references('id')->on('users');
             
             $table->timestamps();
         });

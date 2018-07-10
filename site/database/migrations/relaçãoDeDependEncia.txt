@@ -1,0 +1,26 @@
+X -> Y, Z e W
+=
+X depende de Y, de Z e de W
+=
+em X tem foreign Y, foreign X...
+
+
+users -> perfis_externos
+amizades -> users
+solicitacao_amizades -> users
+interesses_usuarios -> 
+curadorias_usuarios -> users
+posts -> users
+perfis_externos
+comentarios -> users e posts
+grupos -> perfis_externos ->
+post_grupo -> posts e grupos
+solicitacao_grupo -> users e grupos
+adms
+posts_excluidos -> adms, posts e users
+users_banidos -> adms
+curadoria_grupos -> grupos
+interesses_grupos -> grupos
+users_grupos -> grupos e users
+moderadores -> grupos e users
+grupo_excluidos -> adms

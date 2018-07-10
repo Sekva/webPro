@@ -22,7 +22,7 @@ class CreateCuradoriaGruposTable extends Migration
             $table->integer('id_grupo')->nullable(false);
 
 
-            $table->foreing('id_grupo')->references('id')->on('grupos');
+            $table->foreign('id_grupo')->references('id')->on('grupos');
 
             $table->timestamps();
         });

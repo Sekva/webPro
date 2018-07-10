@@ -22,7 +22,7 @@ class CreateGrupoExcluidosTable extends Migration
             $table->string('motivo')->nullable(false);
 
 
-            $table->foreing('id_adm')->references('id')->on('adms');
+            $table->foreign('id_adm')->references('id')->on('adms');
 
             $table->timestamps();
         });
