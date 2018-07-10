@@ -8,7 +8,7 @@ em X tem foreign Y, foreign X...
 users -> perfis_externos
 amizades -> users
 solicitacao_amizades -> users
-interesses_usuarios -> 
+interesses_usuarios ->
 curadorias_usuarios -> users
 posts -> users
 perfis_externos
@@ -24,3 +24,25 @@ interesses_grupos -> grupos
 users_grupos -> grupos e users
 moderadores -> grupos e users
 grupo_excluidos -> adms
+usuarios_banidos -> adms
+
+
+1-perfis_externos
+2-users
+3-amizades
+4-solicitacao_amizades
+5-interesses_usuarios
+6-curadorias_usuarios
+7-posts
+8-comentarios
+9-grupos
+10-post_grupo
+11-users_grupos
+12-solicitacao_grupo
+13-moderadores
+14-interesses_grupos
+15-curadoria_grupos
+16-adms
+17-posts_excluidos
+18-grupo_excluidos
+19-usuarios_banidos
