@@ -15,8 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
 
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/asd', function () {
-    return "asd";
-});
+Route::get('/home/asd', 'HomeController@coisa');
+
+Route::get('/home/perfilExterno', 'HomeController@perfilExterno');
+
+Route::post('/home/salvar_perfilExterno', 'HomeController@salvar_perfilExterno');
+
+Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
+
+Route::post('/home/salvar_fotoPerfil', 'HomeController@salvar_fotoPerfil');

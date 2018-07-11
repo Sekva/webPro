@@ -32,4 +32,5 @@ class User extends Authenticatable
     public function getPerfilExterno($id) {
       return DB::table('perfis_externos')->where('id', $id)->first();
     }
+    
 }
