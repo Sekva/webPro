@@ -28,3 +28,15 @@ Route::post('/home/salvar_perfilExterno', 'HomeController@salvar_perfilExterno')
 Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
 
 Route::post('/home/salvar_fotoPerfil', 'HomeController@salvar_fotoPerfil');
+
+Route::get('/home/novoPost', 'PostController@novoPost');
+
+Route::post('/home/salvar_novoPost', 'PostController@salvar_novoPost');
+
+Route::get('/home/listarPosts', 'PostController@listarPosts');
+
+Route::get('/home/deletarPost/{id}', 'PostController@deletarPost');
+
+Route::get('/home/editarPost/{id}', 'PostController@editarPost');
+
+Route::post('/home/salvar_editarPost', 'PostController@salvar_editarPost');

@@ -14,9 +14,9 @@ class UsersSeed extends Seeder
       DB::table('users')->insert([
 
         'name' => 'Nome o caba',
-        'email' => 'asd@asd.com',
-        'password' => '123456',
-        'foto' => 'asdqew',
+        'email' => 'aqqqqqsd@asd.com',
+        'password' => bcrypt('123456'),
+        'foto' => '/storage/defaul.png',
         'descricao' => 'fgsygbfiufgiapdbfaufvbuoygfpuyfgkuav aiugfoaudyf 13134augf oaugfoydagf'
       ]);
 
@@ -24,8 +24,8 @@ class UsersSeed extends Seeder
 
         'name' => 'nanainha',
         'email' => 'nanainha@asd.com',
-        'password' => '12asfhsi3456',
-        'foto' => 'asdqew',
+        'password' => bcrypt('12asfhsi3456'),
+        'foto' => '/storage/defaul.png',
         'descricao' => 'fgsygbajfhgsyugu348253745234725fiufgiapdbfaufvbuoygfpuyfgkuav aiugfoaudyf 13134augf oaugfoydagf'
       ]);
 

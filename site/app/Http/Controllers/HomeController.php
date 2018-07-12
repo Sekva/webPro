@@ -4,8 +4,8 @@ namespace site\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 use site\User;
 use site\Perfis_externos;
@@ -69,22 +69,27 @@ class HomeController extends Controller
     }
 
     public function salvar_fotoPerfil(Request $req) {
-      $user = Auth::user();
 
-      $caminho = 'storage/defaul.png';
+
+      $user = Auth::user();
+      $caminho = '/storage/defaul.png';
 
       if ($req->hasFile('foto')) {
 
-        $caminho = $req->file('foto')->storeAs(
-          'storage', $req->user()->id
+        $caminho = Storage::putFileAs(
+          'public', $req->file('foto'), $user->id
         );
 
-        $user->foto = $caminho;
+
+        $user->foto = '/storage/' . $user->id;
         $user->save();
 
+        return redirect('/home');
+
       } else {
-        echo 'as';
+        echo 'Deu probleminha com a foto ai';
       }
+
 
     }
 

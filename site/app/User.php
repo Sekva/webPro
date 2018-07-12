@@ -29,8 +29,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getPerfilExterno($id) {
-      return DB::table('perfis_externos')->where('id', $id)->first();
+    public function getPerfilExterno($id_user) {
+      return DB::table('perfis_externos')->where('id', $id_user)->first();
     }
-    
+
+    public function getPosts($id_autor) {
+      return DB::table('posts')->where('id_autor', $id_autor)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getUnicoPost($id_autor, $id_post) {
+      return DB::table('posts')->where('id_autor', $id_autor)->where('id', $id_post)->first();
+    }
+
 }

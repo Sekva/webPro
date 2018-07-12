@@ -65,7 +65,7 @@
               <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
 
               <div class="col-md-6"> -->
-                <input id="foto" type="hidden" name="foto" value="storage/defaul.png">
+                <input id="foto" type="hidden" name="foto" value="/storage/defaul.png">
               <!-- </div>
             </div> -->
 

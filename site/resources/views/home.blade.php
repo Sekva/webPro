@@ -3,9 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-      <div class="">
+
+      <div>
+        <a href="/home/novoPost">Novo Post</a>
         <a href="/home/mudarFotoPerfil"><img src="{{ Auth::user()->foto }}" width="80" height="80"></a>
+        <a href="/home/listarPosts">Listar Post</a>
       </div>
+
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>

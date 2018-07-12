@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('email')->unique()->nullable(false);
             $table->string('password')->nullable(false);
-            $table->string('foto')->nullbale(false)->default('storage/default.png');
+            $table->string('foto')->nullbale(false)->default('/storage/default.png');
 
             $table->integer('id_perfil_externo')->unsigned()->nullable(true);
 
