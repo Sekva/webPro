@@ -37,7 +37,12 @@ class PostController extends Controller
   public function editarPost($post_id) {
 
     $post = \site\Post::find($post_id);
-    return view('editarPost', ['post' => $post]);
+
+    if ($post->id_autor != Auth::user()->id) {
+      echo "Tu num pode editar sá mundenga não";
+    } else {
+      return view('editarPost', ['post' => $post]);
+    }
   }
 
   public function salvar_editarPost(Request $req) {
