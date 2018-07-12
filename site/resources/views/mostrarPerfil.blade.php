@@ -1,32 +1,40 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-            <title>Editar Usuário</title>
+@extends('layouts.app')
 
-    </head>
-    <body>
-    	<h1>Seu Perfil</h1>
-        @can('editarUser', $user)
+@section('content')
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+
+        <div class="card-header"><h2>Seu Perfil</h2></div>
+
+        <div class="card-body">
             <input type="hidden" name="id" value="{{$user->id}}" />
-            Nome: <b>{{$user->name}}</b></br>
-            E-mail: {{$user->email}}</br>
-            Senha: {{'*?*?*?*?*?*'}}</br>
-            Descrição: {{$user->descricao}}</br>
+            <b>Nome:</b> {{$user->name}}</br>
+            <b>E-mail:</b> {{$user->email}}</br>
+            <b>Descrição:</b> {{$user->descricao}}</br>
             @if($user->perfil != null)
-                Nome do Perfil Externo: {{$user->perfil->nome}}</br>
-                Link do Perfil Externo: {{$user->perfil->link}}</br>
+                <b>Nome do Perfil Externo:</b> {{$user->perfil->nome}}</br>
+                <b>Link do Perfil Externo:</b> {{$user->perfil->link}}</br>
             @else
-                Nome do Perfil Externo: {{'Perfil Externo incompleto ou não feito'}}</br>
-                Link do Perfil Externo: {{'Perfil Externo incompleto ou não feito'}}</br>
+                <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
             @endif
-            <br>
-            <a href="{{url("/home/mudarFotoPerfil")}}">Editar Foto do Perfil!</a>
-            <a href="{{url("/home/perfilExterno")}}">Editar Perfil Externo!</a>
-            <a href="{{url("/usuario/$user->id/editar")}}">Editar Dados do Perfil!</a>
-            <a href="{{url("/usuario/$user->id/deletar")}}">Deletar Perfil</a>
-            <!-- <input  type="submit" value="Editar" /></br></br> -->
             <hr>
-        @endcan
+            <h3>Editar</h3>
+            <a href="{{url("/usuario/$user->id/editar")}}">
+                <button class="btn btn-primary" name="button">Dados do Perfil</button>
+            </a>
+            <a href="{{url("/usuario/$user->id/deletar")}}">
+                <button class="btn btn-primary" name="button">Deletar</button>
+            </a>
+        </div>
+      </div>
+      <hr>
+      <hr>
+    </div>
+  </div>
+</div>
 
-    </body>
-</html>
+@endsection
