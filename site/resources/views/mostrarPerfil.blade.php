@@ -20,6 +20,7 @@
                 Link do Perfil Externo: {{'Perfil Externo incompleto ou não feito'}}</br>
             @endif
             <br>
+            <a href="{{url("/home/mudarFotoPerfil")}}">Editar Foto do Perfil!</a>
             <a href="{{url("/home/perfilExterno")}}">Editar Perfil Externo!</a>
             <a href="{{url("/usuario/$user->id/editar")}}">Editar Dados do Perfil!</a>
             <a href="{{url("/usuario/$user->id/deletar")}}">Deletar Perfil</a>
