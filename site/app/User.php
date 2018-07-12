@@ -29,8 +29,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getPerfilExterno($id) {
-      return DB::table('perfis_externos')->where('id', $id)->first();
+    public function perfil() {
+            return $this->hasOne('site\Perfis_externos', 'id');
     }
-    
+
 }

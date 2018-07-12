@@ -28,3 +28,5 @@ Route::post('/home/salvar_perfilExterno', 'HomeController@salvar_perfilExterno')
 Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
 
 Route::post('/home/salvar_fotoPerfil', 'HomeController@salvar_fotoPerfil');
+
+Route::get('/mostrarUsers', 'UserController@mostrarUsers');
