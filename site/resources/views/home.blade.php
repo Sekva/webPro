@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
 
       <div>
-        <a href="{{url("/usuario/mostrarPerfil")}}">Editar Perfil!</a><br>
+        <a href="{{url("/usuario/mostrarPerfil")}}">Ver meu Perfil!</a><br>
 
         <a href="/home/novoPost">Novo Post</a>
         <a href="/home/mudarFotoPerfil"><img src="{{ Auth::user()->foto }}" width="80" height="80"></a>
