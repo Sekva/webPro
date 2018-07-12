@@ -41,8 +41,9 @@ class User extends Authenticatable
       return DB::table('posts')->where('id_autor', $id_autor)->where('id', $id_post)->first();
     }
 
+    //Tá funcionando! \o/
     public function perfil() {
-      return $this->hasOne('site\Perfis_externos', 'id');
+        return $this->belongsTo('site\Perfis_externos', 'id_perfil_externo');
     }
 
   }
