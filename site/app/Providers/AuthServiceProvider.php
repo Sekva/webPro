@@ -4,6 +4,7 @@ namespace site\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        //Método de autorização
+        Gate::define('editarUser', function($userEditando, $userEditado) {
+            return $userEditando->id == $userEditado->id;
+        });
+
     }
 }

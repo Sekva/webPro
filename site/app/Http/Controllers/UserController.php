@@ -5,28 +5,49 @@ namespace site\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use site\User;
+use Auth;
 
 class UserController extends Controller {
 
-    public function editar($id) {
-			$user = \site\User::find($id);
-    		return view("editarUser", ['user' => $user]);
+    public function mostrarPerfil(User $user) {
+        $user = Auth::user();
+        return view('mostrarPerfil', compact('user'));
     }
 
-    public function salvar(Request $request) {
+    public function editar($id_user) {
+        $user = User::find($id_user);
+
+        $this->authorize('editarUser', $user);
+
+        return view('editarUser', compact('user'));
+    }
+
+    public function salvarEdicao(Request $request) {
+        $this->authorize('editarUser', $request);
+
         $user = \site\User::find($request->id);
-        $user->nome = $request->nome;
+
+        $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->foto = $request->foto;
         $user->descricao = $request->descricao;
-
-        return redirect("/mostrarUsers");
+        $user->update();
+        return redirect('/usuario/mostrarPerfil'); //Essa variável no meio vai funcionar?
     }
 
-    public function mostrarUsers(User $user) {
-        $users = $user->all();
 
-        return view('mostrarUsers', compact('users'));
+    public function checarDeletar() {
+        return view('deletar');
+    }
+
+    public function deletar($id_user) {
+        $user = User::find($id_user);
+        if($user->id == $id_user) {
+            $user->delete();
+        } else {
+            return redirect('/home/listarPosts');
+        }
+        return redirect('/home');
     }
 }
