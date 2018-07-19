@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dda55b322b6aff983a69c9a908d9f863",
+    "content-hash": "f8c6b05399e54153bc4582bd24363812",
     "packages": [
         {
             "name": "behat/behat",
@@ -1790,35 +1790,35 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "4.3.1",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "4474f1cb4cf9873996fc07fac6533ab9298eb6fd"
+                "reference": "b37c5a0659d8a405b820737099cf619b29b3a40e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/4474f1cb4cf9873996fc07fac6533ab9298eb6fd",
-                "reference": "4474f1cb4cf9873996fc07fac6533ab9298eb6fd",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/b37c5a0659d8a405b820737099cf619b29b3a40e",
+                "reference": "b37c5a0659d8a405b820737099cf619b29b3a40e",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.5",
                 "ext-tokenizer": "*",
-                "php": "^7.0,<7.3",
+                "php": "^7.1, <7.3",
                 "phpspec/php-diff": "^1.0.0",
-                "phpspec/prophecy": "^1.5",
+                "phpspec/prophecy": "^1.7",
                 "sebastian/exporter": "^1.0 || ^2.0 || ^3.0",
-                "symfony/console": "^3.2 || ^4.0",
-                "symfony/event-dispatcher": "^3.2 || ^4.0",
-                "symfony/finder": "^3.2 || ^4.0",
-                "symfony/process": "^3.2 || ^4.0",
-                "symfony/yaml": "^3.2 || ^4.0"
+                "symfony/console": "^3.4 || ^4.0",
+                "symfony/event-dispatcher": "^3.4 || ^4.0",
+                "symfony/finder": "^3.4 || ^4.0",
+                "symfony/process": "^3.4 || ^4.0",
+                "symfony/yaml": "^3.4 || ^4.0"
             },
             "require-dev": {
                 "behat/behat": "^3.3",
-                "phpunit/phpunit": "^5.7|^6.0",
-                "symfony/filesystem": "^3.2 || ^4.0"
+                "phpunit/phpunit": "^5.7 || ^6.0",
+                "symfony/filesystem": "^3.4 || ^4.0"
             },
             "suggest": {
                 "phpspec/nyan-formatters": "Adds Nyan formatters"
@@ -1829,7 +1829,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3.x-dev"
+                    "dev-master": "5.0.x-dev"
                 }
             },
             "autoload": {
@@ -1867,7 +1867,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2018-07-02T17:43:33+00:00"
+            "time": "2018-07-17T09:51:17+00:00"
         },
         {
             "name": "phpspec/prophecy",
