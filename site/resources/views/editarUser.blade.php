@@ -72,7 +72,7 @@
                     @else
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome do Perfil Externo:') }}</label>
-                            {{'Perfil Externo incompleto ou não feito'}}<
+                            {{'Perfil Externo incompleto ou não feito'}}
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Link do Perfil Externo:') }}</label>
