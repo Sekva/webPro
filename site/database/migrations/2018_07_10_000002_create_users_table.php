@@ -20,12 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable(false);
             $table->string('foto')->nullbale(false)->default('/storage/default.png');
 
-            $table->integer('id_perfil_externo')->unsigned()->nullable(true);
-
             $table->longText('descricao')->nullable(true);
-
-
-            $table->foreign('id_perfil_externo')->references('id')->on('perfis_externos');
 
             $table->timestamps();
             $table->rememberToken(); //???????diabéisso????????

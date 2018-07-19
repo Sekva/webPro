@@ -29,9 +29,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function getPerfilExterno($id_user) {
-      return DB::table('perfis_externos')->where('id', $id_user)->first();
-    }
 
     public function getPosts($id_autor) {
       return DB::table('posts')->where('id_autor', $id_autor)->orderBy('created_at', 'desc')->get();
@@ -40,10 +37,15 @@ class User extends Authenticatable
     public function getUnicoPost($id_autor, $id_post) {
       return DB::table('posts')->where('id_autor', $id_autor)->where('id', $id_post)->first();
     }
+    //
+    // //Tá funcionando! \o/
+    // public function perfil() {
+    //     return $this->belongsTo('site\Perfis_externos', 'id_perfil_externo');
+    // }
 
-    //Tá funcionando! \o/
-    public function perfil() {
-        return $this->belongsTo('site\Perfis_externos', 'id_perfil_externo');
+
+    public function getPerfisExternos() {
+      return $this->hasMany('site\PerfilExternoUser', 'user_id');
     }
 
   }
