@@ -59,7 +59,7 @@ class HomeController extends Controller
     public function perfilExterno() {
 
       $user = Auth::user();
-      $perfilExterno = $user->getPerfilExterno($user->id_perfil_externo);
+      $perfilExterno = $user->getPerfisExternos();
 
       return view('perfilExterno', ['perfilExterno' => $perfilExterno]);
     }

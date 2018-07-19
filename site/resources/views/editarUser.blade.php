@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Perfil Externo</div>
+                <div class="card-header">Seu Perfil</div>
                 <div class="card-body">
 
                     <!-- Formulario -->

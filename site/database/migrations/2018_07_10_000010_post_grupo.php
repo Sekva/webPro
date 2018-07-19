@@ -20,8 +20,8 @@ class PostGrupo extends Migration
           $table->integer('id_grupo')->unsigned()->nullable(false);
 
 
-          $table->foreign('id_post')->references('id')->on('posts');
-          $table->foreign('id_grupo')->references('id')->on('grupos');
+          $table->foreign('id_post')->references('id')->on('posts')->onDelete('cascade');
+          $table->foreign('id_grupo')->references('id')->on('grupos')->onDelete('cascade');
 
           $table->timestamps();
       });

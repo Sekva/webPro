@@ -19,7 +19,7 @@ class CreatePerfilExternoGruposTable extends Migration
       $table->string('link')->nullable(false);
 
       $table->integer('grupo_id')->unsigned()->nullable(false);
-      $table->foreign('grupo_id')->references('id')->on('grupos');
+      $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
 
       $table->timestamps();
 
