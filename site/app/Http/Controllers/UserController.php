@@ -2,8 +2,8 @@
 
 namespace site\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use site\User;
 use Auth;
 
@@ -36,7 +36,6 @@ class UserController extends Controller {
         return redirect('/usuario/mostrarPerfil'); //Essa variável no meio vai funcionar?
     }
 
-
     public function checarDeletar() {
         return view('deletar');
     }
@@ -44,9 +43,8 @@ class UserController extends Controller {
     public function deletar($id_user) {
         $user = User::find($id_user);
         if($user->id == $id_user) {
-            // Cascade >>
-            // $posts=Post::where('id',$id_autor)->delete();
-            // $posts=Perfis_externos::where('id',$user_id)->delete();
+            $posts=\site\Post::where('id_autor', $id_user)->delete();
+            $posts=\site\PerfisExternoUser::where('user_id',$id_user)->delete();
             $user->delete();
         } else {
             return redirect('/home/listarPosts');

@@ -5,6 +5,8 @@ namespace site;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use SoftDelets;
+
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -29,13 +31,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //Para utilizar o SoftDelete
+    // protected $dates = ['deleted_at'];
+
+    public function posts() {
+        return $this->hasMany('App\Post');
+    }
 
     public function getPosts($id_autor) {
-      return DB::table('posts')->where('id_autor', $id_autor)->orderBy('created_at', 'desc')->get();
+        return DB::table('posts')->where('id_autor', $id_autor)->orderBy('created_at', 'desc')->get();
     }
 
     public function getUnicoPost($id_autor, $id_post) {
-      return DB::table('posts')->where('id_autor', $id_autor)->where('id', $id_post)->first();
+        return DB::table('posts')->where('id_autor', $id_autor)->where('id', $id_post)->first();
     }
     //
     // //Tá funcionando! \o/
@@ -45,7 +53,8 @@ class User extends Authenticatable
 
 
     public function getPerfisExternos() {
-      return $this->hasMany('site\PerfilExternoUser', 'user_id');
+        return $this->hasMany('site\PerfilExternoUser', 'user_id');
     }
+
 
   }

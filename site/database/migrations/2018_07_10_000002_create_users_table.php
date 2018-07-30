@@ -23,7 +23,9 @@ class CreateUsersTable extends Migration
             $table->longText('descricao')->nullable(true);
 
             $table->timestamps();
-            $table->rememberToken(); //???????diabéisso????????
+            $table->rememberToken(); //Logado ou não
+
+            //$table->softDeletes();
         });
     }
 

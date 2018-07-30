@@ -21,9 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/home/asd', 'HomeController@coisa');
 
-Route::get('/home/perfilExterno', 'HomeController@perfilExterno');
+Route::get('/home/perfilExterno', 'PerfilExternoController@perfilExterno');
 
-Route::post('/home/salvar_perfilExterno', 'HomeController@salvar_perfilExterno');
+Route::post('/home/salvar_perfilExterno', 'PerfilExternoController@salvar_perfilExterno');
 
 Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
 
