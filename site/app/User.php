@@ -9,6 +9,8 @@ use SoftDelets;
 
 use Illuminate\Support\Facades\DB;
 
+use Auth;
+
 class User extends Authenticatable
 {
     use Notifiable;

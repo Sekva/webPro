@@ -19,7 +19,7 @@ class CreatePerfilExternoUsersTable extends Migration
       $table->string('link')->nullable(false);
 
       $table->integer('user_id')->unsigned()->nullable(false);
-      $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+      $table->foreign('user_id')->references('id')->on('users');
 
       $table->timestamps();
 

@@ -32,34 +32,67 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function salvar_perfilExterno(Request $req) {
+      $user = Auth::user();
+      $perfilExterno = new \site\PerfilExternoUser();
+      $perfilExterno->nome = $req->nome;
+      $perfilExterno->link = $req->link;
+      $user->getPerfisExternos()->save($perfilExterno);
+      return redirect('home');
+    }
+
+    public function novoPerfilExterno() {
+      return view('novoPerfilExterno');
+    }
+
+    public function perfilExterno() {
+      $user = Auth::user();
+      $perfisExterno = $user->getPerfisExternos;
+      return view('perfilExterno', ['perfisExterno' => $perfisExterno]);
+    }
 
     public function mudarFotoPerfilView() {
       return view('mudarFotoPerfil');
     }
 
     public function salvar_fotoPerfil(Request $req) {
-
-
       $user = Auth::user();
       $caminho = '/storage/defaul.png';
-
       if ($req->hasFile('foto')) {
-
         $caminho = Storage::putFileAs(
           'public', $req->file('foto'), $user->id
         );
-
-
         $user->foto = '/storage/' . $user->id;
         $user->save();
-
         return redirect('/home');
-
       } else {
         echo 'Deu probleminha com a foto ai';
       }
-
-
     }
 
+    public function editarPerfilExterno($perfil_id) {
+
+      $perfil = \site\PerfilExternoUser::find($perfil_id);
+
+      if(!$perfil) {
+        return "passaram um argumento com o id de um prefil que nao existe";
+      } else {
+        //return $perfil;
+        return view('editarPerfilExterno', ['perfil_externo' => $perfil]);
+      }
+    }
+
+    public function salvar_perfilExternoEdit(Request $req) {
+      $perfil = \site\PerfilExternoUser::find($req->id);
+      $perfil->nome = $req->nome;
+      $perfil->link = $req->link;
+      $perfil->save();
+      return redirect('/home');
+    }
+
+    public function apagarPerfilExterno($id) {
+      $perfil = \site\PerfilExternoUser::find($id);
+      $perfil->delete();
+      return redirect('/home');
+    }
 }
