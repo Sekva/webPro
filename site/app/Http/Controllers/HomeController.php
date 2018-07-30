@@ -32,15 +32,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function salvar_perfilExterno(Request $req) {
-      $user = Auth::user();
-      $perfilExterno = new \site\PerfilExternoUser();
-      $perfilExterno->nome = $req->nome;
-      $perfilExterno->link = $req->link;
-      $user->getPerfisExternos()->save($perfilExterno);
-      return redirect('home');
-    }
-
     public function novoPerfilExterno() {
       return view('novoPerfilExterno');
     }

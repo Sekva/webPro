@@ -9,34 +9,49 @@ use User;
 class PerfilExternoController extends Controller{
 
     public function salvar_perfilExterno(Request $req) {
-
       $user = Auth::user();
-
-      $perfilExterno = \site\Perfis_externos::find($user->id_perfil_externo);
-
-      if(!$perfilExterno) {
-        $perfilExterno = new \site\Perfis_externos();
-      }
-
+      $perfilExterno = new \site\PerfilExternoUser();
       $perfilExterno->nome = $req->nome;
       $perfilExterno->link = $req->link;
-      $perfilExterno->save();
-
-      $user->id_perfil_externo = $perfilExterno->id;
-      $user->save();
-
+      $user->getPerfisExternos()->save($perfilExterno);
       return redirect('home');
+    }
 
+    public function novoPerfilExterno() {
+      return view('novoPerfilExterno');
     }
 
     public function perfilExterno() {
-
       $user = Auth::user();
-      $perfilExterno = $user->getPerfisExternos();
-
-      return view('perfilExterno', ['perfilExterno' => $perfilExterno]);
+      $perfisExterno = $user->getPerfisExternos;
+      return view('perfilExterno', ['perfisExterno' => $perfisExterno]);
     }
 
+    public function editarPerfilExterno($perfil_id) {
+
+      $perfil = \site\PerfilExternoUser::find($perfil_id);
+
+      if(!$perfil) {
+        return "passaram um argumento com o id de um prefil que nao existe";
+      } else {
+        //return $perfil;
+        return view('editarPerfilExterno', ['perfil_externo' => $perfil]);
+      }
+    }
+
+    public function salvar_perfilExternoEdit(Request $req) {
+      $perfil = \site\PerfilExternoUser::find($req->id);
+      $perfil->nome = $req->nome;
+      $perfil->link = $req->link;
+      $perfil->save();
+      return redirect('/home');
+    }
+
+    public function apagarPerfilExterno($id) {
+      $perfil = \site\PerfilExternoUser::find($id);
+      $perfil->delete();
+      return redirect('/home');
+    }
 
 
 }
