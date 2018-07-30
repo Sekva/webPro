@@ -23,6 +23,14 @@ Route::get('/home/asd', 'HomeController@coisa');
 
 Route::get('/home/perfilExterno', 'HomeController@perfilExterno');
 
+Route::get('/home/novoPerfilExterno', 'HomeController@novoPerfilExterno');
+
+Route::get('/home/editarPerfilExterno/{id}', 'HomeController@editarPerfilExterno');
+
+Route::post('/home/salvar_perfilExternoEdit', 'HomeController@salvar_perfilExternoEdit');
+
+Route::get('/home/apagarPerfilExterno/{id}', 'HomeController@apagarPerfilExterno');
+
 Route::post('/home/salvar_perfilExterno', 'HomeController@salvar_perfilExterno');
 
 Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');

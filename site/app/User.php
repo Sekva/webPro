@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Illuminate\Support\Facades\DB;
 
+use Auth;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -45,6 +47,7 @@ class User extends Authenticatable
 
 
     public function getPerfisExternos() {
+      //return DB::table('perfil_externo_users')->where('user_id', Auth::user()->id)->get();
       return $this->hasMany('site\PerfilExternoUser', 'user_id');
     }
 
