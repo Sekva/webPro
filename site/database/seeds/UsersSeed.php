@@ -14,19 +14,37 @@ class UsersSeed extends Seeder
       DB::table('users')->insert([
 
         'name' => 'Nome o caba',
-        'email' => 'aqqqqqsd@asd.com',
+        'email' => 'asd@asd.com',
         'password' => bcrypt('123456'),
         'foto' => '/storage/defaul.png',
-        'descricao' => 'fgsygbfiufgiapdbfaufvbuoygfpuyfgkuav aiugfoaudyf 13134augf oaugfoydagf'
+        'descricao' => 'kkkk aiugfoaudyf 13134augf oaugfoydagf'
       ]);
 
       DB::table('users')->insert([
 
         'name' => 'nanainha',
-        'email' => 'nanainha@asd.com',
-        'password' => bcrypt('12asfhsi3456'),
+        'email' => 'asd2@asd.com',
+        'password' => bcrypt('123456'),
         'foto' => '/storage/defaul.png',
-        'descricao' => 'fgsygbajfhgsyugu348253745234725fiufgiapdbfaufvbuoygfpuyfgkuav aiugfoaudyf 13134augf oaugfoydagf'
+        'descricao' => 'jgfdfd aiugfoaudyf 13134augf oaugfoydagf'
+      ]);
+
+      DB::table('users')->insert([
+
+        'name' => 'Oto gato',
+        'email' => 'asd3@asd.com',
+        'password' => bcrypt('123456'),
+        'foto' => '/storage/defaul.png',
+        'descricao' => 'asdadasd aiugfoaudyf 13134augf oaugfoydagf'
+      ]);
+
+      DB::table('users')->insert([
+
+        'name' => 'nanainha',
+        'email' => 'asd4@asd.com',
+        'password' => bcrypt('123456'),
+        'foto' => '/storage/defaul.png',
+        'descricao' => 'uyt aiugfoaudyf 13134augf oaugfoydagf'
       ]);
 
     }

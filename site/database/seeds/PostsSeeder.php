@@ -9,22 +9,17 @@ class PostsSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-      DB::table('posts')->insert([
-        'permanente' => 0,
-        'e_de_grupo' => 0,
-        'texto' => 'titulo',
-        'conteudo' => 'asdasdasdasd oi qew',
-        'id_autor' => 13
-      ]);
+    public function run() {
 
-      DB::table('posts')->insert([
-        'permanente' => 0,
-        'e_de_grupo' => 0,
-        'texto' => 'titulo 2',
-        'conteudo' => 'asdasdasdasd oi dnv qew',
-        'id_autor' => 13
-      ]);
+      $post1 = new \site\Post();
+
+      $post1->permanente = false;
+      $post1->e_de_grupo = false;
+      $post1->texto = "kasdhds";
+      $post1->conteudo = "ijifdo";
+
+      $user = \site\User::find(1);
+      $user->posts()->save($post1);
+
     }
 }
