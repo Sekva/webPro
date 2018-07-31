@@ -14,13 +14,16 @@
             <b>Nome:</b> {{$user->name}}</br>
             <b>E-mail:</b> {{$user->email}}</br>
             <b>Descrição:</b> {{$user->descricao}}</br>
-            @if($user->perfil != null)
-                <b>Nome do Perfil Externo:</b> {{$user->perfil->nome}}</br>
-                <b>Link do Perfil Externo:</b> {{$user->perfil->link}}</br>
-            @else
-                <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
-                <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
-            @endif
+            @foreach($perfisExterno as $p)
+                @if($p->nome != null)
+                    <hr>    
+                    <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
+                    <b>Link do Perfil Externo:</b> {{$p->link}}</br>
+                @else
+                    <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                    <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                @endif
+            @endforeach
             <hr>
             <h3>Editar</h3>
             <a href="{{url("/usuario/$user->id/editar")}}">

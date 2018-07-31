@@ -11,15 +11,16 @@ class UserController extends Controller {
 
     public function mostrarPerfil(User $user) {
         $user = Auth::user();
-        return view('mostrarPerfil', compact('user'));
+        $perfisExterno = $user->getPerfisExternos;
+        return view('mostrarPerfil', ["user" => $user, "perfisExterno" => $perfisExterno]);
     }
 
     public function editar($id_user) {
         $user = User::find($id_user);
 
         $this->authorize('editarUser', $user);
-
-        return view('editarUser', compact('user'));
+        $perfisExterno = $user->getPerfisExternos;
+        return view('editarUser', ["user" => $user, "perfisExterno" => $perfisExterno]);
     }
 
     public function salvarEdicao(Request $request) {

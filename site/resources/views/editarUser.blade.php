@@ -56,34 +56,21 @@
                     </form>
                     <br><hr>
                     <h3>Seu Perfil Externo!</h3>
-                    @if($user->perfil != null)
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome do Perfil Externo:') }}</label>
-                            <div class="col-md-6">
-                                {{$user->perfil->nome}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Link do Perfil Externo:') }}</label>
-                            <div class="col-md-6">
-                                {{$user->perfil->link}}
-                            </div>
-                        </div>
-                    @else
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome do Perfil Externo:') }}</label>
-                            {{'Perfil Externo incompleto ou não feito'}}
-                        </div>
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Link do Perfil Externo:') }}</label>
-                            <div class="col-md-6">
-                                {{'Perfil Externo incompleto ou não feito'}}<br><br>
-                            </div>
-                        </div>
-                    @endif
+                    @foreach($perfisExterno as $p)
+                        @if($p->nome != null)
+                            <hr>
+                            <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
+                            <b>Link do Perfil Externo:</b> {{$p->link}}</br>
+                        @else
+                            <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                            <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                        @endif
+                    @endforeach
+                    <hr>
+
                     <div style="text-align:center;">
                         <a href="{{url("/home/perfilExterno")}}">
-                            <button class="btn btn-primary" name="button">Perfil Externo</button>
+                            <button class="btn btn-primary" name="button">Editar Perfil Externo</button>
                         </a>
                     </div>
                     <!-- Formulario -->
