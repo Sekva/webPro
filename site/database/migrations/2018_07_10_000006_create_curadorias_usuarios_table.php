@@ -12,7 +12,7 @@ class CreateCuradoriasUsuariosTable extends Migration
      * @return void
      */
     public function up() {
-        Schema::create('curadorias_usuarios', function (Blueprint $table) {
+        Schema::create('curadoria_usuarios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nome')->nullable(false);
             $table->longText('descricao')->nullable(false); //300 caracteres!

@@ -60,6 +60,8 @@
 
                 <a class="dropdown-item" href="{{ url('/home/perfilExterno') }}">Perfil Externo</a>
 
+                <a class="dropdown-item" href="{{ url('/home/curadorias') }}">Curadorias</a>
+
 
 
 

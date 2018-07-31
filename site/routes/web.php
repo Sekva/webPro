@@ -58,3 +58,6 @@ Route::post('/usuario/salvarEdicao', 'UserController@salvarEdicao');
 Route::get('/usuario/{id}/checarDeletar', 'UserController@checarDeletar');
 
 Route::get('/usuario/{id}/deletar', 'UserController@deletar');
+
+
+include dirname(__FILE__)."/rotas_curadoria_user.php";

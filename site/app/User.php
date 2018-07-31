@@ -58,5 +58,9 @@ class User extends Authenticatable
         return $this->hasMany('site\PerfilExternoUser', 'user_id');
     }
 
+    public function getCuradorias() {
+        return $this->hasMany('site\Curadoria_usuario', 'id_user');
+    }
+
 
   }
