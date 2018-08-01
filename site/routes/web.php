@@ -18,4 +18,8 @@ include dirname(__FILE__)."/rotas_curadoria_user.php";
 include dirname(__FILE__)."/rotas_users.php";
 include dirname(__FILE__)."/rotas_perfil_externo_user.php";
 include dirname(__FILE__)."/rotas_posts.php";
+<<<<<<< HEAD
 include dirname(__FILE__)."/rotas_comentarios.php";
+=======
+include dirname(__FILE__)."/rotas_amigos.php";
+>>>>>>> 269574d84ecc476c0ce8ef48513cdfad45382d1b

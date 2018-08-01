@@ -29,13 +29,6 @@
                <div>
                   <textarea name="conteudo" rows="5" cols="73"></textarea>
                </div>
-               <!-- <a href="/comentar">comentar!</a> -->
-
-               <!-- <div>
-                     <a href="{{url("/comentar")}}">
-                         <button class="btn btn-primary" name="button">Postar Comentário!</button>
-                     </a>
-               </div> -->
                <button type="submit" class="btn btn-primary">
                  {{ __('Comentar! \o/') }}
                </button>

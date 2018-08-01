@@ -16,7 +16,7 @@
             <b>Descrição:</b> {{$user->descricao}}</br>
             @foreach($perfisExterno as $p)
                 @if($p->nome != null)
-                    <hr>    
+                    <hr>
                     <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
                     <b>Link do Perfil Externo:</b> {{$p->link}}</br>
                 @else
