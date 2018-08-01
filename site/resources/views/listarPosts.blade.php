@@ -4,27 +4,32 @@
 
 @foreach($posts as $post)
 
-  <div class="container">
-      <div class="row justify-content-center">
-          <div class="col-md-8">
-              <div class="card">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
 
-                  <div class="card-header">
+                <div class="card-header">
                     <span>{{$post->texto}}</span>
                     <span style="float:right; margin-left:10px;">
-                      <a href="/home/deletarPost/{{$post->id}}">Apagar!</a>
+                        <a href="/home/deletarPost/{{$post->id}}">Apagar!</a>
                     </span> <span style="float:right">
-                      <a href="/home/editarPost/{{$post->id}}">Editar!</a>
+                        <a href="/home/editarPost/{{$post->id}}">Editar!</a>
                     </span>
-                  </div>
+                </div>
 
-                  <div class="card-body">{{$post->conteudo}}</div>
-              </div>
-              <hr>
-              <hr>
-          </div>
-      </div>
-  </div>
+                <div class="card-body">{{$post->conteudo}}</div>
+                <div>
+                    <span style="float:right">
+                        <a href="/post/verPost/{{$post->id}}">Ver Post!</a>
+                    </span>
+                </div>
+            </div>
+            <hr>
+            <hr>
+        </div>
+    </div>
+</div>
 
 @endforeach
 
