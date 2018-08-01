@@ -1,7 +1,6 @@
 <?php
 
 
-
 Route::get('/home/perfilExterno', 'PerfilExternoController@perfilExterno');
 
 Route::get('/home/novoPerfilExterno', 'PerfilExternoController@novoPerfilExterno');

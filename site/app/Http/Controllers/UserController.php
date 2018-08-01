@@ -45,7 +45,7 @@ class UserController extends Controller {
         $user = User::find($id_user);
         if($user->id == $id_user) {
             $posts=\site\Post::where('id_autor', $id_user)->delete();
-            $posts=\site\PerfilExternoUser::where('user_id',$id_user)->delete();
+            $posts=\site\PerfilExternoUser::where('user_id', $id_user)->delete();
             $user->delete();
         } else {
             return redirect('/home/listarPosts');
