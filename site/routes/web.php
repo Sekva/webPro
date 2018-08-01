@@ -19,3 +19,4 @@ include dirname(__FILE__)."/rotas_users.php";
 include dirname(__FILE__)."/rotas_perfil_externo_user.php";
 include dirname(__FILE__)."/rotas_posts.php";
 include dirname(__FILE__)."/rotas_amigos.php";
+include dirname(__FILE__)."/rotas_grupos.php";
