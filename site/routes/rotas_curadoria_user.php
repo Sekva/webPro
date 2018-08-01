@@ -1,11 +1,5 @@
 <?php
 
-
-Route::get('/asdasd', function () {
-  return 'jshf';
-});
-
-
 Route::get('/home/curadorias', 'CuradoriaUserController@listarCuradorias');
 
 Route::get('/home/novaCuradoria', 'CuradoriaUserController@novaCuradoria');
