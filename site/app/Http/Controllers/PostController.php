@@ -17,10 +17,7 @@ class PostController extends Controller
 
    public function salvar_novoPost(Request $req) {
 
-      $req->validate([
-         'texto' => 'required',
-         'conteudo' => 'required',
-      ]);
+      $req->validate(\site\Post::getRules(), \site\Post::getMsgs());
 
       $user = Auth::user();
 
@@ -48,6 +45,9 @@ class PostController extends Controller
    }
 
    public function salvar_editarPost(Request $req) {
+
+      $req->validate(\site\Post::getRules(), \site\Post::getMsgs());
+
 
       if ($req->user()->id != Auth::user()->id) {
          echo "Tu num pode editar sá mundenga não";

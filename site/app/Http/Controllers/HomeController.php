@@ -74,6 +74,10 @@ class HomeController extends Controller
     }
 
     public function salvar_perfilExternoEdit(Request $req) {
+
+      $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
+
+
       $perfil = \site\PerfilExternoUser::find($req->id);
       $perfil->nome = $req->nome;
       $perfil->link = $req->link;

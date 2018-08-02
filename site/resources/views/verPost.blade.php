@@ -23,6 +23,16 @@
                </div>
 
                <div class="card-body">{{$post->conteudo}}</div>
+
+               @if ($errors->any())
+                   <div class="alert alert-danger">
+                       <ul>
+                           @foreach ($errors->all() as $error)
+                               <li>{{ $error }}</li>
+                           @endforeach
+                       </ul>
+                   </div>
+               @endif
                <hr>
                <input type="hidden" name="post_id" value="{{$post->id}}">
                <input type="hidden" name="user_id" value="{{Auth::user()->id}}">

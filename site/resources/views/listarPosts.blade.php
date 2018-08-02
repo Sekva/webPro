@@ -16,7 +16,15 @@
                     </span> <span style="float:right">
                         <a href="/home/editarPost/{{$post->id}}">Editar!</a>
                     </span>
+                    <br>
+                    @if($post->e_de_grupo)
+                        Do grupo
+                        <a href="/grupos/ver/{{DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo')}}">
+                           {{\site\Grupo::find(DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo'))->name}}
+                        </a>
+                    @endif
                 </div>
+
 
                 <div class="card-body">{{$post->conteudo}}</div>
                 <div>

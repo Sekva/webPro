@@ -8,6 +8,9 @@ use Auth;
 class ComentariosController extends Controller {
 
    public function comentar(Request $req) {
+
+      $req->validate(\site\Comentario::getRules(), \site\Comentario::getMsgs());
+
       if (Auth::user()->id != $req->user_id) {
          return redirect('/home');
       }

@@ -32,13 +32,55 @@
                @endif
                Opa!
                <br><br>
+               <?php
+                  $listaPosts = Auth::user()->getPosts(Auth::user()->id);
+                ?>
 
-               <div class="card">
-                  <div class="card-header">Seu Feed de todo dia</div>
-                  <div class="card-body">
-                     Opa!
+                @foreach(Auth::user()->getAmigos as $amigo)
+                  @foreach($amigo->getPosts($amigo->id) as $posts)
+                     @php($listaPosts->push($posts))
+                  @endforeach
+                @endforeach
+
+                @php($saida = $listaPosts->sortByDesc('created_at'))
+
+                @foreach($saida as $p)
+                  @if($p->e_de_grupo == 0)
+                  <div class="card">
+                     <div class="card-header"> {{$p->texto}} </div>
+                     <div class="card-body">
+                        <div>
+                            <span style="float:right">
+                                <a href="/post/verPost/{{$p->id}}">Ver Post!</a>
+                                <br>
+                                {{\site\Post::find($p->id)->getComentarios()->count()}} comentarios
+                            </span>
+                        </div>
+                        <p> {{$p->conteudo}} </p>
+                     </div>
+
+                     @php($elo = \site\User::find($p->id_autor))
+
+                     <span style=" font-size: 13px" > Por {{$elo->name}} </span>
+                     <span style=" font-size: 13px" >
+
+                        <?php
+                           $data = '';
+                         ?>
+
+                         @php ($data = $p->created_at)
+
+                        <?php
+                           echo date( "H:i:s", strtotime($data)) . ' do dia ' . date( "d/m/Y", strtotime($data));
+                         ?>
+
+                      </span>
+
                   </div>
-               </div>
+                  <br><br>
+                  @endif
+               @endforeach
+
             </div>
          </div>
       </div>

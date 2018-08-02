@@ -123,7 +123,7 @@ class GrupoController extends Controller {
       $grupo = \site\Grupo::find($req->id_grupo);
       $grupo->getPosts()->attach($post->id);
 
-      return redirect()->back();
+      return redirect('/grupos/ver/'.$req->id_grupo);
 
    }
 

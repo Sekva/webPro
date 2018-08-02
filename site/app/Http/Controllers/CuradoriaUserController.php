@@ -18,6 +18,11 @@ class CuradoriaUserController extends Controller {
   }
 
   public function salvarNovaCuradoria(Request $req) {
+
+   $req->validate(\site\Curadoria_usuario::getRules(), \site\Curadoria_usuario::getMsgs());
+
+
+
     $user = Auth::user();
 
     $curadoria = new \site\Curadoria_usuario();
@@ -42,6 +47,10 @@ class CuradoriaUserController extends Controller {
   }
 
   public function salvarEditCuradoria(Request $req) {
+
+     $req->validate(\site\Curadoria_usuario::getRules(), \site\Curadoria_usuario::getMsgs());
+
+
     $curadoria = \site\Curadoria_usuario::find($req->id);
 
     if ($curadoria) {
