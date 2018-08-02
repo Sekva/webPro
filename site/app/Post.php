@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Post extends Model {
 
     public function users() {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('site\User', 'id_autor');
     }
 
     public function getComentarios() {

@@ -21,11 +21,12 @@ $eAmigo = 0;
                </span>
 
                @if(Auth::user()->id != $user->id)
-               @foreach(Auth::user()->getAmigos as $amigo)
-               @if($amigo->id == $user->id)
-               <?php $eAmigo = 1;?>
-               @endif
-               @endforeach
+                  @foreach(Auth::user()->getAmigos as $amigo)
+                     @if($amigo->id == $user->id)
+                        <?php $eAmigo = 1;?>
+                     @endif
+                  @endforeach
+               
 
                @if($eAmigo == 1)
                <span style="float:right">

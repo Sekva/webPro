@@ -16,3 +16,43 @@ Route::get('/grupos/aceitarSolicitacao/{id_user}/{id_grupo}', 'GrupoController@a
 Route::get('/grupos/sairDoGrupo/{id}', 'GrupoController@sairDoGrupo');
 
 Route::get('/grupos/removerDoGrupo/{id_grupo}/{id_user}', 'GrupoController@removerDoGrupo');
+
+Route::get('/grupos/ver/{id}', 'GrupoController@verGrupo');
+
+Route::get('/grupos/novoPost/{id}', 'GrupoController@novoPost');
+
+Route::post('/grupos/salvar_novoPost', 'GrupoController@salvar_novoPost');
+
+Route::get('/grupos/listarMembros/{id}', 'GrupoController@listarMembros');
+
+Route::get('/grupos/listarModeradores/{id}', 'GrupoController@listarModeradores');
+
+Route::get('/grupos/listarPerfisExternos/{id}', 'GrupoController@listarPerfisExternos');
+
+Route::get('/grupos/novoPerfilExterno/{id}', 'GrupoController@novoPerfilExterno');
+
+Route::post('/grupos/salvar_novoPerfilExterno', 'GrupoController@salvar_novoPerfilExterno');
+
+Route::get('/grupos/apagarPerfilExterno/{id_perfil}/{id_grupo}', 'GrupoController@apagarPerfilExterno');
+
+Route::get('/grupos/editarPerfilExterno/{id_perfil}/{id_grupo}', 'GrupoController@editarPerfilExterno');
+
+Route::post('/grupos/salvar_editarPerfilExterno', 'GrupoController@salvar_editarPerfilExterno');
+
+Route::get('/grupos/listarCuradorias/{id}', 'GrupoController@listarCuradorias');
+
+Route::get('/grupos/novaCuradoria/{id}', 'GrupoController@novaCuradoria');
+
+Route::post('/grupos/salvar_novaCuradoria', 'GrupoController@salvar_novaCuradoria');
+
+Route::get('/grupos/apagarCuradoria/{id_curadoria}/{id_grupo}', 'GrupoController@apagarCuradoria');
+
+Route::get('/grupos/editarCuradoria/{id_curadoria}/{id_grupo}', 'GrupoController@editarCuradoria');
+
+Route::post('/grupos/salvar_editarCuradoria', 'GrupoController@salvar_editarCuradoria');
+
+Route::get('/grupos/listarSolicitacoes/{id}','GrupoController@listarSolicitacoes' );
+
+Route::get('/grupo/promoverParaModerador/{id_grupo}/{id_user}', 'GrupoController@promoverParaModerador');
+
+Route::get('/grupo/reduzirModerador/{id_grupo}/{id_user}', 'GrupoController@reduzirModerador');
