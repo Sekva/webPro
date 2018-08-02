@@ -28,11 +28,17 @@
 
       <div class="col-md-8">
          <div class="card">
-            <div class="card-header">{{$grupo->name}}</div>
+            <div class="card-header">
+               {{$grupo->name}}
+            </div>
             <div class="card-body">
-               @foreach($grupo->getPosts as $post)
+               @php($postsOrdenados = $grupo->getPosts->sortByDesc('created_at'))
+               @foreach($postsOrdenados as $post)
                <hr style="border-style: inset; border-width: 1px; color: black;">
                <span> {{$post->texto}} </span>
+               @if($grupo->getModeradores->contains(Auth::user()->id))
+               <span> <a href="/grupos/deletarPost/{{$grupo->id}}/{{$post->id}}">Deletar</a> </span>
+               @endif
                <hr>
                <p> {{$post->conteudo}} </p>
                <hr>

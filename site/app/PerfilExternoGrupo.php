@@ -12,7 +12,7 @@ class PerfilExternoGrupo extends Model {
 
    public static $messages = [
       'required' => 'O campo :attribute é obrigatório',
-      'nome.min' => 'o nome tem que ter pelo menos 10 caracteres',
+      'nome.min' => 'o nome tem que ter pelo menos 4 caracteres',
    ];
 
    public static function getRules() {

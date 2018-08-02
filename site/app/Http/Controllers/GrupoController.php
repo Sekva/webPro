@@ -7,6 +7,33 @@ use Auth;
 
 class GrupoController extends Controller {
 
+
+   private function apagarGrupo($id_grupo) {
+      $grupo = \site\Grupo::find($id_grupo);
+      if ($grupo) {
+         foreach ($grupo->getSolicitacoes as $solicitacao) {
+            $grupo->getSolicitacoes()->detach($solicitacao->id);
+         }
+         foreach ($grupo->getPosts as $post) {
+            $grupo->getPosts()->detach($post->id);
+         }
+         foreach ($grupo->getPerfisExterno as $p) {
+            $perfil = \site\PerfilExternoGrupo::find($p->id);
+            $perfil->delete();
+         }
+         foreach ($grupo->getCuradorias as $c) {
+            $ca = \site\Curadoria_grupos::find($c->id);
+            $ca->delete();
+         }
+
+         $grupo->getMembros()->detach(Auth::user()->id);
+
+         if ($grupo->getModeradores->contains(Auth::user()->id)) {
+            $grupo->getModeradores()->detach(Auth::user()->id);
+         }
+      }
+   }
+
    private function esseGrupoExiste($id_grupo) {
       $grupo = \site\Grupo::find($id_grupo);
       if(!$grupo) {
@@ -43,7 +70,11 @@ class GrupoController extends Controller {
 
    private function esseUsuarioExiste($id_user){
       $user = \site\User::find($id_user);
-      return (!$user->isEmpty());
+      if ($user) {
+         return true;
+      } else {
+         return false;
+      }
    }
 
    private function quantidadeDeModeradores($id_grupo) {
@@ -66,6 +97,9 @@ class GrupoController extends Controller {
 
    public function salvar_novoGrupo(Request $req) {
       //valida a request
+      $req->validate(\site\Grupo::getRules(), \site\Grupo::getMsgs());
+
+
 
       $grupo = new \site\Grupo();
       $grupo->name = $req->name;
@@ -92,12 +126,14 @@ class GrupoController extends Controller {
       }
 
       //Verifica se aquele cara é membro do grupo
-      if($this->ehMembroDoGrupo($id_grupo, $id_user) == true) {
+      if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == true) {
          return "Você já é membro do grupo! ~.~";
       }
 
       $grupo = \site\Grupo::find($id_grupo);
-      $grupo->getSolicitacoes()->attach(Auth::user()->id);
+      if (!$grupo->getSolicitacoes->contains(Auth::user()->id)) {
+         $grupo->getSolicitacoes()->attach(Auth::user()->id);
+      }
       return redirect()->back();
    }
 
@@ -131,13 +167,15 @@ class GrupoController extends Controller {
          return "Você não é Moderador!!";
       }
 
-      //Verifica se aquele cara é membro do grupo
-      if($this->ehMembroDoGrupo($id_grupo, $id_user) == false) {
-         return "Esse cara ai não é membro do grupo não! ~.~";
-      }
-
       if($this->esseUsuarioExiste($id_user) == false) {
          return "Usuário inexistente!";
+      }
+
+      //Verifica se aquele cara é membro do grupo
+      if($this->ehMembroDoGrupo($id_grupo, $id_user) == true) {
+         $grupo = \site\Grupo::find($id_grupo);
+         $grupo->getSolicitacoes()->detach($id_user);
+         return "Mas esse cara já é membro";
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -158,13 +196,19 @@ class GrupoController extends Controller {
          return "Você não é membro desse Grupo!";
       }
 
-      //Verifica se o usuário logado é Moderador
-      if($this->ehModerador($id_grupo, Auth::user()->id) == true) {
-         if($this->quantidadeDeModeradores() == 1)
-            return "Você é Moderador! Um grupo não pode ficar sem moderador!";
+      $grupo = \site\Grupo::find($id_grupo);
+      if ($grupo->getMembros->count() == 1) {
+         $this->apagarGrupo($id_grupo);
+         $grupo->delete();
+         return redirect('/grupos');
       }
 
-      $grupo = \site\Grupo::find($id_grupo);
+      //Verifica se o usuário logado é Moderador
+      if($this->ehModerador($id_grupo, Auth::user()->id) == true) {
+         if($this->quantidadeDeModeradores($id_grupo) == 1)
+            return "Você é o unico Moderador! Um grupo não pode ficar sem moderador!";
+      }
+
       $grupo->getMembros()->detach(Auth::user()->id);
 
       if ($grupo->getModeradores->contains(Auth::user()->id)) {
@@ -196,7 +240,7 @@ class GrupoController extends Controller {
       if ($grupo->getModeradores->contains($id_user)) {
          $grupo->getModeradores()->detach($id_user);
       }
-      return redirect('/grupos');
+      return redirect()->back();
    }
 
    public function verGrupo($id_grupo) { //[???????- Onde isso é usado? -????????]
@@ -234,14 +278,16 @@ class GrupoController extends Controller {
 
    public function salvar_novoPost(Request $req) {
       //valide essa resquest
+      $req->validate(\site\Post::getRules(), \site\Post::getMsgs());
+
 
       //Se o grupo existir
-      if($this->esseGrupoExiste($id_grupo) == false) {
+      if($this->esseGrupoExiste($req->id_grupo) == false) {
          return "Esse grupo não existe!";
       }
 
       //Verifica se o cara logado é membro do grupo
-      if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
+      if($this->ehMembroDoGrupo($req->id_grupo, Auth::user()->id) == false) {
          return "Você não é membro desse Grupo!";
       }
 
@@ -268,6 +314,25 @@ class GrupoController extends Controller {
 
       return redirect('/grupos/ver/'.$req->id_grupo);
 
+   }
+
+   public function deletarPost($id_grupo, $id_post) {
+
+      if (!$this->esseGrupoExiste($id_grupo)) {
+         return 'Esse grupo nem existe';
+      }
+
+
+      $grupo = \site\Grupo::find($id_grupo);
+      if ($grupo) {
+         if (!$grupo->getModeradores->contains(Auth::user()->id)) {
+            return 'tu nem é moderador';
+         }
+         if ($grupo->getPosts->contains($id_post)) {
+            $grupo->getPosts()->detach($id_post);
+         }
+      }
+      return redirect()->back();
    }
 
    public function listarMembros($id_grupo) {
@@ -335,6 +400,8 @@ class GrupoController extends Controller {
 
    public function salvar_novoPerfilExterno(Request $req) {
       //validar request
+      $req->validate(\site\PerfilExternoGrupo::getRules(), \site\PerfilExternoGrupo::getMsgs());
+
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
@@ -395,6 +462,8 @@ class GrupoController extends Controller {
 
    public function salvar_editarPerfilExterno(Request $req) {
       //valida a request
+      $req->validate(\site\PerfilExternoGrupo::getRules(), \site\PerfilExternoGrupo::getMsgs());
+
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
@@ -449,6 +518,9 @@ class GrupoController extends Controller {
 
    public function salvar_novaCuradoria(Request $req) {
       //já sabe q tem q validar né sekva? é '-'
+
+      $req->validate(\site\Curadoria_grupos::getRules(), \site\Curadoria_grupos::getMsgs());
+
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
@@ -511,6 +583,8 @@ class GrupoController extends Controller {
 
    public function salvar_editarCuradoria(Request $req) {
       //valida a request
+      $req->validate(\site\Curadoria_grupos::getRules(), \site\Curadoria_grupos::getMsgs());
+
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($req->id_grupo, Auth::user()->id) == false) {

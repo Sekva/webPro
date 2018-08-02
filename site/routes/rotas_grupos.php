@@ -23,6 +23,8 @@ Route::get('/grupos/novoPost/{id}', 'GrupoController@novoPost');
 
 Route::post('/grupos/salvar_novoPost', 'GrupoController@salvar_novoPost');
 
+Route::get('/grupos/deletarPost/{id_grupo}/{id_post}', 'GrupoController@deletarPost');
+
 Route::get('/grupos/listarMembros/{id}', 'GrupoController@listarMembros');
 
 Route::get('/grupos/listarModeradores/{id}', 'GrupoController@listarModeradores');
@@ -53,6 +55,6 @@ Route::post('/grupos/salvar_editarCuradoria', 'GrupoController@salvar_editarCura
 
 Route::get('/grupos/listarSolicitacoes/{id}','GrupoController@listarSolicitacoes' );
 
-Route::get('/grupo/promoverParaModerador/{id_grupo}/{id_user}', 'GrupoController@promoverParaModerador');
+Route::get('/grupos/promoverParaModerador/{id_grupo}/{id_user}', 'GrupoController@promoverParaModerador');
 
-Route::get('/grupo/reduzirModerador/{id_grupo}/{id_user}', 'GrupoController@reduzirModerador');
+Route::get('/grupos/reduzirModerador/{id_grupo}/{id_user}', 'GrupoController@reduzirModerador');
