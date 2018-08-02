@@ -5,7 +5,7 @@ namespace site;
 use Illuminate\Database\Eloquent\Model;
 
 class Grupo extends Model {
-   public function getMebros() {
+   public function getMembros() {
       return $this->belongsToMany('\site\User', 'users_grupos', 'id_grupo' , 'id_user')->withTimestamps();
    }
 

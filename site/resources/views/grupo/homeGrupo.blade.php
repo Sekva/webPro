@@ -11,7 +11,7 @@
          <br>
          <a href="/grupos/novoPost/{{$grupo->id}}">Novo Post</a>
          <br>
-         <a href="/grupos/listarMembros/{{$grupo->id}}">Mebros</a>
+         <a href="/grupos/listarMembros/{{$grupo->id}}">Membros</a>
          <br>
          <a href="/grupos/listarModeradores/{{$grupo->id}}">Moderadores</a>
          <br>

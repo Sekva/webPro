@@ -11,7 +11,7 @@
                   <div class="card-header">
                      <h2>{{$grupo->name}}</h2>
 
-                     @if($grupo->getMebros->contains($user->id))
+                     @if($grupo->getMembros->contains($user->id))
                      <a href="/grupos/ver/{{$grupo->id}}">xo v</a>
                      @else
                      <a href="/grupos/solicitarEntradaEmGrupo/{{$grupo->id}}">Xo entrar?</a>
