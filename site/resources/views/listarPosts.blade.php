@@ -19,8 +19,13 @@
                     <br>
                     @if($post->e_de_grupo)
                         Do grupo
-                        <a href="/grupos/ver/{{DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo')}}">
-                           {{\site\Grupo::find(DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo'))->name}}
+                        @php($grupo = \site\Grupo::find(DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo')))
+                        @if($grupo)
+                           <a href="/grupos/ver/{{DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo')}}">
+                           {{ DB::table('grupos')->where('id', DB::table('posts_grupos')->where('id_post', $post->id)->value('id_grupo'))->value('name')}}
+                        @else
+                           que foi deletado
+                        @endif
                         </a>
                     @endif
                 </div>
