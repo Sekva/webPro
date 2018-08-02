@@ -11,16 +11,18 @@ class UserController extends Controller {
 
     public function mostrarPerfil(User $user) {
         $user = Auth::user();
-        $perfisExterno = $user->getPerfisExternos;
-        return view('mostrarPerfil', ["user" => $user, "perfisExterno" => $perfisExterno]);
+        $perfisExternos = $user->getPerfisExternos;
+        $curadorias = $user->getCuradorias;
+        return view('mostrarPerfil', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
     }
 
     public function editar($id_user) {
         $user = User::find($id_user);
 
         $this->authorize('editarUser', $user);
-        $perfisExterno = $user->getPerfisExternos;
-        return view('editarUser', ["user" => $user, "perfisExterno" => $perfisExterno]);
+        $perfisExternos = $user->getPerfisExternos;
+        $curadorias = $user->getCuradorias;
+        return view('editarUser', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
     }
 
     public function salvarEdicao(Request $request) {
@@ -44,12 +46,36 @@ class UserController extends Controller {
     public function deletar($id_user) {
         $user = User::find($id_user);
         if($user->id == $id_user) {
-            $posts=\site\Post::where('id_autor', $id_user)->delete();
-            $posts=\site\PerfilExternoUser::where('user_id', $id_user)->delete();
+            $posts  = \site\Post::where('id_autor', $id_user)->get();
+            //Apaga todos os comentários dos posts daquele usuário
+            foreach ($posts as $p) {
+               $comentarios = \site\Comentario::where('id_post', $p->id)->delete();
+               //Apaga post um a u
+               $p->delete();
+            }
+            $perfis = \site\PerfilExternoUser::where('user_id', $id_user)->delete();
+            $curadoria = \site\Curadoria_usuario::where('id_user', $id_user)->delete();
+            //Apagar amizades
+            $amizades = $user->getAmigos;
+            foreach ($amizades as $a) {
+               // echo $a->id;
+               $amigo = \site\User::find($a->id);
+               $amigo->getAmigos()->detach($user->id);
+               $user->getAmigos()->detach($amigo->id);
+            }
+            //Deletar Solicitações
+            $solicitacoes = $user->getSolicitacoes;
+            foreach ($solicitacoes as $s) {
+               $amigo = \site\User::find($s->id);
+               $amigo->getSolicitacoes()->detach($user->id);
+               $user->getSolicitacoes()->detach($amigo->id);
+            }
+
             $user->delete();
         } else {
             return redirect('/home/listarPosts');
         }
-        return redirect('/home');
+        echo "deletado";
+        // return redirect('/home');
     }
 }

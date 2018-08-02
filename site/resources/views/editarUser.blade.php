@@ -55,25 +55,34 @@
 
                </form>
                <br><hr>
-               <h3>Seu Perfil Externo!</h3>
-               @foreach($perfisExterno as $p)
-               @if($p->nome != null)
-               <hr>
-               <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
-               <b>Link do Perfil Externo:</b> {{$p->link}}</br>
-               @else
-               <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
-               <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+               @if(!$perfisExternos->isEmpty())
+                  <hr>
+                  <h2>Perfis Externos</h2>
+                  @foreach($perfisExternos as $p)
+                     <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
+                     <b>Link do Perfil Externo:</b> {{$p->link}}</br>
+                  @endforeach
                @endif
-               @endforeach
-               <hr>
-               
                <div style="text-align:center;">
                   <a href="{{url("/home/perfilExterno")}}">
                      <button class="btn btn-primary" name="button">Editar Perfil Externo</button>
                   </a>
                </div>
-               <!-- Formulario -->
+               @if(!$curadorias->isEmpty())
+                  <hr>
+                  <h2>Curadorias</h2>
+                  @foreach($curadorias as $c)
+                     <b>Nome da Curadoria:</b> {{$c->nome}}</br>
+                     <b>Descrição da Curadoria:</b> {{$c->descricao}}</br>
+                     <b>Link da Curadoria:</b> {{$c->link}}</br>
+                  @endforeach
+               @endif
+               <hr>
+               <div style="text-align:center;">
+                  <a href="{{url("/home/curadorias")}}">
+                     <button class="btn btn-primary" name="button">Editar Curadorias</button>
+                  </a>
+               </div>
 
             </div>
          </div>
