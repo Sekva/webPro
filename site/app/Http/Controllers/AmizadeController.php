@@ -13,6 +13,11 @@ class AmizadeController extends Controller {
       return view('listarAmigos', ['listaAmigos' => Auth::user()->getAmigos, 'id' => Auth::user()->id]);
    }
 
+   public function listarTodosUsers() {
+      $users = \site\User::paginate(5);
+      return view('listarTodosUsers', ['users' => $users]);
+   }
+
    public function listarAmigosDeOutro($id) {
       // valida se o oto existe
 
@@ -27,9 +32,9 @@ class AmizadeController extends Controller {
       return view('exibirUsuario', ['user' => $user]);
    }
 
-   public function listarTodosUsers() {
-      return \site\User::all();
-   }
+   // public function listarTodosUsers() {
+   //    return \site\User::all();
+   // }
 
    public function soilicitarAmizade($id) {
       // valide pq eu n posso solicitar eu mesmo

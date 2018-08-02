@@ -4,6 +4,8 @@ namespace site\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class GrupoController extends Controller {
 
@@ -113,7 +115,7 @@ class GrupoController extends Controller {
    }
 
    public function listarTodosGrupos() {
-      $grupos = \site\Grupo::all();
+      $grupos = \site\Grupo::paginate(5);
       return view('grupo/listarTodosGrupos', ['grupos' => $grupos, 'user' => Auth::user()]);
    }
 

@@ -8,13 +8,14 @@ class Grupo extends Model {
 
    public static $rules = [
       'name' => 'required|min:5',
-      'descricao' => 'required|min:10',
+      'descricao' => 'required|min:10|max:1000',
    ];
 
    public static $messages = [
       'required' => 'O campo :attribute é obrigatório',
       'name.min' => 'Um nome de 5 caracteres',
       'descricao.min' => 'A descricao tem que ter pelo menos 10 caracteres',
+      'descricao.max' => 'A descricao tem que no maximo 1000 caracteres',
    ];
 
    public static function getRules() {

@@ -6,35 +6,33 @@
   <div class="container">
       <div class="row justify-content-center">
           <div class="col-md-8">
-             @if(Auth::user()->id == $id)
-               <a href="/amigos/listarPedidosPraMim">Pedidos de amizade</a>
-             @endif
-             <br>
-             <a href="/amigos/listarTodosUsers"> Xo v todo mundo </a>
-             @foreach($listaAmigos as $amigo)
+             @foreach($users as $user)
               <div class="card">
 
                   <div class="card-header">
                     <span>
-                       {{$amigo->name}}
+                       {{$user->name}}
                     </span>
                     <span style="float:right">
-                      <a href="/amigos/ver/{{$amigo->id}}">xo v!</a>
+                      <a href="/amigos/ver/{{$user->id}}">xo v!</a>
                     </span>
                   </div>
 
                   <div class="card-body">
                      <span style="float:left">
-                        <img src="{{$amigo->foto}}" width="50" height="50">
+                        <img src="{{$user->foto}}" width="50" height="50">
                      </span>
 
-                     {{$amigo->descricao}}
+                     {{$user->descricao}}
 
                   </div>
               </div>
               <hr>
               <hr>
               @endforeach
+              <div class="col-md-4" style=" margin-right: auto; margin-left: auto;">
+                 {{ $users->links() }}
+              </div>
           </div>
       </div>
   </div>
