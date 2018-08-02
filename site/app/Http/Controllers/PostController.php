@@ -12,7 +12,7 @@ class PostController extends Controller
 {
 
    public function novoPost() {
-      return view('novoPostView');
+      return view('posts/novoPostView');
    }
 
    public function salvar_novoPost(Request $req) {
@@ -40,7 +40,7 @@ class PostController extends Controller
       if ($post->id_autor != Auth::user()->id) {
          echo "Tu num pode editar sá mundenga não";
       } else {
-         return view('editarPost', ['post' => $post]);
+         return view('user/editarPost', ['post' => $post]);
       }
    }
 
@@ -68,7 +68,7 @@ class PostController extends Controller
 
       $posts = $user->getPosts($user->id);
 
-      return view('listarPosts', ['posts' => $posts]);
+      return view('posts/listarPosts', ['posts' => $posts]);
 
    }
 
@@ -99,7 +99,7 @@ class PostController extends Controller
          $obj->avaliacao = 0;
          return $obj->getAutor();
       });
-      return view('verPost', ['post' => $post, 'comentarios' => $comentarios, 'autores' => $autores]);
+      return view('posts/verPost', ['post' => $post, 'comentarios' => $comentarios, 'autores' => $autores]);
    }
 
 

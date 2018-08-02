@@ -13,7 +13,7 @@ class UserController extends Controller {
         $user = Auth::user();
         $perfisExternos = $user->getPerfisExternos;
         $curadorias = $user->getCuradorias;
-        return view('mostrarPerfil', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
+        return view('user/mostrarPerfil', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
     }
 
     public function editar($id_user) {
@@ -22,7 +22,7 @@ class UserController extends Controller {
         $this->authorize('editarUser', $user);
         $perfisExternos = $user->getPerfisExternos;
         $curadorias = $user->getCuradorias;
-        return view('editarUser', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
+        return view('user/editarUser', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
     }
 
     public function salvarEdicao(Request $request) {
@@ -40,7 +40,7 @@ class UserController extends Controller {
     }
 
     public function checarDeletar() {
-        return view('deletar');
+        return view('user/deletar');
     }
 
     public function deletar($id_user) {

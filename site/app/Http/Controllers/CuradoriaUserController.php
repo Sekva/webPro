@@ -10,11 +10,11 @@ class CuradoriaUserController extends Controller {
   public function listarCuradorias() {
     $user = Auth::user();
     $curadorias = $user->getCuradorias;
-    return view('minhasCuradorias', ["curadorias" => $curadorias]);
+    return view('user/minhasCuradorias', ["curadorias" => $curadorias]);
   }
 
   public function novaCuradoria() {
-    return view('novaCuradoria');
+    return view('user/novaCuradoria');
   }
 
   public function salvarNovaCuradoria(Request $req) {
@@ -41,7 +41,7 @@ class CuradoriaUserController extends Controller {
     if (!$curadoria) {
       return "num existe";
     } else {
-      return view('editarCuradoria', ["curadoria" => $curadoria]);
+      return view('user/editarCuradoria', ["curadoria" => $curadoria]);
     }
 
   }
