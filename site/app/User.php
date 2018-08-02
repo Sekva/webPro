@@ -60,17 +60,25 @@ class User extends Authenticatable
         return $this->hasMany('site\Curadoria_usuario', 'id_user');
     }
 
-    public function getAmigos() {
-      return $this->belongsToMany('\site\User', 'amizades', 'id_user1', 'id_user2');
+    function getAmigos() {
+      return $this->belongsToMany('\site\User', 'amizades', 'id_user1', 'id_user2')->withTimestamps();
     }
 
     //Retorna Usuários
     public function getSolicitacoes() {
-      return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_recebeu', 'id_quem_pediu');
+      return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_recebeu', 'id_quem_pediu')->withTimestamps();
     }
-    
+
     //Retorna Usuários
     public function getPedidosAmizadeEnviados() {
-      return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_pediu', 'id_quem_recebeu');
+      return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_pediu', 'id_quem_recebeu')->withTimestamps();
     }
+
+    public function getGrupos() {
+      return $this->belongsToMany('\site\Grupo', 'users_grupos', 'id_user', 'id_grupo')->withTimestamps();
+   }
+
+   public function getPedidosGruposEnviado() {
+      return $this->belongsToMany('\site\Grupo', 'solicitacoes_grupo', 'id_user_pedinte', 'id_grupo_solicitado')->withTimestamps();
+   }
   }

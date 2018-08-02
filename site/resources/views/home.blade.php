@@ -10,6 +10,7 @@
         <a href="/home/novoPost">Novo Post</a>
         <a href="/home/mudarFotoPerfil"><img src="{{ Auth::user()->foto }}" width="80" height="80"></a>
         <a href="/home/listarPosts">Listar Post</a>
+        <a href="/grupos">Grupos</a>
         <br>
         <a href="/amigos">Amigos</a>
       </div>
