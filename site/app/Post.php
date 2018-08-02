@@ -32,7 +32,7 @@ class Post extends Model {
     }
 
     public function comentario() {
-      return $this0>hasMany('App\Post');
+      return $this->hasMany('App\Post');
    }
 
     public function getComentarios() {
