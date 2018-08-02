@@ -12,6 +12,10 @@ class Post extends Model {
         return $this->belongsTo('App\User');
     }
 
+    public function comentario() {
+      return $this0>hasMany('App\Post');
+   }
+
     public function getComentarios() {
       return DB::table('comentarios')->where('id_post', $this->id)->get();
    }

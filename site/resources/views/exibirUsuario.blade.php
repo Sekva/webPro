@@ -21,21 +21,51 @@ $eAmigo = 0;
                </span>
 
                @if(Auth::user()->id != $user->id)
-               @foreach(Auth::user()->getAmigos as $amigo)
-               @if($amigo->id == $user->id)
-               <?php $eAmigo = 1;?>
-               @endif
-               @endforeach
+                  @foreach(Auth::user()->getAmigos as $amigo)
+                     @if($amigo->id == $user->id)
+                        <?php $eAmigo = 1;?>
+                     @endif
+                  @endforeach
+                  <?php
+                     $euSolicitei = false;
+                     $euFuiSolicitado = false;
+                     //Se não são amigos
+                     if($eAmigo != 1) {
+                        $solicitacoesUserAtual = Auth::user()->getPedidosAmizadeEnviados;
+                        //Verifica se o usuário atual foi solicitado por o dono do perfil
+                        foreach ($solicitacoesUserAtual as $s) {
+                           if($s->id == $user->id) {
+                              $euSolicitei = true;
+                           }
+                        }
+                        $solicitacoesDonoPage = $user->getPedidosAmizadeEnviados;
+                        //Verifica se o dono do perfil solicitou o usuário atual
+                        foreach ($solicitacoesDonoPage as $s) {
+                           if($s->id == Auth::user()->id) {
+                              $euFuiSolicitado = true;
+                           }
+                        }
+                     }
+                     // Nunca vai ser true e true
+                  ?>
 
-               @if($eAmigo == 1)
-               <span style="float:right">
-                  <a href="/amigos/desfazerAmizade/{{$user->id}}">Desfazer Amizade ;-( </a>
-               </span>
-               @else
-               <span style="float:right">
-                  <a href="/amigos/soilicitarAmizade/{{$user->id}}">Ei bixim, bo c amigo?</a>
-               </span>
-               @endif
+                  @if($euSolicitei == true)
+                     <span style="float:right">
+                        <a href="/amigos/cancelarSolicitacao/{{$user->id}}">Cancelar Solicitação</a>
+                     </span>
+                  @elseif($euFuiSolicitado == true)
+                     <span style="float:right">
+                        <a href="/amigos/aceitarAmizade/{{$user->id}}">Aceitar amizade! \o/</a>
+                     </span>
+                  @elseif($eAmigo == 1)
+                     <span style="float:right">
+                        <a href="/amigos/desfazerAmizade/{{$user->id}}">Desfazer Amizade ;-( </a>
+                     </span>
+                  @else
+                  <span style="float:right">
+                        <a href="/amigos/soilicitarAmizade/{{$user->id}}">Ei bixim, bó c amigo?</a>
+                     </span>
+                  @endif
                @endif
 
 
@@ -56,14 +86,14 @@ $eAmigo = 0;
                <b>E-mail:</b> {{$user->email}}</br>
                <b>Descrição:</b> {{$user->descricao}}</br>
                @foreach($user->getPerfisExternos as $p)
-               @if($p->nome != null)
-               <hr>
-               <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
-               <b>Link do Perfil Externo:</b> {{$p->link}}</br>
-               @else
-               <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
-               <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
-               @endif
+                  @if($p->nome != null)
+                     <hr>
+                     <b>Nome do Perfil Externo:</b> {{$p->nome}}</br>
+                     <b>Link do Perfil Externo:</b> {{$p->link}}</br>
+                  @else
+                     <b>Nome do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                     <b>Link do Perfil Externo:</b> {{'Perfil Externo incompleto ou não feito'}}</br>
+                  @endif
                @endforeach
                <hr>
             </div>

@@ -38,7 +38,7 @@ class AmizadeController extends Controller {
       $outro_eu = DB::table('amizades')->where('id_user1', $id)->where('id_user2', Auth::user()->id)->get();
 
       if (!$eu_outro->isEmpty() && !$outro_eu->isEmpty()) {
-         return 'mas já são amogis';
+         return 'mas já são amiguss';
       }
 
       $user = Auth::user();
@@ -68,6 +68,7 @@ class AmizadeController extends Controller {
       return view('listarPedidosPraMim', ['lista' => Auth::user()->getSolicitacoes]);
    }
 
+   //Recebe id do amigo
    public function desfazerAmizade($id) {
       $user = Auth::user();
       //VALIDA se o id é amg mrm
@@ -77,9 +78,18 @@ class AmizadeController extends Controller {
       $exAmigo->getAmigos()->detach($user->id);
 
       return redirect()->back();
-
    }
 
+   public function cancelarSolicitacao($id_solicitado) {
+      // $user = \site\User::find(Auth::user()->id);
+      // $solicitacoes = $user->getSolicitacoes()->detach($id_solicitado);
+
+         Auth::user()->getPedidosAmizadeEnviados()->detach($id_solicitado);
+
+
+      return redirect()->back();
+      // $solicitacao = \site\Solicitacao::where('id_quem_pediu', Auth::user()->id)->where('id_quem_recebeu', $id_solicitado);
+   }
 
    public function perfisExternosAmigos($id) {
       //valida se esse id ta certo

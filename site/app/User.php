@@ -60,14 +60,16 @@ class User extends Authenticatable
         return $this->hasMany('site\Curadoria_usuario', 'id_user');
     }
 
-    function getAmigos() {
+    public function getAmigos() {
       return $this->belongsToMany('\site\User', 'amizades', 'id_user1', 'id_user2');
     }
 
+    //Retorna Usuários
     public function getSolicitacoes() {
       return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_recebeu', 'id_quem_pediu');
     }
-
+    
+    //Retorna Usuários
     public function getPedidosAmizadeEnviados() {
       return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_pediu', 'id_quem_recebeu');
     }

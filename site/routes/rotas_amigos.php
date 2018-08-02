@@ -12,6 +12,8 @@ Route::get('/amigos/listarPedidosPraMim', 'AmizadeController@listarPedidosPraMim
 
 Route::get('/amigos/soilicitarAmizade/{id}', 'AmizadeController@soilicitarAmizade');
 
+Route::get('/amigos/cancelarSolicitacao/{id}', 'AmizadeController@cancelarSolicitacao');
+
 Route::get('/amigos/listarAmigosDeOutro/{id}', 'AmizadeController@listarAmigosDeOutro');
 
 Route::get('/amigos/perfisExternosAmigos/{id}', 'AmizadeController@perfisExternosAmigos');
