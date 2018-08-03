@@ -64,12 +64,10 @@ class User extends Authenticatable
       return $this->belongsToMany('\site\User', 'amizades', 'id_user1', 'id_user2')->withTimestamps();
    }
 
-   //Retorna Usuários
    public function getSolicitacoes() {
       return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_recebeu', 'id_quem_pediu')->withTimestamps();
    }
 
-   //Retorna Usuários
    public function getPedidosAmizadeEnviados() {
       return $this->belongsToMany('\site\User', 'solicitacao_amizades', 'id_quem_pediu', 'id_quem_recebeu')->withTimestamps();
    }

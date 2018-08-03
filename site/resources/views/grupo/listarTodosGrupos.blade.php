@@ -14,7 +14,11 @@
                      @if($grupo->getMembros->contains($user->id))
                      <a href="/grupos/ver/{{$grupo->id}}">xo v</a>
                      @else
-                     <a href="/grupos/solicitarEntradaEmGrupo/{{$grupo->id}}">Xo entrar?</a>
+                        @if($grupo->getSolicitacoes->contains($user->id))
+                           <a href="/grupos/cancelarSolicitacaoDeGrupo/{{$grupo->id}}">Cancelar Solicitação</a>
+                        @else
+                           <a href="/grupos/solicitarEntradaEmGrupo/{{$grupo->id}}">Xo entrar?</a>
+                        @endif
                      @endif
 
                    </div>

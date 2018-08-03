@@ -3,10 +3,52 @@
 namespace site\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Illiminate\Contracts\Session\Session
+// use Illuminate\Support\Facades\Session;
+use Session;
 use Auth;
 
 class GrupoController extends Controller {
 
+
+   private function esseGrupoExiste($id_grupo) {
+      $grupo = \site\Grupo::find($id_grupo);
+      if(!$grupo) {
+         return false;
+      }
+      return true;
+   }
+
+   private function ehModerador($id_grupo, $id_user) {
+      $grupo = \site\Grupo::find($id_grupo);
+      if($grupo->getModeradores->contains($id_user)) {
+         return true;
+      }
+      return false;
+   }
+
+   private function ehMembroDoGrupo($id_grupo, $id_membro) {
+      $grupo = \site\Grupo::find($id_grupo);
+      if($grupo->getMembros->contains($id_membro)) {
+         return true;
+      }
+      return false;
+   }
+
+   private function esseUsuarioExiste($id_user){
+      $user = \site\User::find($id_user);
+      if ($user) {
+         return true;
+      } else {
+         return false;
+      }
+   }
+
+   private function quantidadeDeModeradores($id_grupo) {
+      $grupo = \site\Grupo::find($id_grupo);
+      $moderadores = $grupo->getModeradores;
+      return $moderadores->count();
+   }
 
    private function apagarGrupo($id_grupo) {
       $grupo = \site\Grupo::find($id_grupo);
@@ -32,55 +74,6 @@ class GrupoController extends Controller {
             $grupo->getModeradores()->detach(Auth::user()->id);
          }
       }
-   }
-
-   private function esseGrupoExiste($id_grupo) {
-      $grupo = \site\Grupo::find($id_grupo);
-      if(!$grupo) {
-         return false;
-      }
-      return true;
-   }
-
-   private function ehModerador($id_grupo, $id_user) {
-      $grupo = \site\Grupo::find($id_grupo);
-      $moderadores = $grupo->getModeradores;
-      $eModerador = false;
-      foreach($moderadores as $mod) {
-         if($mod->id == $id_user) {
-            $eModerador = true;
-            break;
-         }
-      }
-      return $eModerador;
-   }
-
-   private function ehMembroDoGrupo($id_grupo, $id_membro) {
-      $grupo = \site\Grupo::find($id_grupo);
-      $membros = $grupo->getMembros;
-      $eMembro = false;
-      foreach($membros as $memb) {
-         if($memb->id == $id_membro) {
-            $eMembro = true;
-            break;
-         }
-      }
-      return $eMembro;
-   }
-
-   private function esseUsuarioExiste($id_user){
-      $user = \site\User::find($id_user);
-      if ($user) {
-         return true;
-      } else {
-         return false;
-      }
-   }
-
-   private function quantidadeDeModeradores($id_grupo) {
-      $grupo = \site\Grupo::find($id_grupo);
-      $moderadores = $grupo->getModeradores;
-      return $moderadores->count();
    }
 
    //==========================================
@@ -137,6 +130,32 @@ class GrupoController extends Controller {
       return redirect()->back();
    }
 
+   public function cancelarSolicitacaoDeGrupo($id_grupo) {
+      $user = Auth::user();
+
+      //Se o grupo existir
+      if($this->esseGrupoExiste($id_grupo) == false) {
+         return "Esse grupo não existe!";
+      }
+
+      //Verifica se aquele cara é membro do grupo
+      if($this->ehMembroDoGrupo($id_grupo, $user->id) == true) {
+         return "Você já é membro do grupo! ~.~";
+      }
+
+      $grupo = \site\Grupo::find($id_grupo);
+
+      //Se ele realmente havia solicitado a entrada
+      if( ! $grupo->getSolicitacoes->contains($user->id)) {
+         return("Não há solicitação sua para entrar nesse grupo. Talvez algum Moderador tenha recusado.");
+      }
+
+      $grupo->getSolicitacoes()->detach($user->id);
+
+      return redirect()->back();
+
+   }
+
    public function listarSolicitacoes($id_grupo) {
       //veja se tudo existe [?]
 
@@ -184,6 +203,35 @@ class GrupoController extends Controller {
       return redirect()->back();
    }
 
+   public function recusarSolicitacao($id_user, $id_grupo) {
+
+      //Se o grupo existir
+      if($this->esseGrupoExiste($id_grupo) == false) {
+         return "Esse grupo não existe!";
+      }
+
+      //Verifica se o usuário logado é Moderador
+      if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
+         return "Você não é Moderador!!";
+      }
+
+      if($this->esseUsuarioExiste($id_user) == false) {
+         return "Usuário inexistente!";
+      }
+
+      //Verifica se aquele cara é membro do grupo
+      if($this->ehMembroDoGrupo($id_grupo, $id_user) == true) {
+         $grupo = \site\Grupo::find($id_grupo);
+         $grupo->getSolicitacoes()->detach($id_user);
+         return "Mas esse cara já é membro";
+      }
+
+
+      $grupo = \site\Grupo::find($id_grupo);
+      $grupo->getSolicitacoes()->detach($id_user);
+      return redirect()->back()->withErros(array('msg' => "asdasdasd"));
+   }
+
    public function sairDoGrupo($id_grupo) {
 
       //Se o grupo existir
@@ -205,8 +253,9 @@ class GrupoController extends Controller {
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == true) {
-         if($this->quantidadeDeModeradores($id_grupo) == 1)
+         if($this->quantidadeDeModeradores($id_grupo) == 1) {
             return "Você é o unico Moderador! Um grupo não pode ficar sem moderador!";
+         }
       }
 
       $grupo->getMembros()->detach(Auth::user()->id);
@@ -224,9 +273,21 @@ class GrupoController extends Controller {
          return "Esse grupo não existe!";
       }
 
+      $grupo = \site\Grupo::find($id_grupo);
+      if ($grupo->getMembros->count() == 1) {
+         $this->apagarGrupo($id_grupo);
+         $grupo->delete();
+         return redirect('/grupos');
+      }
+
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
          return "Você não é Moderador!!";
+      }
+
+      //Se tiver outros membros e o único moderador tentar se remover
+      if($id_user == Auth::user()->id && $this->quantidadeDeModeradores($id_grupo) == 1) {
+         return "Esse grupo só tem você como moderador. Um grupo não pode ficar sem moderador!";
       }
 
       //Verifica se aquele cara é membro do grupo
@@ -240,7 +301,7 @@ class GrupoController extends Controller {
       if ($grupo->getModeradores->contains($id_user)) {
          $grupo->getModeradores()->detach($id_user);
       }
-      return redirect()->back();
+      return redirect("/grupos");
    }
 
    public function verGrupo($id_grupo) { //[???????- Onde isso é usado? -????????]

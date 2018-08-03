@@ -34,6 +34,10 @@ class AmizadeController extends Controller {
    public function soilicitarAmizade($id) {
       // valide pq eu n posso solicitar eu mesmo
 
+      if(Auth::user()->id == $id){
+         return "Não dá pra tu ser amigo de tu mermo! kk";
+      }
+
       $eu_outro = DB::table('amizades')->where('id_user1', Auth::user()->id)->where('id_user2', $id)->get();
       $outro_eu = DB::table('amizades')->where('id_user1', $id)->where('id_user2', Auth::user()->id)->get();
 

@@ -11,7 +11,11 @@ Route::get('/grupos/listarTodosGrupos', 'GrupoController@listarTodosGrupos');
 
 Route::get('/grupos/solicitarEntradaEmGrupo/{id}', 'GrupoController@solicitarEntradaEmGrupo');
 
+Route::get('/grupos/cancelarSolicitacaoDeGrupo/{id}', 'GrupoController@cancelarSolicitacaoDeGrupo');
+
 Route::get('/grupos/aceitarSolicitacao/{id_user}/{id_grupo}', 'GrupoController@aceitarSolicitacao');
+
+Route::get('/grupos/recusarSolicitacao/{id_user}/{id_grupo}', 'GrupoController@recusarSolicitacao');
 
 Route::get('/grupos/sairDoGrupo/{id}', 'GrupoController@sairDoGrupo');
 
