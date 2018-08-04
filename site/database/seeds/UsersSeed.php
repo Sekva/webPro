@@ -40,7 +40,7 @@ class UsersSeed extends Seeder
 
       DB::table('users')->insert([
 
-        'name' => 'nanainha',
+        'name' => 'Tia da nanainha',
         'email' => 'asd4@asd.com',
         'password' => bcrypt('123456'),
         'foto' => '/storage/defaul.png',

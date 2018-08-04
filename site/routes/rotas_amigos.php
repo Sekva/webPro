@@ -19,3 +19,5 @@ Route::get('/amigos/listarAmigosDeOutro/{id}', 'AmizadeController@listarAmigosDe
 Route::get('/amigos/perfisExternosAmigos/{id}', 'AmizadeController@perfisExternosAmigos');
 
 Route::get('/amigos/curadoriasAmigos/{id}', 'AmizadeController@curadoriasAmigos');
+
+Route::get('/amigos/listarTodosUsers', 'AmizadeController@listarTodosUsers');

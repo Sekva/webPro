@@ -13,7 +13,7 @@ class UserController extends Controller {
       $user = Auth::user();
       $perfisExternos = $user->getPerfisExternos;
       $curadorias = $user->getCuradorias;
-      return view('mostrarPerfil', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
+      return view('user/mostrarPerfil', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
    }
 
    public function editar($id_user) {
@@ -22,7 +22,7 @@ class UserController extends Controller {
       $this->authorize('editarUser', $user);
       $perfisExternos = $user->getPerfisExternos;
       $curadorias = $user->getCuradorias;
-      return view('editarUser', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
+      return view('user/editarUser', ["user" => $user, "perfisExternos" => $perfisExternos, "curadorias" => $curadorias]);
    }
 
    public function salvarEdicao(Request $request) {
@@ -40,7 +40,7 @@ class UserController extends Controller {
    }
 
    public function checarDeletar() {
-      return view('deletar');
+      return view('user/deletar');
    }
 
    public function deletar($id_user) {
@@ -79,15 +79,16 @@ class UserController extends Controller {
             $user->getPedidosGruposEnviado()->detach($solicitacao->id_grupo_solicitado);
          }
 
+         //Deixa de ser moderador dos grupos que ele é moderador
+         foreach($user->getGrupos as $grupo) {
+            if($grupo->getModeradores->contains($id_user) && $grupo->getModeradores->count() == 1){
+               return "Você é o único moderador do grupo ~". $grupo->name ."~. Apague-o ou promova algum membro à Moderador.";
+            }
+         }
+
          //Deixa de ser membro dos grupos que ele é membro
          foreach($user->getGrupos as $grupos) {
              $grupos->getMembros()->detach($id_user);
-         }
-         //Deixa de ser moderador dos grupos que ele é moderador
-         foreach($user->getGrupos as $grupos) {
-            if($grupo->getModeradores->contains($id_user) && $grupos->getModeradores()->count() == 1){
-               return "Você é o único moderador do grupo _". $grupos->name ."~. Apague-o ou promova algum membro à Moderador.";
-            }
          }
 
          foreach($user->getGrupos as $grupo) {

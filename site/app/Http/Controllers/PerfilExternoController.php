@@ -22,7 +22,7 @@ class PerfilExternoController extends Controller{
     }
 
     public function novoPerfilExterno() {
-      return view('novoPerfilExterno');
+      return view('user/novoPerfilExterno');
     }
 
     public function perfilExterno() {
@@ -39,7 +39,7 @@ class PerfilExternoController extends Controller{
         return "passaram um argumento com o id de um prefil que nao existe";
       } else {
         //return $perfil;
-        return view('editarPerfilExterno', ['perfil_externo' => $perfil]);
+        return view('user/editarPerfilExterno', ['perfil_externo' => $perfil]);
       }
     }
 

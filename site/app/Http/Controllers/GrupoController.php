@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Session;
 use Session;
 use Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class GrupoController extends Controller {
 
@@ -106,7 +108,7 @@ class GrupoController extends Controller {
    }
 
    public function listarTodosGrupos() {
-      $grupos = \site\Grupo::all();
+      $grupos = \site\Grupo::paginate(5);
       return view('grupo/listarTodosGrupos', ['grupos' => $grupos, 'user' => Auth::user()]);
    }
 

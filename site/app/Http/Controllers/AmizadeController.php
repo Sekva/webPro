@@ -10,26 +10,31 @@ use Illuminate\Support\Facades\DB;
 class AmizadeController extends Controller {
 
    public function listarAmigos() {
-      return view('listarAmigos', ['listaAmigos' => Auth::user()->getAmigos, 'id' => Auth::user()->id]);
+      return view('amizades/listarAmigos', ['listaAmigos' => Auth::user()->getAmigos, 'id' => Auth::user()->id]);
+   }
+
+   public function listarTodosUsers() {
+      $users = \site\User::paginate(5);
+      return view('amizades/listarTodosUsers', ['users' => $users]);
    }
 
    public function listarAmigosDeOutro($id) {
       // valida se o oto existe
 
       $user = \site\User::find($id);
-      return view('listarAmigos', ['listaAmigos' => $user->getAmigos, 'id' => $id]);
+      return view('amizades/listarAmigos', ['listaAmigos' => $user->getAmigos, 'id' => $id]);
 
    }
 
    public function verAmigo($id) {
       $user = \site\User::find($id);
       //VALIDA ser usuario existe
-      return view('exibirUsuario', ['user' => $user]);
+      return view('amizades/exibirUsuario', ['user' => $user]);
    }
 
-   public function listarTodosUsers() {
-      return \site\User::all();
-   }
+   // public function listarTodosUsers() {
+   //    return \site\User::all();
+   // }
 
    public function soilicitarAmizade($id) {
       // valide pq eu n posso solicitar eu mesmo
@@ -69,7 +74,7 @@ class AmizadeController extends Controller {
    }
 
    public function listarPedidosPraMim()  {
-      return view('listarPedidosPraMim', ['lista' => Auth::user()->getSolicitacoes]);
+      return view('amizades/listarPedidosPraMim', ['lista' => Auth::user()->getSolicitacoes]);
    }
 
    //Recebe id do amigo
@@ -100,7 +105,7 @@ class AmizadeController extends Controller {
 
       $amigo = \site\User::find($id);
       $perfis = $amigo->getPerfisExternos;
-      return view('perfilExternosAmigos', ['perfis' => $perfis, 'amigo' => $amigo]);
+      return view('amizades/perfilExternosAmigos', ['perfis' => $perfis, 'amigo' => $amigo]);
    }
 
    public function curadoriasAmigos($id) {
@@ -109,7 +114,7 @@ class AmizadeController extends Controller {
       $amigo = \site\User::find($id);
       $curadorias = $amigo->getCuradorias;
 
-      return view('curadoriasAmigos', ['curadorias' => $curadorias, 'amigo' => $amigo]);
+      return view('amizades/curadoriasAmigos', ['curadorias' => $curadorias, 'amigo' => $amigo]);
    }
 
 }

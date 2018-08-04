@@ -31,6 +31,9 @@
               <hr>
               <hr>
               @endforeach
+              <div class="col-md-4" style=" margin-right: auto; margin-left: auto;">
+                 {{ $grupos->links() }}
+              </div>
           </div>
       </div>
   </div>
