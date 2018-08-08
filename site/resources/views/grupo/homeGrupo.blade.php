@@ -21,7 +21,7 @@
          <br>
 
          @if($grupo->getModeradores->contains(Auth::user()->id))
-            <a href="/grupos/listarSolicitacoes/{{$grupo->id}}">Ver Solicitacoes Grupo</a>
+         <a href="/grupos/listarSolicitacoes/{{$grupo->id}}">Ver Solicitacoes Grupo</a>
          @endif
 
       </div>
@@ -34,37 +34,50 @@
             <div class="card-body">
                @php($postsOrdenados = $grupo->getPosts->sortByDesc('created_at'))
                @foreach($postsOrdenados as $post)
-               <hr style="border-style: inset; border-width: 1px; color: black;">
-               <span> {{$post->texto}} </span>
-               @if($grupo->getModeradores->contains(Auth::user()->id))
-               <span> <a href="/grupos/deletarPost/{{$grupo->id}}/{{$post->id}}">Deletar</a> </span>
+
+               @php($elo = \site\User::find($post->id_autor))
+               @if($elo->id == Auth::user()->id)
+               <div class="card-header" style=" background-color: #faa650; "> {{$post->texto}} </div>
+               @else
+               <div class="card-header"> {{$post->texto}} </div>
                @endif
-               <hr>
-               <p> {{$post->conteudo}} </p>
-               <hr>
-               <span style="float: right" >
-                  <a href="/post/verPost/{{$post->id}}">Ver</a>
+
+               <div class="card-body">
+
+                  <hr style="border-style: inset; border-width: 1px; color: black;">
+                  <hr>
+                  <p> {{$post->conteudo}} </p>
+                  <hr>
+                  <span style="float: right" >
+                     <a href="/post/verPost/{{$post->id}}">Ver</a>
+                     <br>
+                     {{$post->getComentarios()->count()}}
+                     comentarios
+                  </span>
                   <br>
-                  {{$post->getComentarios()->count()}}
-                  comentarios
-               </span>
-               <br>
-               <br>
-               <span style=" font-size: 13px" > Por {{$post->users->name}} </span>
-               <span style=" font-size: 13px" >
+                  <br>
 
-                  <?php
+                  @if($grupo->getModeradores->contains(Auth::user()->id))
+                  <span> <a href="/grupos/deletarPost/{{$grupo->id}}/{{$post->id}}">Deletar</a> </span>
+                  @endif
+                  <br>
+                  
+                  <span style=" font-size: 13px" > Por {{$post->users->name}} </span>
+                  <span style=" font-size: 13px" >
+
+                     <?php
                      $data = '';
-                   ?>
+                     ?>
 
-                   @php ($data = $post->created_at)
+                     @php ($data = $post->created_at)
 
-                  <?php
+                     <?php
                      echo date( "H:i:s", strtotime($data)) . ' do dia ' . date( "d/m/Y", strtotime($data));
-                   ?>
+                     ?>
 
-                </span>
-               <hr style="border-style: inset; border-width: 1px; color: black;">
+                  </span>
+                  <hr style="border-style: inset; border-width: 1px; color: black;">
+               </div>
                @endforeach
 
             </div>

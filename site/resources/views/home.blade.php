@@ -47,7 +47,12 @@
                 @foreach($saida as $p)
                   @if($p->e_de_grupo == 0)
                   <div class="card">
-                     <div class="card-header"> {{$p->texto}} </div>
+                     @php($elo = \site\User::find($p->id_autor))
+                     @if($elo->id == Auth::user()->id)
+                        <div class="card-header" style=" background-color: #faa650; "> {{$p->texto}} </div>
+                     @else
+                        <div class="card-header"> {{$p->texto}} </div>
+                     @endif
                      <div class="card-body">
                         <div>
                             <span style="float:right">
@@ -58,8 +63,6 @@
                         </div>
                         <p> {{$p->conteudo}} </p>
                      </div>
-
-                     @php($elo = \site\User::find($p->id_autor))
 
                      <span style=" font-size: 13px" > Por {{$elo->name}} </span>
                      <span style=" font-size: 13px" >
