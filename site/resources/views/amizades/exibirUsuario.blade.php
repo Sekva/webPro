@@ -20,51 +20,53 @@ $eAmigo = 0;
                   </h2>
                </span>
 
-               @if(Auth::user()->id != $user->id)
-                  @foreach(Auth::user()->getAmigos as $amigo)
-                     @if($amigo->id == $user->id)
-                        <?php $eAmigo = 1;?>
-                     @endif
-                  @endforeach
-                  <?php
-                     $euSolicitei = false;
-                     $euFuiSolicitado = false;
-                     //Se não são amigos
-                     if($eAmigo != 1) {
-                        $solicitacoesUserAtual = Auth::user()->getPedidosAmizadeEnviados;
-                        //Verifica se o usuário atual foi solicitado por o dono do perfil
-                        foreach ($solicitacoesUserAtual as $s) {
-                           if($s->id == $user->id) {
-                              $euSolicitei = true;
+               @if(Auth::user())
+                  @if(Auth::user()->id != $user->id)
+                     @foreach(Auth::user()->getAmigos as $amigo)
+                        @if($amigo->id == $user->id)
+                           <?php $eAmigo = 1;?>
+                        @endif
+                     @endforeach
+                     <?php
+                        $euSolicitei = false;
+                        $euFuiSolicitado = false;
+                        //Se não são amigos
+                        if($eAmigo != 1) {
+                           $solicitacoesUserAtual = Auth::user()->getPedidosAmizadeEnviados;
+                           //Verifica se o usuário atual foi solicitado por o dono do perfil
+                           foreach ($solicitacoesUserAtual as $s) {
+                              if($s->id == $user->id) {
+                                 $euSolicitei = true;
+                              }
+                           }
+                           $solicitacoesDonoPage = $user->getPedidosAmizadeEnviados;
+                           //Verifica se o dono do perfil solicitou o usuário atual
+                           foreach ($solicitacoesDonoPage as $s) {
+                              if($s->id == Auth::user()->id) {
+                                 $euFuiSolicitado = true;
+                              }
                            }
                         }
-                        $solicitacoesDonoPage = $user->getPedidosAmizadeEnviados;
-                        //Verifica se o dono do perfil solicitou o usuário atual
-                        foreach ($solicitacoesDonoPage as $s) {
-                           if($s->id == Auth::user()->id) {
-                              $euFuiSolicitado = true;
-                           }
-                        }
-                     }
-                     // Nunca vai ser true e true
-                  ?>
+                        // Nunca vai ser true e true
+                     ?>
 
-                  @if($euSolicitei == true)
+                     @if($euSolicitei == true)
+                        <span style="float:right">
+                           <a href="/amigos/cancelarSolicitacao/{{$user->id}}">Cancelar Solicitação</a>
+                        </span>
+                     @elseif($euFuiSolicitado == true)
+                        <span style="float:right">
+                           <a href="/amigos/aceitarAmizade/{{$user->id}}">Aceitar amizade! \o/</a>
+                        </span>
+                     @elseif($eAmigo == 1)
+                        <span style="float:right">
+                           <a href="/amigos/desfazerAmizade/{{$user->id}}">Desfazer Amizade ;-( </a>
+                        </span>
+                     @else
                      <span style="float:right">
-                        <a href="/amigos/cancelarSolicitacao/{{$user->id}}">Cancelar Solicitação</a>
-                     </span>
-                  @elseif($euFuiSolicitado == true)
-                     <span style="float:right">
-                        <a href="/amigos/aceitarAmizade/{{$user->id}}">Aceitar amizade! \o/</a>
-                     </span>
-                  @elseif($eAmigo == 1)
-                     <span style="float:right">
-                        <a href="/amigos/desfazerAmizade/{{$user->id}}">Desfazer Amizade ;-( </a>
-                     </span>
-                  @else
-                  <span style="float:right">
-                        <a href="/amigos/soilicitarAmizade/{{$user->id}}">Ei bixim, bó c amigo?</a>
-                     </span>
+                           <a href="/amigos/soilicitarAmizade/{{$user->id}}">Ei bixim, bó c amigo?</a>
+                        </span>
+                     @endif
                   @endif
                @endif
 

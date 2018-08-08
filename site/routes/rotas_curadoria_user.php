@@ -1,13 +1,17 @@
 <?php
 
-Route::get('/home/curadorias', 'CuradoriaUserController@listarCuradorias');
+Route::middleware('auth')->group(function () {
 
-Route::get('/home/novaCuradoria', 'CuradoriaUserController@novaCuradoria');
+   Route::get('/home/curadorias', 'CuradoriaUserController@listarCuradorias');
 
-Route::post('/home/salvarNovaCuradoria', 'CuradoriaUserController@salvarNovaCuradoria');
+   Route::get('/home/novaCuradoria', 'CuradoriaUserController@novaCuradoria');
 
-Route::get('/home/editarCuradoria/{id}', 'CuradoriaUserController@editarCuradoria');
+   Route::post('/home/salvarNovaCuradoria', 'CuradoriaUserController@salvarNovaCuradoria');
 
-Route::post('/home/salvarEditCuradoria', 'CuradoriaUserController@salvarEditCuradoria');
+   Route::get('/home/editarCuradoria/{id}', 'CuradoriaUserController@editarCuradoria');
 
-Route::get('/home/apagarCuradoria/{id}', 'CuradoriaUserController@apagarCuradoria');
+   Route::post('/home/salvarEditCuradoria', 'CuradoriaUserController@salvarEditCuradoria');
+
+   Route::get('/home/apagarCuradoria/{id}', 'CuradoriaUserController@apagarCuradoria');
+
+});

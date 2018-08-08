@@ -9,10 +9,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
+Route::middleware('auth')->group(function () {
 
-Route::post('/home/salvar_fotoPerfil', 'HomeController@salvar_fotoPerfil');
+   Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
 
+   Route::post('/home/salvar_fotoPerfil', 'HomeController@salvar_fotoPerfil');
+
+});
 
 include dirname(__FILE__)."/rotas_curadoria_user.php";
 include dirname(__FILE__)."/rotas_users.php";

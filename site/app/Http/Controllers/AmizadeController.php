@@ -28,16 +28,11 @@ class AmizadeController extends Controller {
 
    public function verAmigo($id) {
       $user = \site\User::find($id);
-      //VALIDA ser usuario existe
+      //TODO ser usuario existe
       return view('amizades/exibirUsuario', ['user' => $user]);
    }
 
-   // public function listarTodosUsers() {
-   //    return \site\User::all();
-   // }
-
    public function soilicitarAmizade($id) {
-      // valide pq eu n posso solicitar eu mesmo
 
       if(Auth::user()->id == $id){
          return "Não dá pra tu ser amigo de tu mermo! kk";
