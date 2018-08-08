@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header">Curadoria {{$curadoria->nome}}
                     <span style="float:right; margin-left:10px;">
-                      <a href="/home/apagarCuradoria/{{$curadoria->id}}">Apagar!</a>
+                      <a href="/home/apagarCuradoria/{{$curadoria->id}}" onclick="return confirm('Certeza que quer apagar esta curadoria?')" >Apagar!</a>
                     </span>
                     <span style="float:right; margin-left:10px;">
                       <a href="/home/editarCuradoria/{{$curadoria->id}}">Editar!</a>

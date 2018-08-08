@@ -52,15 +52,15 @@ $eAmigo = 0;
 
                      @if($euSolicitei == true)
                         <span style="float:right">
-                           <a href="/amigos/cancelarSolicitacao/{{$user->id}}">Cancelar Solicitação</a>
+                           <a href="/amigos/cancelarSolicitacao/{{$user->id}}" onclick="return confirm('Certeza?')">Cancelar Solicitação</a>
                         </span>
                      @elseif($euFuiSolicitado == true)
                         <span style="float:right">
-                           <a href="/amigos/aceitarAmizade/{{$user->id}}">Aceitar amizade! \o/</a>
+                           <a href="/amigos/aceitarAmizade/{{$user->id}}" onclick="return confirm('Certeza?')">Aceitar amizade! \o/</a>
                         </span>
                      @elseif($eAmigo == 1)
                         <span style="float:right">
-                           <a href="/amigos/desfazerAmizade/{{$user->id}}">Desfazer Amizade ;-( </a>
+                           <a href="/amigos/desfazerAmizade/{{$user->id}}" onclick="return confirm('Certeza?')">Desfazer Amizade ;-( </a>
                         </span>
                      @else
                      <span style="float:right">

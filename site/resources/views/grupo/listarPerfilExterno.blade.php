@@ -17,7 +17,7 @@
 
                    @if($grupo->getModeradores->contains(Auth::user()->id))
                     <span style="float:right; margin-left:10px;">
-                      <a href="/grupos/apagarPerfilExterno/{{$perfilExterno->id}}/{{$grupo->id}}">Apagar!</a>
+                      <a href="/grupos/apagarPerfilExterno/{{$perfilExterno->id}}/{{$grupo->id}}" onclick="return confirm('Certeza que quer apagar este perfil?')">Apagar!</a>
                     </span>
                     <span style="float:right; margin-left:10px;">
                       <a href="/grupos/editarPerfilExterno/{{$perfilExterno->id}}/{{$grupo->id}}">Editar!</a>

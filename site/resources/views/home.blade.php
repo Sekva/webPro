@@ -64,7 +64,7 @@
                         <p> {{$p->conteudo}} </p>
                      </div>
 
-                     <span style=" font-size: 13px" > Por {{$elo->name}} </span>
+                     <span style=" font-size: 13px" >Por <a href="/amigos/ver/{{$elo->id}}">{{$elo->name}}</a></span>
                      <span style=" font-size: 13px" >
 
                         <?php
@@ -77,7 +77,7 @@
                            echo date( "H:i:s", strtotime($data)) . ' do dia ' . date( "d/m/Y", strtotime($data));
                          ?>
 
-                      </span>
+                     </span>
 
                   </div>
                   <br><br>

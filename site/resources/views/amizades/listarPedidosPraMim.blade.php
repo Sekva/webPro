@@ -14,7 +14,7 @@
                <span style="float:right">
                   <a href="/amigos/ver/{{$l->id}}">xo v!</a>
                   <br>
-                  <a href="/amigos/aceitarAmizade/{{$l->id}}">ACEITO SA PORRA!</a>
+                  <a href="/amigos/aceitarAmizade/{{$l->id}}" onclick="return confirm('Certeza?')">ACEITO SA PORRA!</a>
                </span>
 
                <span style="float:left">

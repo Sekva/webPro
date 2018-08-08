@@ -14,9 +14,9 @@
                <span style="float:right">
                   <a href="/amigos/ver/{{$l->id}}">xo v!</a>
                   <br>
-                  <a href="/grupos/aceitarSolicitacao/{{$l->id}}/{{$grupo->id}}">ACEITO SA PORRA!</a>
+                  <a href="/grupos/aceitarSolicitacao/{{$l->id}}/{{$grupo->id}}" onclick="return confirm('Certeza?')">ACEITO SA PORRA!</a>
                   <br>
-                  <a href="/grupos/recusarSolicitacao/{{$l->id}}/{{$grupo->id}}">Recusar Solicitacao</a>
+                  <a href="/grupos/recusarSolicitacao/{{$l->id}}/{{$grupo->id}}" onclick="return confirm('Certeza?')">Recusar Solicitacao</a>
                </span>
 
                <span style="float:left">

@@ -15,7 +15,7 @@
                      <h2>{{$grupo->name}}</h2>
                      <a href="/grupos/ver/{{$grupo->id}}">xo v</a>
                      <br>
-                     <a href="/grupos/sairDoGrupo/{{$grupo->id}}">Vou embora</a>
+                     <a href="/grupos/sairDoGrupo/{{$grupo->id}}" onclick="return confirm('Certeza que quer sair do grupo?')">Vou embora</a>
                    </div>
 
                   <div class="card-body">

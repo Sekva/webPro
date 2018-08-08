@@ -21,17 +21,17 @@
                         @if($grupo->getModeradores->contains($amigo->id))
                           <br>
                           <span style="float:right">
-                            <a href="/grupos/reduzirModerador/{{$grupo->id}}/{{$amigo->id}}">REBAIXAR</a>
+                            <a href="/grupos/reduzirModerador/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">REBAIXAR</a>
                           </span>
                         @else
                           <br>
                           <span style="float:right">
-                            <a href="/grupos/promoverParaModerador/{{$grupo->id}}/{{$amigo->id}}">SUBIR DE VIDA</a>
+                            <a href="/grupos/promoverParaModerador/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">SUBIR DE VIDA</a>
                           </span>
                         @endif
                         <br>
                        <span style="float:right">
-                          <a href="/grupos/removerDoGrupo/{{$grupo->id}}/{{$amigo->id}}">chutar a bunda</a>
+                          <a href="/grupos/removerDoGrupo/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">chutar a bunda</a>
                        </span>
                     @endif
 

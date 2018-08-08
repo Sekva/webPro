@@ -37,7 +37,7 @@
                   <button class="btn btn-primary" name="button">Dados do Perfil</button>
                </a>
                <a href="{{url("/usuario/$user->id/deletar")}}">
-                  <button class="btn btn-primary" name="button">Deletar</button>
+                  <button class="btn btn-primary" name="button" onclick="return confirm('Certeza que quer se apagar?\nNão tem volta ein...')" >Deletar</button>
                </a>
             </div>
          </div>

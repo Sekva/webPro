@@ -17,7 +17,7 @@
 
                    @if($grupo->getModeradores->contains(Auth::user()->id))
                     <span style="float:right; margin-left:10px;">
-                      <a href="/grupos/apagarCuradoria/{{$curadoria->id}}/{{$grupo->id}}">Apagar!</a>
+                      <a href="/grupos/apagarCuradoria/{{$curadoria->id}}/{{$grupo->id}}" onclick="return confirm('Certeza que quer apagar esta curadoria?')">Apagar!</a>
                     </span>
                     <span style="float:right; margin-left:10px;">
                       <a href="/grupos/editarCuradoria/{{$curadoria->id}}/{{$grupo->id}}">Editar!</a>

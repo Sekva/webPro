@@ -58,11 +58,11 @@
                   <br>
 
                   @if($grupo->getModeradores->contains(Auth::user()->id))
-                  <span> <a href="/grupos/deletarPost/{{$grupo->id}}/{{$post->id}}">Deletar</a> </span>
+                  <span> <a href="/grupos/deletarPost/{{$grupo->id}}/{{$post->id}}" onclick="return confirm('Certeza que quer apagar este post?')">Deletar</a> </span>
                   @endif
                   <br>
-                  
-                  <span style=" font-size: 13px" > Por {{$post->users->name}} </span>
+
+                  <span style=" font-size: 13px" > Por <a href="/amigos/ver/{{$post->users->id}}">{{$post->users->name}}</a> </span>
                   <span style=" font-size: 13px" >
 
                      <?php

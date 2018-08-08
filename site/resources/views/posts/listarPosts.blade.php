@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <span>{{$post->texto}}</span>
                     <span style="float:right; margin-left:10px;">
-                        <a href="/home/deletarPost/{{$post->id}}">Apagar!</a>
+                        <a href="/home/deletarPost/{{$post->id}}" onclick="return confirm('Certeza que quer apagar este post?')" >Apagar!</a>
                     </span> <span style="float:right">
                         <a href="/home/editarPost/{{$post->id}}">Editar!</a>
                     </span>
