@@ -105,7 +105,7 @@
             <span style="float:right">
                <?php
                //Printa o nome do dono do comentario
-               echo "Autor: " . "<a href=/amigos/ver/{{$autor->id}}>" .$nomes[$cont]. "</a>";
+               echo "Autor: " . "<a href=/amigos/ver/$autor->id>" .$nomes[$cont]. "</a>";
                $cont = $cont + 1;
                ?>
             </span>
