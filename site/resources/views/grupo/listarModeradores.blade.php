@@ -14,7 +14,7 @@
                        {{$amigo->name}}
                     </span>
                     <span style="float:right">
-                      <a href="/amigos/ver/{{$amigo->id}}">xo v!</a>
+                      <a href="/amigos/ver/{{$amigo->id}}">Ver</a>
                     </span>
                   </div>
 

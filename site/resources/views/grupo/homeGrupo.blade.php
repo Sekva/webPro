@@ -59,7 +59,7 @@
                      <a href="/post/verPost/{{$post->id}}">Ver</a>
                      <br>
                      {{$post->getComentarios()->count()}}
-                     comentarios
+                     comentários
                   </span>
                   <br>
                   <br>

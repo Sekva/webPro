@@ -21,11 +21,11 @@
                   </h2>
                </span>
                <span style="float:right">
-                  <a href="/amigos/ver/{{$l->id}}">xo v!</a>
+                  <a href="/amigos/ver/{{$l->id}}">Ver</a>
                   <br>
-                  <a href="/grupos/aceitarSolicitacao/{{$l->id}}/{{$grupo->id}}" onclick="return confirm('Certeza?')">ACEITO SA PORRA!</a>
+                  <a href="/grupos/aceitarSolicitacao/{{$l->id}}/{{$grupo->id}}" onclick="return confirm('Certeza?')">Aceitar!</a>
                   <br>
-                  <a href="/grupos/recusarSolicitacao/{{$l->id}}/{{$grupo->id}}" onclick="return confirm('Certeza?')">Recusar Solicitacao</a>
+                  <a href="/grupos/recusarSolicitacao/{{$l->id}}/{{$grupo->id}}" onclick="return confirm('Certeza?')">Recusar!</a>
                </span>
 
                <span style="float:left">

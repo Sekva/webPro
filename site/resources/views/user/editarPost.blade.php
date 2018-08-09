@@ -31,7 +31,7 @@
 
             <div class="form-group row">
               <div class="col-md-6">
-                <textarea name="conteudo" rows="8" cols="73">{{$post->conteudo}}</textarea>
+                <textarea name="conteudo" rows="8" cols="73" onkeydown="habilitarTextArea()" >{{$post->conteudo}}</textarea>
               </div>
             </div>
 

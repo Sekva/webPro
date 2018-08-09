@@ -41,7 +41,7 @@
                         <div style=" text-align: center; margin-left: 70%">
                            <span>Conteudo</span>
                         </div>
-                        <textarea name="conteudo" rows="8" cols="73" onkeydown="habilitarTextArea()" ></textarea>
+                        <textarea name="conteudo" rows="8" cols="73" onkeydown="habilitarTextArea()" placeholder="Use  ;;lang=alguma_lang  para iniciar o codigo."></textarea>
                       </div>
                     </div>
 
@@ -62,6 +62,9 @@
         </div>
     </div>
 </div>
-
+<br><br>
+<div style=" text-align: center; ">
+ <a href="/ajuda/postCodigo">Como uso o bloco de codigo?</a>
+</div>
 
 @endsection

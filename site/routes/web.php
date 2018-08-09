@@ -24,3 +24,10 @@ include dirname(__FILE__)."/rotas_posts.php";
 include dirname(__FILE__)."/rotas_comentarios.php";
 include dirname(__FILE__)."/rotas_amigos.php";
 include dirname(__FILE__)."/rotas_grupos.php";
+
+
+Route::get('/ajuda/postCodigo', function() {
+
+  return view('listaLangs');
+
+});

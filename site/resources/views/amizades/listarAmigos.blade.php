@@ -10,7 +10,7 @@
                <a href="/amigos/listarPedidosPraMim">Pedidos de amizade</a>
              @endif
              <br>
-             <a href="/amigos/listarTodosUsers"> Xo v todo mundo </a>
+             <a href="/amigos/listarTodosUsers"> Listar todos usuarios (em breve uma ferramenta de busca) </a>
              @foreach($listaAmigos as $amigo)
               <div class="card">
 
@@ -19,7 +19,7 @@
                        {{$amigo->name}}
                     </span>
                     <span style="float:right">
-                      <a href="/amigos/ver/{{$amigo->id}}">xo v!</a>
+                      <a href="/amigos/ver/{{$amigo->id}}">Ver</a>
                     </span>
                   </div>
 

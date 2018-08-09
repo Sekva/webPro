@@ -12,12 +12,12 @@
                      <h2>{{$grupo->name}}</h2>
 
                      @if($grupo->getMembros->contains($user->id))
-                     <a href="/grupos/ver/{{$grupo->id}}">xo v</a>
+                     <a href="/grupos/ver/{{$grupo->id}}">Ver</a>
                      @else
                         @if($grupo->getSolicitacoes->contains($user->id))
                            <a href="/grupos/cancelarSolicitacaoDeGrupo/{{$grupo->id}}" onclick="return confirm('Certeza?')">Cancelar Solicitação</a>
                         @else
-                           <a href="/grupos/solicitarEntradaEmGrupo/{{$grupo->id}}">Xo entrar?</a>
+                           <a href="/grupos/solicitarEntradaEmGrupo/{{$grupo->id}}">Solicitar entrada</a>
                         @endif
                      @endif
 

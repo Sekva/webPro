@@ -14,7 +14,7 @@ $eAmigo = 0;
          <div class="card">
             <div class="card-header">
                <span style="float: left" >
-                  <img src="{{$user->foto}}" alt="Teu amigo ai oia" width="50" height="50">
+                  <img src="{{$user->foto}}" alt="{{$user->name}}" width="50" height="50">
                   <h2>
                      {{$user->name}}
                   </h2>
@@ -65,7 +65,7 @@ $eAmigo = 0;
                         </span>
                      @else
                      <span style="float:right">
-                           <a href="/amigos/solicitarAmizade/{{$user->id}}">Ei bixim, bó c amigo?</a>
+                           <a href="/amigos/solicitarAmizade/{{$user->id}}"> Solicitar Amizade </a>
                         </span>
                      @endif
                   @endif

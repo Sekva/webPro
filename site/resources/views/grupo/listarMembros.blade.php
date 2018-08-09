@@ -14,24 +14,24 @@
                        {{$amigo->name}}
                     </span>
                     <span style="float:right">
-                      <a href="/amigos/ver/{{$amigo->id}}">xo v!</a>
+                      <a href="/amigos/ver/{{$amigo->id}}">Ver</a>
                     </span>
 
                     @if($grupo->getModeradores->contains(Auth::user()->id))
                         @if($grupo->getModeradores->contains($amigo->id))
                           <br>
                           <span style="float:right">
-                            <a href="/grupos/reduzirModerador/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">REBAIXAR</a>
+                            <a href="/grupos/reduzirModerador/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">Remover privilégio</a>
                           </span>
                         @else
                           <br>
                           <span style="float:right">
-                            <a href="/grupos/promoverParaModerador/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">SUBIR DE VIDA</a>
+                            <a href="/grupos/promoverParaModerador/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">Dar privilégio</a>
                           </span>
                         @endif
                         <br>
                        <span style="float:right">
-                          <a href="/grupos/removerDoGrupo/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">chutar a bunda</a>
+                          <a href="/grupos/removerDoGrupo/{{$grupo->id}}/{{$amigo->id}}" onclick="return confirm('Certeza?')">Expulsar</a>
                        </span>
                     @endif
 

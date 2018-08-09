@@ -21,9 +21,9 @@
                   </h2>
                </span>
                <span style="float:right">
-                  <a href="/amigos/ver/{{$l->id}}">xo v!</a>
+                  <a href="/amigos/ver/{{$l->id}}">Ver</a>
                   <br>
-                  <a href="/amigos/aceitarAmizade/{{$l->id}}" onclick="return confirm('Certeza?')">ACEITO SA PORRA!</a>
+                  <a href="/amigos/aceitarAmizade/{{$l->id}}" onclick="return confirm('Certeza?')">Aceito!</a>
                   <a href="/amigos/recusarAmizade/{{$l->id}}" onclick="return confirm('Certeza?')">Recusar amizade!</a>
 
                </span>
