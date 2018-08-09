@@ -76,7 +76,7 @@ class PerfilExternoController extends Controller{
       }
 
       $perfil->delete();
-      return redirect('/home/perfilExterno);
+      return redirect('/home/perfilExterno');
     }
 
 

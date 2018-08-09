@@ -37,7 +37,7 @@
 
             <div class="form-group row mb-0">
               <div class="col-md-6 offset-md-5">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Confirmar Edição?')">
                   {{ __('Ok!') }}
                 </button>
               </div>

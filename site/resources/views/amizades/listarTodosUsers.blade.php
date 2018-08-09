@@ -9,6 +9,7 @@
              @foreach($users as $user)
               <div class="card">
 
+                 @if($user->id != Auth::user()->id)
                   <div class="card-header">
                     <span>
                        {{$user->name}}
@@ -26,6 +27,7 @@
                      {{$user->descricao}}
 
                   </div>
+                  @endif
               </div>
               <hr>
               <hr>
