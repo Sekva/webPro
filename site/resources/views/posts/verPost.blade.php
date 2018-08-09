@@ -108,7 +108,7 @@
             </p>
 
             @if(Auth::user())
-               @if ($c->id_autor == Auth::user()->id)
+               @if ($c->id_autor == Auth::user()->id || $post->id_autor == Auth::user()->id)
                   <span style="float:right; margin-left:10px;">
                      <a href="/deletarComentario/{{$c->id}}" onclick="return confirm('Certeza que quer apagar este comentário?')" >Apagar Comentário!</a>
                   </span>
@@ -125,7 +125,7 @@
                $cont = $cont + 1;
                ?>
                @if(Auth::user())
-                 @if(Auth::user()->id)
+                 @if(Auth::user()->id == $c->id_autor)
                    (Você!)
                    <br>
                    <a href="/editarComentario/{{$c->id}}">Editar!</a>
