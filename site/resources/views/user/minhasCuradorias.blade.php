@@ -8,6 +8,15 @@
         <a  href="/home/novaCuradoria" >Novo Curadoria!</a>
       </div>
         <div class="col-md-8">
+
+           @if($curadorias->count() == 0)
+           <div style=" text-align: center; margin-top: 20%;">
+                <h1>
+                   Parece que não há nada aqui
+                </h1>
+           </div>
+          @endif
+
           @foreach ($curadorias as $curadoria)
 
             <div class="card">

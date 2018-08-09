@@ -11,6 +11,15 @@
              @endif
              <br>
              <a href="/amigos/listarTodosUsers"> Listar todos usuarios (em breve uma ferramenta de busca) </a>
+
+             @if($listaAmigos->count() == 0)
+               <div style=" text-align: center; margin-top: 20%;">
+                  <h1>
+                     Parece que não há nada aqui
+                  </h1>
+               </div>
+            @endif
+
              @foreach($listaAmigos as $amigo)
               <div class="card">
 
