@@ -33,7 +33,7 @@
                Opa!
                <br><br>
                <?php
-                  $listaPosts = Auth::user()->getPosts(Auth::user()->id);
+                  $listaPosts = Auth::user()->postsOrdenaos()->paginate(12);
                 ?>
 
                 @foreach(Auth::user()->getAmigos as $amigo)
@@ -91,7 +91,7 @@
                   <br><br>
                   @endif
                @endforeach
-
+               {{$listaPosts->links()}}
             </div>
          </div>
       </div>
