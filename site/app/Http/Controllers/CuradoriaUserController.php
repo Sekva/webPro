@@ -39,11 +39,11 @@ class CuradoriaUserController extends Controller {
       $curadoria = \site\Curadoria_usuario::find($id);
 
       if (!$curadoria) {
-         return "Essa curadoria não existe!";
+         return view('mensagemErro', ['msg' => "Essa curadoria não existe!"]);
       }
 
       if(Auth::user()->id != $curadoria->id_user) {
-         return "Você não tem permissão para editar curadorias de outras pessoas!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para editar curadorias de outras pessoas!"]);
       }
 
       return view('user/editarCuradoria', ["curadoria" => $curadoria]);
@@ -56,11 +56,11 @@ class CuradoriaUserController extends Controller {
       $curadoria = \site\Curadoria_usuario::find($req->id);
 
       if (!$curadoria) {
-         return "Algo errado aconteceu!";
+         return view('mensagemErro', ['msg' => "Algo errado aconteceu!"]);
       }
 
       if(Auth::user()->id != $curadoria->id_user) {
-         return "Você não tem permissão para editar curadorias de outras pessoas!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para editar curadorias de outras pessoas!"]);
       }
 
       $curadoria->nome = $req->nome;
@@ -74,11 +74,11 @@ class CuradoriaUserController extends Controller {
       $curadoria = \site\Curadoria_usuario::find($id);
 
       if(!$curadoria) {
-         return "Curadoria inexistente";
+         return view('mensagemErro', ['msg' => "Curadoria inexistente"]);
       }
 
       if(Auth::user()->id != $curadoria->id_user) {
-         return "Você não tem permissão para apagar curadorias de outras pessoas!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para apagar curadorias de outras pessoas!"]);
       }
 
       $curadoria->delete();

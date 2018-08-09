@@ -47,7 +47,7 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       $user = \site\User::find($id);
@@ -58,7 +58,7 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       $user = \site\User::find($id);
@@ -70,22 +70,22 @@ class AmizadeController extends Controller {
 
       //Verifica se ele está solicitando ele mesmo
       if($user->id == $id){
-         return "Não dá pra tu ser amigo de tu mermo! kk";
+         return view('mensagemErro', ['msg' => "Não dá pra tu ser amigo de tu mermo! kk"]);
       }
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se já são amigos
       if ($this->jaSaoAmigos($id) == true) {
-         return 'Vocês já são amigos';
+         return view('mensagemErro', ['msg' => 'Vocês já são amigos']);
       }
 
       //Verifica se ele já foi solicitado
       if($this->euSoliciteiEle($id) == true) {
-         return "Essa solicitação já existe!";
+         return view('mensagemErro', ['msg' => "Essa solicitação já existe!"]);
       }
 
       $solicitacoes =$user->getPedidosAmizadeEnviados();
@@ -97,17 +97,17 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id_solicitado) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se já são amigos
       if ($this->jaSaoAmigos($id_solicitado) == true) {
-         return 'Vocês já são amigos';
+         return view('mensagemErro', ['msg' => 'Vocês já são amigos']);
       }
 
       //Verifica se a solicitação existe
       if($this->euSoliciteiEle($id_solicitado) == false) {
-         return "Essa solicitação não existe. Talvez tenha sido recusada.";
+         return view('mensagemErro', ['msg' => "Essa solicitação não existe. Talvez tenha sido recusada."]);
       }
 
       Auth::user()->getPedidosAmizadeEnviados()->detach($id_solicitado);
@@ -118,12 +118,12 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($idPedinte) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se ele foi solicitado
       if($this->eleMeSolicitou($idPedinte) == false) {
-         return "Essa solicitação não existe mais!";
+         return view('mensagemErro', ['msg' => "Essa solicitação não existe mais!"]);
       }
 
       $pedinte = \site\User::find($idPedinte);
@@ -139,12 +139,12 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($idPedinte) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se ele foi solicitado
       if($this->eleMeSolicitou($idPedinte) == false) {
-         return "Essa solicitação não existe mais!";
+         return view('mensagemErro', ['msg' => "Essa solicitação não existe mais!"]);
       }
 
       $pedinte = \site\User::find($idPedinte);
@@ -163,12 +163,12 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se não são mais amigos
       if ($this->jaSaoAmigos($id) == false) {
-         return 'Vocês não são mais amigos. Impossível de desfazer uma amizade que não existe mais';
+         return view('mensagemErro', ['msg' => 'Vocês não são mais amigos. Impossível de desfazer uma amizade que não existe mais']);
       }
 
       $user->getAmigos()->detach($id);
@@ -181,12 +181,12 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se não são mais amigos
       if ($this->jaSaoAmigos($id) == false) {
-         return 'Vocês não são mais amigos';
+         return view('mensagemErro', ['msg' => 'Vocês não são mais amigos']);
       }
 
       $amigo = \site\User::find($id);
@@ -198,12 +198,12 @@ class AmizadeController extends Controller {
 
       //Verifica se o usuário existe
       if($this->esseUsuarioExiste($id) == false) {
-         return "Esse usuário não existe";
+         return view('mensagemErro', ['msg' => "Esse usuário não existe"]);
       }
 
       //Verifica se não são mais amigos
       if ($this->jaSaoAmigos($id) == false) {
-         return 'Vocês não são mais amigos';
+         return view('mensagemErro', ['msg' => 'Vocês não são mais amigos']);
       }
 
       $amigo = \site\User::find($id);

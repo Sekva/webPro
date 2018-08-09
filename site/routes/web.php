@@ -9,11 +9,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/home/erro', 'HomeController@msgErro');
+
 Route::middleware('auth')->group(function () {
 
    Route::get('/home/mudarFotoPerfil', 'HomeController@mudarFotoPerfilView');
 
    Route::post('/home/salvar_fotoPerfil', 'HomeController@salvar_fotoPerfil');
+
 
 });
 

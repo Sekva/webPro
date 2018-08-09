@@ -22,7 +22,7 @@ class UserController extends Controller {
 
       if($id_user != $user->id) {
          //Se bem que isso aqui vai apenas mostrar as informações do perfil
-         return "Você não pode editar perfis de outro usuários!";
+            return view('mensagemErro', ['msg' => "Você não pode editar perfis de outro usuários!"]);
       }
 
       $perfisExternos = $user->getPerfisExternos;
@@ -35,7 +35,7 @@ class UserController extends Controller {
 
       //Verifica se o usuário atual é o dono dos dados a serem alterados
       if(Auth::user()->id != $request->id) {
-         return "Você não pode editar perfis de outro usuários!";
+            return view('mensagemErro', ['msg' => "Você não pode editar perfis de outro usuários!"]);
       }
 
       $user = \site\User::find($request->id);
@@ -50,15 +50,15 @@ class UserController extends Controller {
 
    public function deletar($id_user) {
       $user = User::find($id_user);
-      if($user->id != $id_user) {
-         return "Você não pode deletar outros usuários!";
+      if(Auth::user()->id != $id_user) {
+            return view('mensagemErro', ['msg' => "Você não pode deletar outros usuários!"]);
       }
 
       //Deixa de ser moderador dos grupos que ele é moderador
       foreach($user->getGrupos as $grupo) {
          if($grupo->getModeradores->contains($id_user) && $grupo->getModeradores->count() == 1){
-            return "Você é o único moderador do grupo ~". $grupo->name ."~.\n
-             Apague-o ou promova algum membro à Moderador.\nUm Grupo não pode ficar sem moderador!";
+                return view('mensagemErro', ['msg' => "Você é o único moderador do grupo ~". $grupo->name ."~.
+                Apague-o ou promova algum membro à Moderador. Um Grupo não pode ficar sem moderador!"]);
          }
       }
 
@@ -112,6 +112,6 @@ class UserController extends Controller {
       }
 
       $user->delete();
-      echo "deletado";
+      redirect ('/home');
    }
 }
