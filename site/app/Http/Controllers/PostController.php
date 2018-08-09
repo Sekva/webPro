@@ -16,11 +16,11 @@ class PostController extends Controller
    }
 
    public function salvar_novoPost(Request $req) {
+      //Não precisa de verificação. (Além da do Request)
 
       $req->validate(\site\Post::getRules(), \site\Post::getMsgs());
 
       $user = Auth::user();
-
       $post = new \site\Post();
       $post->permanente = false;
       $post->e_de_grupo = false;
@@ -38,28 +38,30 @@ class PostController extends Controller
       $post = \site\Post::find($post_id);
 
       if ($post->id_autor != Auth::user()->id) {
-         echo "Tu num pode editar sá mundenga não";
-      } else {
-         return view('user/editarPost', ['post' => $post]);
+         return "Você não tem permissão para editar posts de outros usuários!";
       }
+
+      return view('user/editarPost', ['post' => $post]);
    }
 
    public function salvar_editarPost(Request $req) {
 
       $req->validate(\site\Post::getRules(), \site\Post::getMsgs());
+      $post = \site\Post::find($req->id);
 
-
-      if ($req->user()->id != Auth::user()->id) {
-         echo "Tu num pode editar sá mundenga não";
-      } else {
-
-         $post = \site\Post::find($req->id);
-
-         $post->conteudo = $req->conteudo;
-         $post->update();
-         return redirect('/home/listarPosts');
+      //Se não encontrou o post
+      if(!$post) {
+         return "Algo está errado.";
       }
 
+      //Verifica se o usuário logado é o autor do post
+      if ($post->id_autor != Auth::user()->id) {
+         return "Você não tem permissão para editar posts de outros usuários!";
+      }
+
+      $post->conteudo = $req->conteudo;
+      $post->update();
+      return redirect('/home/listarPosts');
    }
 
    public function listarPosts() {
@@ -76,13 +78,20 @@ class PostController extends Controller
 
       $user = Auth::user();
       $post = \site\Post::find($post_id);
-      if ($post && $post->id_autor == $user->id) {
-         //Deleta os comentários daquele post
-         $comentarios = \site\Comentario::where('id_post', $post_id)->delete();
-         $post->delete();
-      } else {
-         echo 'Pode fazer isso não rapaz';
+
+      //Se não encontrou o post
+      if(!$post) {
+         return "Algo está errado. Post não encontrado!";
       }
+
+      //Verifica se o usuário logado é o autor do post
+      if ($post->id_autor != Auth::user()->id) {
+         return "Você não tem permissão para deletar posts de outros usuários!";
+      }
+
+      //Deleta os comentários daquele post
+      $comentarios = \site\Comentario::where('id_post', $post_id)->delete();
+      $post->delete();
       return redirect('/home/listarPosts');
    }
 

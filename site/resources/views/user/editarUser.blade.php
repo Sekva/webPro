@@ -61,7 +61,7 @@
                   </div>
                   <hr>
                   <h3>Aplicar Mudanças!</h3>
-                  <button class="btn btn-primary" name="button">Aplicar!</button>
+                  <button class="btn btn-primary" name="button" onclick="return confirm('Confirmar Edição?')">Aplicar</button>
 
                </form>
                <br><hr>

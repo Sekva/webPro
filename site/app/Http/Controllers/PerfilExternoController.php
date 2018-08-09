@@ -12,6 +12,9 @@ class PerfilExternoController extends Controller{
 
       $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
 
+      if (Auth::user()->id != $req->user_id) {
+         return redirect('Ocorreu algum erro!');
+      }
 
       $user = Auth::user();
       $perfilExterno = new \site\PerfilExternoUser();
@@ -26,6 +29,7 @@ class PerfilExternoController extends Controller{
     }
 
     public function perfilExterno() {
+      //Não precisa de verificação
       $user = Auth::user();
       $perfisExterno = $user->getPerfisExternos;
       return view('perfilExterno', ['perfisExterno' => $perfisExterno]);
@@ -35,18 +39,27 @@ class PerfilExternoController extends Controller{
 
       $perfil = \site\PerfilExternoUser::find($perfil_id);
 
+      //Se não encontrar o perfil externo buscado
       if(!$perfil) {
-        return "passaram um argumento com o id de um prefil que nao existe";
-      } else {
-        //return $perfil;
-        return view('user/editarPerfilExterno', ['perfil_externo' => $perfil]);
+         return "Perfil Externo não encontrado!";
       }
+
+      //Se ele não for o dono do perfil externo
+      if(Auth::user()->id != $perfil->user_id) {
+         return "Você não tem permissão para alterar esse Perfil Externo!";
+      }
+
+      return view('user/editarPerfilExterno', ['perfil_externo' => $perfil]);
     }
 
     public function salvar_perfilExternoEdit(Request $req) {
 
-      $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
+      //Se ele é o dono do perfil externo do request
+      if(Auth::user()->id != $req->id) {
+         return "Você não tem permissão para salvar esse Perfil Externo!";
+      }
 
+      $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
 
       $perfil = \site\PerfilExternoUser::find($req->id);
       $perfil->nome = $req->nome;
@@ -57,6 +70,11 @@ class PerfilExternoController extends Controller{
 
     public function apagarPerfilExterno($id) {
       $perfil = \site\PerfilExternoUser::find($id);
+
+      if(Auth::user()->id != $perfil->user_id) {
+         return "Você não tem permissão para deletar esse perfil!";
+      }
+
       $perfil->delete();
       return redirect('/home');
     }

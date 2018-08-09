@@ -14,9 +14,11 @@ Route::middleware('auth')->group(function () {
 
    Route::get('/amigos/aceitarAmizade/{id}', 'AmizadeController@aceitarAmizade');
 
+   Route::get('amigos/recusarAmizade/{id}', 'AmizadeController@recusarAmizade');
+
    Route::get('/amigos/listarPedidosPraMim', 'AmizadeController@listarPedidosPraMim');
 
-   Route::get('/amigos/soilicitarAmizade/{id}', 'AmizadeController@soilicitarAmizade');
+   Route::get('/amigos/solicitarAmizade/{id}', 'AmizadeController@solicitarAmizade');
 
    Route::get('/amigos/cancelarSolicitacao/{id}', 'AmizadeController@cancelarSolicitacao');
 

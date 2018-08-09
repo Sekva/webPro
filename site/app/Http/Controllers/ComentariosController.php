@@ -8,12 +8,14 @@ use Auth;
 class ComentariosController extends Controller {
 
    public function comentar(Request $req) {
+      //Não precisa de verificação (Além da do Request)
 
       $req->validate(\site\Comentario::getRules(), \site\Comentario::getMsgs());
 
       if (Auth::user()->id != $req->user_id) {
-         return redirect('/home');
+         return redirect('Ocorreu algum erro!');
       }
+
       $coment = new \site\Comentario();
       $coment->id_autor = $req->user_id;
       $coment->id_post = $req->post_id;
@@ -27,13 +29,13 @@ class ComentariosController extends Controller {
 
    public function deletar($id_coment) {
       $coment = \site\Comentario::find($id_coment);
+
       if(Auth::user()->id != $coment->id_autor) {
-         echo "Tá mexendo onde não pode rapá?!";
-      } else {
-         $coment->delete();
-         return redirect()->back();
+         return "Você não tem autorização para deletar comentários de outros usuários!";
       }
+
+      $coment->delete();
+      return redirect()->back();
    }
-
-
+   
 }

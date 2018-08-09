@@ -24,6 +24,8 @@
                   <a href="/amigos/ver/{{$l->id}}">xo v!</a>
                   <br>
                   <a href="/amigos/aceitarAmizade/{{$l->id}}" onclick="return confirm('Certeza?')">ACEITO SA PORRA!</a>
+                  <a href="/amigos/recusarAmizade/{{$l->id}}" onclick="return confirm('Certeza?')">Recusar amizade!</a>
+
                </span>
 
                <span style="float:left">

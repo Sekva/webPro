@@ -8,8 +8,6 @@ Route::middleware('auth')->group(function () {
 
    Route::post('/usuario/salvarEdicao', 'UserController@salvarEdicao');
 
-   Route::get('/usuario/{id}/checarDeletar', 'UserController@checarDeletar');
-
    Route::get('/usuario/{id}/deletar', 'UserController@deletar');
 
 });

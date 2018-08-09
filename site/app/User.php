@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 use Auth;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
    use Notifiable;
 
    /**
@@ -32,9 +31,6 @@ class User extends Authenticatable
    protected $hidden = [
       'password', 'remember_token',
    ];
-
-   //Para utilizar o SoftDelete
-   // protected $dates = ['deleted_at'];
 
    public function posts() {
       return $this->hasMany('site\Post', 'id_autor');

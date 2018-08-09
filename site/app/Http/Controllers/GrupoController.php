@@ -46,6 +46,12 @@ class GrupoController extends Controller {
       }
    }
 
+   private function essaSolicitacaoExiste($id_grupo, $id_user) {
+      $grupo = \site\Grupo::find($id_grupo);
+      return $grupo->getSolicitacoes->contains($id_user);
+
+   }
+
    private function quantidadeDeModeradores($id_grupo) {
       $grupo = \site\Grupo::find($id_grupo);
       $moderadores = $grupo->getModeradores;
@@ -113,7 +119,7 @@ class GrupoController extends Controller {
    }
 
    public function solicitarEntradaEmGrupo($id_grupo) {
-      //valida se o grupo ta certo e veja e já n é membro
+      $user = Auth::user();
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
@@ -125,10 +131,13 @@ class GrupoController extends Controller {
          return "Você já é membro do grupo! ~.~";
       }
 
-      $grupo = \site\Grupo::find($id_grupo);
-      if (!$grupo->getSolicitacoes->contains(Auth::user()->id)) {
-         $grupo->getSolicitacoes()->attach(Auth::user()->id);
+      //Se a solicitação dele não existir
+      if($this->essaSolicitacaoExiste($id_grupo, $user->id) == true) {
+         return "Você já solicitou a entrada nesse grupo";
       }
+
+      $grupo = \site\Grupo::find($id_grupo);
+      $grupo->getSolicitacoes()->attach(Auth::user()->id);
       return redirect()->back();
    }
 
@@ -140,18 +149,17 @@ class GrupoController extends Controller {
          return "Esse grupo não existe!";
       }
 
-      //Verifica se aquele cara é membro do grupo
+      //Se a solicitação dele não existir
+      if($this->essaSolicitacaoExiste($id_grupo, $user->id) == false) {
+         return "Essa solicitação não existe mais.";
+      }
+
+      //Verifica se já foi aceito no grupo (aí não dá mais pra cancelar)
       if($this->ehMembroDoGrupo($id_grupo, $user->id) == true) {
-         return "Você já é membro do grupo! ~.~";
+         return "Você já é membro do grupo!";
       }
 
       $grupo = \site\Grupo::find($id_grupo);
-
-      //Se ele realmente havia solicitado a entrada
-      if( ! $grupo->getSolicitacoes->contains($user->id)) {
-         return("Não há solicitação sua para entrar nesse grupo. Talvez algum Moderador tenha recusado.");
-      }
-
       $grupo->getSolicitacoes()->detach($user->id);
 
       return redirect()->back();
@@ -159,7 +167,6 @@ class GrupoController extends Controller {
    }
 
    public function listarSolicitacoes($id_grupo) {
-      //veja se tudo existe [?]
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
@@ -186,6 +193,11 @@ class GrupoController extends Controller {
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
          return "Você não é Moderador!!";
+      }
+
+      //Se a solicitação existir
+      if($this->essaSolicitacaoExiste($id_grupo, $id_user) == false) {
+         return "Essa solicitação não existe mais";
       }
 
       if($this->esseUsuarioExiste($id_user) == false) {
@@ -219,6 +231,11 @@ class GrupoController extends Controller {
 
       if($this->esseUsuarioExiste($id_user) == false) {
          return "Usuário inexistente!";
+      }
+
+      //Se a solicitação existir
+      if($this->essaSolicitacaoExiste($id_grupo, $id_user) == false) {
+         return "Essa solicitação não existe mais";
       }
 
       //Verifica se aquele cara é membro do grupo

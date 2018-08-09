@@ -7,67 +7,82 @@ use Auth;
 
 class CuradoriaUserController extends Controller {
 
-  public function listarCuradorias() {
-    $user = Auth::user();
-    $curadorias = $user->getCuradorias;
-    return view('user/minhasCuradorias', ["curadorias" => $curadorias]);
-  }
+   public function listarCuradorias() {
+      //Não precisa de verificação
+      $user = Auth::user();
+      $curadorias = $user->getCuradorias;
+      return view('user/minhasCuradorias', ["curadorias" => $curadorias]);
+   }
 
-  public function novaCuradoria() {
-    return view('user/novaCuradoria');
-  }
+   public function novaCuradoria() {
+      return view('user/novaCuradoria');
+   }
 
-  public function salvarNovaCuradoria(Request $req) {
+   public function salvarNovaCuradoria(Request $req) {
+      //Não precisa de verificação pois o id do usuário não está sendo passado no req
 
-   $req->validate(\site\Curadoria_usuario::getRules(), \site\Curadoria_usuario::getMsgs());
+      $req->validate(\site\Curadoria_usuario::getRules(), \site\Curadoria_usuario::getMsgs());
 
+      $user = Auth::user();
 
+      $curadoria = new \site\Curadoria_usuario();
+      $curadoria->nome = $req->nome;
+      $curadoria->descricao = $req->descricao;
+      $curadoria->link = $req->link;
 
-    $user = Auth::user();
+      $user->getCuradorias()->save($curadoria);
 
-    $curadoria = new \site\Curadoria_usuario();
-    $curadoria->nome = $req->nome;
-    $curadoria->descricao = $req->descricao;
-    $curadoria->link = $req->link;
+      return redirect('/home/curadorias');
+   }
 
-    $user->getCuradorias()->save($curadoria);
+   public function editarCuradoria($id) {
+      $curadoria = \site\Curadoria_usuario::find($id);
 
-    return redirect('/home/curadorias');
-  }
+      if (!$curadoria) {
+         return "Essa curadoria não existe!";
+      }
 
-  public function editarCuradoria($id) {
-    $curadoria = \site\Curadoria_usuario::find($id);
+      if(Auth::user()->id != $curadoria->id_user) {
+         return "Você não tem permissão para editar curadorias de outras pessoas!";
+      }
 
-    if (!$curadoria) {
-      return "num existe";
-    } else {
       return view('user/editarCuradoria', ["curadoria" => $curadoria]);
-    }
+   }
 
-  }
+   public function salvarEditCuradoria(Request $req) {
 
-  public function salvarEditCuradoria(Request $req) {
+      $req->validate(\site\Curadoria_usuario::getRules(), \site\Curadoria_usuario::getMsgs());
 
-     $req->validate(\site\Curadoria_usuario::getRules(), \site\Curadoria_usuario::getMsgs());
+      $curadoria = \site\Curadoria_usuario::find($req->id);
 
+      if (!$curadoria) {
+         return "Algo errado aconteceu!";
+      }
 
-    $curadoria = \site\Curadoria_usuario::find($req->id);
+      if(Auth::user()->id != $curadoria->id_user) {
+         return "Você não tem permissão para editar curadorias de outras pessoas!";
+      }
 
-    if ($curadoria) {
       $curadoria->nome = $req->nome;
       $curadoria->descricao = $req->descricao;
       $curadoria->link = $req->link;
       $curadoria->save();
       return redirect('/home/curadorias');
-    } else {
-      return "request mei errado";
-    }
-  }
+   }
 
-  public function apagarCuradoria($id) {
-    $curadoria = \site\Curadoria_usuario::find($id);
-    $curadoria->delete();
-    return redirect('/home/curadorias');
-  }
+   public function apagarCuradoria($id) {
+      $curadoria = \site\Curadoria_usuario::find($id);
+
+      if(!$curadoria) {
+         return "Curadoria inexistente";
+      }
+
+      if(Auth::user()->id != $curadoria->id_user) {
+         return "Você não tem permissão para apagar curadorias de outras pessoas!";
+      }
+
+      $curadoria->delete();
+      return redirect('/home/curadorias');
+   }
 
 }
