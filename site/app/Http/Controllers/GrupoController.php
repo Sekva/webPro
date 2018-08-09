@@ -261,6 +261,7 @@ class GrupoController extends Controller {
       }
 
       $grupo = \site\Grupo::find($id_grupo);
+      //Se ele for sair do grupo mas ele é o único membro
       if ($grupo->getMembros->count() == 1) {
          $this->apagarGrupo($id_grupo);
          $grupo->delete();
@@ -407,7 +408,7 @@ class GrupoController extends Controller {
             $grupo->getPosts()->detach($id_post);
          }
       }
-      return redirect()->back();
+      return redirect("/grupos");
    }
 
    public function listarMembros($id_grupo) {
@@ -493,7 +494,7 @@ class GrupoController extends Controller {
       $perfil->link = $req->link;
       $perfil->grupo_id = $req->id_grupo;
       $perfil->save();
-      return redirect('/grupos/ver/'.$req->id_grupo);
+      return redirect('/grupos/listarPerfisExternos/'.$req->id_grupo);
    }
 
    public function apagarPerfilExterno($id_perfil, $id_grupo) {
@@ -514,7 +515,7 @@ class GrupoController extends Controller {
          $perfil->delete();
       }
 
-      return redirect()->back();
+      return redirect('/grupos/listarPerfisExternos/'.$id_grupo);
    }
 
    public function editarPerfilExterno($id_perfil, $id_grupo) {
@@ -554,7 +555,7 @@ class GrupoController extends Controller {
       $perfil->nome = $req->nome;
       $perfil->link = $req->link;
       $perfil->save();
-      return redirect('grupos/ver/' . $req->id_grupo);
+      return redirect('/grupos/listarPerfisExternos/'.$req->id_grupo);
    }
 
    public function listarCuradorias($id_grupo) {
@@ -613,7 +614,7 @@ class GrupoController extends Controller {
       $curadoria->id_grupo = $req->id_grupo;
       $curadoria->save();
 
-      return redirect('grupos/ver/' . $req->id_grupo);
+      return redirect('/grupos/listarCuradorias/' . $req->id_grupo);
    }
 
    public function apagarCuradoria($id_curadoria, $id_grupo) {
@@ -670,7 +671,7 @@ class GrupoController extends Controller {
       $curadoria->link = $req->link;
       $curadoria->descricao = $req->descricao;
       $curadoria->save();
-      return redirect('grupos/ver/' . $req->id_grupo);
+      return redirect('/grupos/listarCuradorias/' . $req->id_grupo);
    }
 
    public function promoverParaModerador($id_grupo, $id_user) {

@@ -30,7 +30,7 @@ class PostController extends Controller
 
       $post->save();
 
-      return redirect('/home');
+      return redirect('/home/listarPosts');
    }
 
    public function editarPost($post_id) {

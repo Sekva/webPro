@@ -21,7 +21,7 @@ class PerfilExternoController extends Controller{
       $perfilExterno->nome = $req->nome;
       $perfilExterno->link = $req->link;
       $user->getPerfisExternos()->save($perfilExterno);
-      return redirect('home');
+      return redirect('/home/perfilExterno');
     }
 
     public function novoPerfilExterno() {
@@ -65,7 +65,7 @@ class PerfilExternoController extends Controller{
       $perfil->nome = $req->nome;
       $perfil->link = $req->link;
       $perfil->save();
-      return redirect('/home');
+      return redirect('/home/perfilExterno');
     }
 
     public function apagarPerfilExterno($id) {
@@ -76,7 +76,7 @@ class PerfilExternoController extends Controller{
       }
 
       $perfil->delete();
-      return redirect('/home');
+      return redirect('/home/perfilExterno);
     }
 
 
