@@ -38,4 +38,26 @@ class ComentariosController extends Controller {
       return redirect()->back();
    }
 
+   public function editarComentario($id) {
+     $coment = \site\Comentario::find($id);
+     if (!$coment) {
+       return view('mensagemErro', ['msg' => "Esse Comentario nem existe!"]);
+     }
+     return view('posts/editarComentario', ["c" => $coment]);
+   }
+
+   public function salvar_editarComentario(Request $req) {
+     $req->validate(\site\Comentario::getRules(), \site\Comentario::getMsgs());
+     $coment = \site\Comentario::find($req->id);
+     if (!$coment) {
+       return view('mensagemErro', ['msg' => "Esse Comentario nem existe!"]);
+     }
+
+     $coment->conteudo = $req->conteudo;
+     $coment->save();
+
+     return redirect('post/verPost/' . $req->id_post);
+
+   }
+
 }

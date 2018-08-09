@@ -6,7 +6,7 @@
           <div class="col-md-8">
              <a href="/grupos/novoGrupo">Novo grupo!!!</a>
              <br>
-             <a href="/grupos/listarTodosGrupos">Xo v tudo</a>
+             <a href="/grupos/listarTodosGrupos">Ver todos os grupos</a>
              <br>
              @foreach($grupos as $grupo)
               <div class="card">
