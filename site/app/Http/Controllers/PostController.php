@@ -41,7 +41,7 @@ class PostController extends Controller
          return view('mensagemErro', ['msg' => "Você não tem permissão para editar posts de outros usuários!"]);
       }
 
-      return view('user/editarPost', ['post' => $post]);
+      return view('posts/editarPost', ['post' => $post]);
    }
 
    public function salvar_editarPost(Request $req) {

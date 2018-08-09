@@ -6,4 +6,8 @@ Route::middleware('auth')->group(function () {
 
    Route::get('/deletarComentario/{id}', 'ComentariosController@deletar');
 
+   Route::get('/editarComentario/{id}', 'ComentariosController@editarComentario');
+
+   Route::post('/salvar_editarComentario', 'ComentariosController@salvar_editarComentario');
+
 });
