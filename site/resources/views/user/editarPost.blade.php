@@ -27,6 +27,7 @@
           <form action="/home/salvar_editarPost" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <input type="hidden" name="id" value="{{$post->id}}">
+            <input type="hidden" name="texto" value="{{$post->texto}}">
 
             <div class="form-group row">
               <div class="col-md-6">

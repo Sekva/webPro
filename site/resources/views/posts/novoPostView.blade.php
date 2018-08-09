@@ -35,10 +35,13 @@
                     </div>
 
                     <div class="form-group row">
-                      <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Conteudo') }}</label>
+                      <!-- <label for="foto" class="col-md-4 col-form-label text-md-top">{{ __('Conteudo') }}</label> -->
 
                       <div class="col-md-6">
-                        <input id="conteudo" type="text" name="conteudo">
+                        <div style=" text-align: center; margin-left: 70%">
+                           <span>Conteudo</span>
+                        </div>
+                        <textarea name="conteudo" rows="8" cols="73" onkeydown="habilitarTextArea()" ></textarea>
                       </div>
                     </div>
 

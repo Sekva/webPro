@@ -13,12 +13,29 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
 
+  <script src="{{ asset('js/prism.js') }}" defer></script>
+
+  <!-- <script src="{{ asset('js/interpretador.js') }}" defer></script> -->
+
+  <script type="text/javascript" src="/js/interpretador.js"></script>
+
+
   <!-- Fonts -->
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/prism.css') }}" rel="stylesheet">
+
+  <style >
+
+      .containerCodigo {
+         white-space: pre-wrap;
+      }
+
+  </style>
+
 </head>
 <body>
   <div id="app">

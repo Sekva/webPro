@@ -54,15 +54,23 @@
                         <div class="card-header"> {{$p->texto}} </div>
                      @endif
                      <div class="card-body">
-                        <div>
+                        <p>
+                           <div id="<?php echo $p->id ?>" class="containerCodigo">
+                              @php($conteudo = $p->conteudo)
+                              <script type="text/javascript">
+                                 interpretar(<?php echo json_encode($conteudo); ?>, "<?php echo $p->id ?>");
+                              </script>
+                           </div>
+                        </p>
+                        <div style=" margin-bottom: 20px;">
                             <span style="float:right">
                                 <a href="/post/verPost/{{$p->id}}">Ver Post!</a>
                                 <br>
                                 {{\site\Post::find($p->id)->getComentarios()->count()}} comentarios
                             </span>
                         </div>
-                        <p> {{$p->conteudo}} </p>
                      </div>
+
 
                      <span style=" font-size: 13px" >Por <a href="/amigos/ver/{{$elo->id}}">{{$elo->name}}</a></span>
                      <span style=" font-size: 13px" >

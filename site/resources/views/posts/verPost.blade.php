@@ -42,7 +42,12 @@
                   @endif
                @endif
 
-               <div class="card-body">{{$post->conteudo}}</div>
+               <div id="conteinerCodigo" class="card-body containerCodigo">
+                  @php($conteudo = $post->conteudo)
+                  <script type="text/javascript">
+                     interpretar(<?php echo json_encode($conteudo); ?>, "conteinerCodigo");
+                  </script>
+               </div>
 
                @if ($errors->any())
                   <div class="alert alert-danger">
@@ -75,7 +80,7 @@
                @if(Auth::user())
                   <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                   <div>
-                     <textarea name="conteudo" rows="5" cols="73"></textarea>
+                     <textarea name="conteudo" rows="5" cols="73" onkeydown="habilitarTextArea()"></textarea>
                   </div>
                   <button type="submit" class="btn btn-primary">
                      {{ __('Comentar! \o/') }}
@@ -92,6 +97,16 @@
          $cont = 0;
          ?>
          @foreach($comentarios as $c)
+         <hr>
+            <p>
+               <div id="<?php echo $c->id ?>">
+                 @php($conteudo = $c->conteudo)
+                 <script type="text/javascript">
+                    interpretar(<?php echo json_encode($conteudo); ?>, "<?php echo $c->id ?>");
+                 </script>
+               </div>
+            </p>
+
             @if(Auth::user())
                @if ($c->id_autor == Auth::user()->id)
                   <span style="float:right; margin-left:10px;">
@@ -99,7 +114,8 @@
                   </span>
                @endif
             @endif
-            {{$c->conteudo}}
+
+
             @php($autor = \site\User::find($c->id_autor))
             <br>
             <span style="float:right">

@@ -31,6 +31,14 @@
                 </div>
                 @php($elo = \site\User::find($post->id_autor))
                 <div class="card-body">
+                   <p>
+                      <div id="<?php echo $post->id ?>" class="containerCodigo">
+                        @php($conteudo = $post->conteudo)
+                        <script type="text/javascript">
+                           interpretar(<?php echo json_encode($conteudo); ?>, "<?php echo $post->id ?>");
+                        </script>
+                      </div>
+                   </p>
                    <div>
                        <span style="float:right">
                            <a href="/post/verPost/{{$post->id}}">Ver Post!</a>
@@ -38,8 +46,7 @@
                            {{\site\Post::find($post->id)->getComentarios()->count()}} comentarios
                        </span>
                    </div>
-                   <p> {{$post->conteudo}} </p>
-                </div>
+                  </div>
 
                 <span style=" font-size: 13px" >Por <a href="/amigos/ver/{{$elo->id}}">{{$elo->name}}</a></span>
                 <span style=" font-size: 13px" >

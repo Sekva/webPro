@@ -46,7 +46,14 @@
 
                   <hr style="border-style: inset; border-width: 1px; color: black;">
                   <hr>
-                  <p> {{$post->conteudo}} </p>
+                  <p>
+                     <div id="<?php echo $post->id ?>" class="containerCodigo">
+                       @php($conteudo = $post->conteudo)
+                       <script type="text/javascript">
+                          interpretar(<?php echo json_encode($conteudo); ?>, "<?php echo $post->id ?>");
+                       </script>
+                     </div>
+                  </p>
                   <hr>
                   <span style="float: right" >
                      <a href="/post/verPost/{{$post->id}}">Ver</a>

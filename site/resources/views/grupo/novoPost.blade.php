@@ -39,17 +39,17 @@
                       <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Conteudo') }}</label>
 
                       <div class="col-md-6">
-                        <input id="conteudo" type="text" name="conteudo">
+                        <textarea name="conteudo" rows="8" cols="73" onkeydown="habilitarTextArea()" ></textarea>
                       </div>
                     </div>
 
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                       <label for="permanente" class="col-md-4 col-form-label text-md-right">{{ __('É permanente?') }}</label>
 
                       <div class="col-md-6">
                         <input id="permanente" type="checkbox" name="permanente">
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group row mb-0">
                       <div class="col-md-6 offset-md-4">
