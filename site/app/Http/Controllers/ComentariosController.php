@@ -13,7 +13,7 @@ class ComentariosController extends Controller {
       $req->validate(\site\Comentario::getRules(), \site\Comentario::getMsgs());
 
       if (Auth::user()->id != $req->user_id) {
-         return redirect('Ocorreu algum erro!');
+         return view('mensagemErro', ['msg' => 'Ocorreu algum erro!']);
       }
 
       $coment = new \site\Comentario();
@@ -31,11 +31,11 @@ class ComentariosController extends Controller {
       $coment = \site\Comentario::find($id_coment);
 
       if(Auth::user()->id != $coment->id_autor) {
-         return "Você não tem autorização para deletar comentários de outros usuários!";
+         return view('mensagemErro', ['msg' => "Você não tem autorização para deletar comentários de outros usuários!"]);
       }
 
       $coment->delete();
       return redirect()->back();
    }
-   
+
 }

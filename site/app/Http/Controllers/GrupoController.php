@@ -100,8 +100,6 @@ class GrupoController extends Controller {
       //valida a request
       $req->validate(\site\Grupo::getRules(), \site\Grupo::getMsgs());
 
-
-
       $grupo = new \site\Grupo();
       $grupo->name = $req->name;
       $grupo->foto = $req->foto;
@@ -123,17 +121,17 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se aquele cara é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == true) {
-         return "Você já é membro do grupo! ~.~";
+         return view('mensagemErro', ['msg' => "Você já é membro do grupo! ~.~"]);
       }
 
       //Se a solicitação dele não existir
       if($this->essaSolicitacaoExiste($id_grupo, $user->id) == true) {
-         return "Você já solicitou a entrada nesse grupo";
+         return view('mensagemErro', ['msg' => "Você já solicitou a entrada nesse grupo"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -146,36 +144,35 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Se a solicitação dele não existir
       if($this->essaSolicitacaoExiste($id_grupo, $user->id) == false) {
-         return "Essa solicitação não existe mais.";
+         return view('mensagemErro', ['msg' => "Essa solicitação não existe mais."]);
       }
 
       //Verifica se já foi aceito no grupo (aí não dá mais pra cancelar)
       if($this->ehMembroDoGrupo($id_grupo, $user->id) == true) {
-         return "Você já é membro do grupo!";
+         return view('mensagemErro', ['msg' => "Você já é membro do grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
       $grupo->getSolicitacoes()->detach($user->id);
 
       return redirect()->back();
-
    }
 
    public function listarSolicitacoes($id_grupo) {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -187,28 +184,28 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       //Se a solicitação existir
       if($this->essaSolicitacaoExiste($id_grupo, $id_user) == false) {
-         return "Essa solicitação não existe mais";
+         return view('mensagemErro', ['msg' => "Essa solicitação não existe mais"]);
       }
 
       if($this->esseUsuarioExiste($id_user) == false) {
-         return "Usuário inexistente!";
+         return view('mensagemErro', ['msg' => "Usuário inexistente!"]);
       }
 
       //Verifica se aquele cara é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, $id_user) == true) {
          $grupo = \site\Grupo::find($id_grupo);
          $grupo->getSolicitacoes()->detach($id_user);
-         return "Mas esse cara já é membro";
+         return view('mensagemErro', ['msg' => "Mas esse cara já é membro"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -221,28 +218,28 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       if($this->esseUsuarioExiste($id_user) == false) {
-         return "Usuário inexistente!";
+         return view('mensagemErro', ['msg' => "Usuário inexistente!"]);
       }
 
       //Se a solicitação existir
       if($this->essaSolicitacaoExiste($id_grupo, $id_user) == false) {
-         return "Essa solicitação não existe mais";
+         return view('mensagemErro', ['msg' => "Essa solicitação não existe mais"]);
       }
 
       //Verifica se aquele cara é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, $id_user) == true) {
          $grupo = \site\Grupo::find($id_grupo);
          $grupo->getSolicitacoes()->detach($id_user);
-         return "Mas esse cara já é membro";
+         return view('mensagemErro', ['msg' => "Mas esse cara já é membro"]);
       }
 
 
@@ -255,12 +252,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -273,7 +270,7 @@ class GrupoController extends Controller {
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == true) {
          if($this->quantidadeDeModeradores($id_grupo) == 1) {
-            return "Você é o unico Moderador! Um grupo não pode ficar sem moderador!";
+            return view('mensagemErro', ['msg' => "Você é o unico Moderador! Um grupo não pode ficar sem moderador!"]);
          }
       }
 
@@ -289,7 +286,7 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -301,17 +298,17 @@ class GrupoController extends Controller {
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       //Se tiver outros membros e o único moderador tentar se remover
       if($id_user == Auth::user()->id && $this->quantidadeDeModeradores($id_grupo) == 1) {
-         return "Esse grupo só tem você como moderador. Um grupo não pode ficar sem moderador!";
+         return view('mensagemErro', ['msg' => "Esse grupo só tem você como moderador. Um grupo não pode ficar sem moderador!"]);
       }
 
       //Verifica se aquele cara é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, $id_user) == false) {
-         return "Esse cara ai não é membro do grupo não! ~.~";
+         return view('mensagemErro', ['msg' => "Esse cara ai não é membro do grupo não! ~.~"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -323,20 +320,19 @@ class GrupoController extends Controller {
       return redirect("/grupos");
    }
 
-   public function verGrupo($id_grupo) { //[???????- Onde isso é usado? -????????]
+   public function verGrupo($id_grupo) {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
-      // echo $grupo;
       return view('grupo/homeGrupo', [ 'grupo' => $grupo]);
    }
 
@@ -344,12 +340,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -357,18 +353,17 @@ class GrupoController extends Controller {
    }
 
    public function salvar_novoPost(Request $req) {
-      //valide essa resquest
       $req->validate(\site\Post::getRules(), \site\Post::getMsgs());
 
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($req->id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $user = Auth::user();
@@ -399,14 +394,14 @@ class GrupoController extends Controller {
    public function deletarPost($id_grupo, $id_post) {
 
       if (!$this->esseGrupoExiste($id_grupo)) {
-         return 'Esse grupo nem existe';
+          return view('mensagemErro', ['msg' => 'Esse grupo nem existe']);
       }
 
 
       $grupo = \site\Grupo::find($id_grupo);
       if ($grupo) {
          if (!$grupo->getModeradores->contains(Auth::user()->id)) {
-            return 'tu nem é moderador';
+          return view('mensagemErro', ['msg' => 'tu nem é moderador']);
          }
          if ($grupo->getPosts->contains($id_post)) {
             $grupo->getPosts()->detach($id_post);
@@ -419,7 +414,7 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
       //Não precisa ser membro do grupo pra ver os Membros
 
@@ -432,12 +427,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -449,12 +444,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -466,12 +461,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -485,12 +480,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($req->id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $perfil = new \site\PerfilExternoGrupo();
@@ -505,12 +500,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $perfil = \site\PerfilExternoGrupo::find($id_perfil);
@@ -526,12 +521,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -547,12 +542,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($req->id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $perfil = \site\PerfilExternoGrupo::find($req->id);
@@ -566,12 +561,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o cara logado é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, Auth::user()->id) == false) {
-         return "Você não é membro desse Grupo!";
+         return view('mensagemErro', ['msg' => "Você não é membro desse Grupo!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -583,12 +578,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -597,19 +592,18 @@ class GrupoController extends Controller {
    }
 
    public function salvar_novaCuradoria(Request $req) {
-      //já sabe q tem q validar né sekva? é '-'
 
       $req->validate(\site\Curadoria_grupos::getRules(), \site\Curadoria_grupos::getMsgs());
 
 
       //Se o grupo existir
       if($this->esseGrupoExiste($req->id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($req->id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $curadoria = new \site\Curadoria_grupos();
@@ -626,12 +620,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $curadoria = \site\Curadoria_grupos::find($id_curadoria);
@@ -647,12 +641,12 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -668,7 +662,7 @@ class GrupoController extends Controller {
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($req->id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $curadoria = \site\Curadoria_grupos::find($req->id);
@@ -683,7 +677,7 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       $grupo = \site\Grupo::find($id_grupo);
@@ -691,19 +685,19 @@ class GrupoController extends Controller {
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       $membros = $grupo->getMembros;
 
       //Verifica se aquele cara é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, $id_user) == false) {
-         return "Esse cara ai não é membro do grupo não! ~.~";
+         return view('mensagemErro', ['msg' => "Esse cara ai não é membro do grupo não! ~.~"]);
       }
 
       //Verifica se aquele cara já não é moderador
       if($this->ehModerador($id_grupo, $id_user) == true) {
-         return ("Esse cara já é moderador!");
+         return view('mensagemErro', ['msg' => "Esse cara já é moderador!"]);
       }
 
       $grupo->getModeradores()->attach($id_user);
@@ -719,26 +713,26 @@ class GrupoController extends Controller {
 
       //Se o grupo existir
       if($this->esseGrupoExiste($id_grupo) == false) {
-         return "Esse grupo não existe!";
+         return view('mensagemErro', ['msg' => "Esse grupo não existe!"]);
       }
 
       //Verifica se o usuário logado é Moderador
       if($this->ehModerador($id_grupo, Auth::user()->id) == false) {
-         return "Você não é Moderador!!";
+         return view('mensagemErro', ['msg' => "Você não é Moderador!!"]);
       }
 
       //Verifica se aquele cara é membro do grupo
       if($this->ehMembroDoGrupo($id_grupo, $id_user) == false) {
-         return "Esse cara ai não é membro do grupo não! ~.~";
+         return view('mensagemErro', ['msg' => "Esse cara ai não é membro do grupo não! ~.~"]);
       }
 
       //Verifica se aquele cara já não é moderador
       if($this->ehModerador($id_grupo, $id_user) == false) {
-         return "Esse cara não é moderador!";
+         return view('mensagemErro', ['msg' => "Esse cara não é moderador!"]);
       }
 
       if($this->quantidadeDeModeradores($id_grupo) == 1) {
-         return "Um grupo não pode ficar sem moderador!";
+         return view('mensagemErro', ['msg' => "Um grupo não pode ficar sem moderador!"]);
       }
 
       $grupo->getModeradores()->detach($id_user);

@@ -38,7 +38,7 @@ class PostController extends Controller
       $post = \site\Post::find($post_id);
 
       if ($post->id_autor != Auth::user()->id) {
-         return "Você não tem permissão para editar posts de outros usuários!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para editar posts de outros usuários!"]);
       }
 
       return view('user/editarPost', ['post' => $post]);
@@ -51,12 +51,12 @@ class PostController extends Controller
 
       //Se não encontrou o post
       if(!$post) {
-         return "Algo está errado.";
+         return view('mensagemErro', ['msg' => "Algo está errado."]);
       }
 
       //Verifica se o usuário logado é o autor do post
       if ($post->id_autor != Auth::user()->id) {
-         return "Você não tem permissão para editar posts de outros usuários!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para editar posts de outros usuários!"]);
       }
 
       $post->conteudo = $req->conteudo;
@@ -81,12 +81,12 @@ class PostController extends Controller
 
       //Se não encontrou o post
       if(!$post) {
-         return "Algo está errado. Post não encontrado!";
+         return view('mensagemErro', ['msg' => "Algo está errado. Post não encontrado!"]);
       }
 
       //Verifica se o usuário logado é o autor do post
       if ($post->id_autor != Auth::user()->id) {
-         return "Você não tem permissão para deletar posts de outros usuários!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para deletar posts de outros usuários!"]);
       }
 
       //Deleta os comentários daquele post
@@ -98,6 +98,12 @@ class PostController extends Controller
 
    public function verPost($post_id) {
       $post = \site\Post::find($post_id);
+
+      //Se o post não existe
+      if(!$post) {
+         return view('mensagemErro', ['msg' => 'Esse post não existe!']);
+      }
+
       $comentarios = $post->getComentarios();
       //Pega os autores
       $autores = $comentarios->map(function($c) {

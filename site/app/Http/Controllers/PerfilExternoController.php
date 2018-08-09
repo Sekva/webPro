@@ -13,7 +13,7 @@ class PerfilExternoController extends Controller{
       $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
 
       if (Auth::user()->id != $req->user_id) {
-         return redirect('Ocorreu algum erro!');
+         return view('mensagemErro', ['msg' => 'Ocorreu algum erro!']);
       }
 
       $user = Auth::user();
@@ -41,12 +41,12 @@ class PerfilExternoController extends Controller{
 
       //Se não encontrar o perfil externo buscado
       if(!$perfil) {
-         return "Perfil Externo não encontrado!";
+         return view('mensagemErro', ['msg' => "Perfil Externo não encontrado!"]);
       }
 
       //Se ele não for o dono do perfil externo
       if(Auth::user()->id != $perfil->user_id) {
-         return "Você não tem permissão para alterar esse Perfil Externo!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para alterar esse Perfil Externo!"]);
       }
 
       return view('user/editarPerfilExterno', ['perfil_externo' => $perfil]);
@@ -56,7 +56,7 @@ class PerfilExternoController extends Controller{
 
       //Se ele é o dono do perfil externo do request
       if(Auth::user()->id != $req->id) {
-         return "Você não tem permissão para salvar esse Perfil Externo!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para salvar esse Perfil Externo!"]);
       }
 
       $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
@@ -72,7 +72,7 @@ class PerfilExternoController extends Controller{
       $perfil = \site\PerfilExternoUser::find($id);
 
       if(Auth::user()->id != $perfil->user_id) {
-         return "Você não tem permissão para deletar esse perfil!";
+         return view('mensagemErro', ['msg' => "Você não tem permissão para deletar esse perfil!"]);
       }
 
       $perfil->delete();

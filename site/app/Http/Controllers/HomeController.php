@@ -32,6 +32,10 @@ class HomeController extends Controller
       return view('home');
    }
 
+   public function msgErro() {
+      return view('mensagemErro');
+   }
+
    //Isso vai pra UserController
    public function mudarFotoPerfilView() {
       return view('user/mudarFotoPerfil');
@@ -49,7 +53,7 @@ class HomeController extends Controller
          $user->save();
          return redirect('/home');
       } else {
-         echo 'Deu probleminha com a foto ai';
+         return view('mensagemErro', ['msg' => "Ocorreu algum problema."]);
       }
    }
 
