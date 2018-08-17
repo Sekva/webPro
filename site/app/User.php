@@ -36,6 +36,10 @@ class User extends Authenticatable {
       return $this->hasMany('site\Post', 'id_autor');
    }
 
+   public function postsOrdenaos() {
+      return $this->hasMany('site\Post', 'id_autor')->orderBy('created_at', 'DESC');
+   }
+
    public function comentario() {
       return $this->hasMany('site\Comentario', 'id_autor');
    }
