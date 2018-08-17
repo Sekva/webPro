@@ -12,9 +12,6 @@ class PerfilExternoController extends Controller{
 
       $req->validate(\site\PerfilExternoUser::getRules(), \site\PerfilExternoUser::getMsgs());
 
-      if (Auth::user()->id != $req->user_id) {
-         return view('mensagemErro', ['msg' => 'Ocorreu algum erro!']);
-      }
 
       $user = Auth::user();
       $perfilExterno = new \site\PerfilExternoUser();
